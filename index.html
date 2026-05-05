@@ -18,7 +18,6 @@
         }
         .serif { font-family: 'Playfair Display', serif; }
         
-        /* Premium Glass Effect */
         .glass-panel { 
             background: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%);
             backdrop-filter: blur(16px); 
@@ -26,14 +25,12 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        /* Gradient Text */
         .text-gradient {
             background: linear-gradient(to right, #fbbf24, #d97706);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Checkbox Logic for Custom Cards */
         .feature-card { transition: all 0.3s ease; }
         input[type="checkbox"]:checked + .feature-card {
             background-color: rgba(217, 119, 6, 0.15);
@@ -46,30 +43,26 @@
         
         .hidden { display: none; }
         
-        /* Dropdown Styling Reset */
-        select {
+        select, input[type="number"] {
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
         }
         
-        /* Smooth Fade In */
         .fade-in { animation: fadeIn 0.4s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="pb-12 px-4 pt-10 sm:pt-16">
 
-    <!-- Header -->
     <header class="max-w-3xl mx-auto text-center mb-10 fade-in">
         <h1 class="text-4xl sm:text-5xl font-bold serif mb-3 tracking-tight">
             Rezept-<span class="text-gradient">Transformator</span>
         </h1>
         <p class="text-slate-400 text-sm sm:text-base font-light max-w-lg mx-auto">
-            Klassische Gerichte in Gourmet-Versionen umwandeln – strikt histaminarm & glutenfrei durch echte Lebensmittelchemie.
+            Klassische Gerichte umwandeln – strikt histaminarm & glutenfrei durch echte Lebensmittelchemie.
         </p>
         
-        <!-- Mode Switcher -->
         <div class="inline-flex bg-slate-800/80 rounded-full p-1 border border-slate-700/50 mt-8 shadow-inner">
             <button onclick="setMode('dish')" id="mode-dish" class="px-6 py-2.5 rounded-full text-sm font-semibold transition-all bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg">Rezept-Planer</button>
             <button onclick="setMode('fridge')" id="mode-fridge" class="px-6 py-2.5 rounded-full text-sm font-medium text-slate-300 hover:text-white transition-all">Resteverwertung</button>
@@ -78,9 +71,7 @@
 
     <main class="max-w-3xl mx-auto space-y-8 fade-in">
         
-        <!-- STEP 1: Eingabe -->
         <section id="step1" class="glass-panel rounded-[2rem] p-6 sm:p-10 relative overflow-hidden">
-            <!-- Decorative Glow -->
             <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-amber-600/10 blur-3xl pointer-events-none"></div>
 
             <div id="input-dish-group" class="mb-8">
@@ -89,20 +80,19 @@
             </div>
             
             <div id="input-fridge-group" class="hidden mb-8">
-                <label class="block text-sm font-semibold text-slate-300 mb-3 ml-1">Welche Zutaten hast du vorrätig?</label>
-                <textarea id="fridge-input" rows="3" placeholder="z.B. Frisches Rinderhack, Karotten, Kartoffeln..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
+                <label class="block text-sm font-semibold text-slate-300 mb-1 ml-1">Welche Zutaten hast du vorrätig?</label>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Tipp: Gib nach Möglichkeit auch die Mengen an (z.B. 3 Karotten, 200g Skyr), damit die KI chemisch präzise arbeiten kann.</p>
+                <textarea id="fridge-input" rows="3" placeholder="z.B. 250g Rinderhack, 3 Karotten, halber Becher Skyr..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
-            <!-- Rahmenbedingungen -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-                <!-- Dropdown 1: Garmethode -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
                 <div>
                     <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2 ml-1">Garmethode</label>
                     <div class="relative group">
                         <select id="param-method" class="w-full bg-slate-900/60 border border-slate-700/80 hover:border-amber-500/50 rounded-xl px-4 py-3.5 text-slate-200 font-medium outline-none cursor-pointer transition-colors shadow-inner pr-10">
-                            <option value="Herd" class="bg-slate-800 text-white">Pfanne / Topf (Herd)</option>
-                            <option value="Backofen" class="bg-slate-800 text-white">Backofen</option>
-                            <option value="Airfryer" class="bg-slate-800 text-white">Heißluftfritteuse (Airfryer)</option>
+                            <option value="Herd">Pfanne / Topf (Herd)</option>
+                            <option value="Backofen">Backofen</option>
+                            <option value="Airfryer">Heißluftfritteuse (Airfryer)</option>
                         </select>
                         <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400 group-hover:text-amber-500 transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -110,23 +100,31 @@
                     </div>
                 </div>
 
-                <!-- Dropdown 2: Zeitfenster -->
                 <div>
                     <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2 ml-1">Zeitfenster</label>
                     <div class="relative group">
                         <select id="param-time" class="w-full bg-slate-900/60 border border-slate-700/80 hover:border-amber-500/50 rounded-xl px-4 py-3.5 text-slate-200 font-medium outline-none cursor-pointer transition-colors shadow-inner pr-10">
-                            <option value="ca. 30 Minuten" class="bg-slate-800 text-white">Schnell (ca. 30 Min)</option>
-                            <option value="ca. 60 Minuten" class="bg-slate-800 text-white">Normal (ca. 60 Min)</option>
-                            <option value="Viel Zeit (Slow Cooking)" class="bg-slate-800 text-white">Slow Cooking</option>
+                            <option value="ca. 30 Minuten">Schnell (ca. 30 Min)</option>
+                            <option value="ca. 60 Minuten">Normal (ca. 60 Min)</option>
+                            <option value="Viel Zeit">Slow Cooking</option>
                         </select>
                         <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400 group-hover:text-amber-500 transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
                     </div>
                 </div>
+
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2 ml-1">Personen</label>
+                    <div class="relative group">
+                        <input type="number" id="param-portions" value="2" min="1" max="20" class="w-full bg-slate-900/60 border border-slate-700/80 hover:border-amber-500/50 rounded-xl px-4 py-3.5 text-slate-200 font-medium outline-none transition-colors shadow-inner">
+                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400 group-hover:text-amber-500 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Lebensmittelchemie Toggles -->
             <div class="border-t border-slate-700/50 pt-8">
                 <h3 class="text-sm font-bold uppercase tracking-widest text-amber-500 mb-4 flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
@@ -134,8 +132,6 @@
                 </h3>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    
-                    <!-- Option 1: Maillard -->
                     <label class="cursor-pointer relative block">
                         <input type="checkbox" id="focus-maillard" class="sr-only">
                         <div class="feature-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
@@ -145,11 +141,10 @@
                                     <svg class="check-icon w-3 h-3 text-amber-500 opacity-0 transform scale-50 transition-all duration-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
                                 </div>
                             </div>
-                            <p class="text-[12px] text-slate-400 leading-relaxed">Fokus auf intensive Röstaromen und herzhafte Krusten durch das gezielte Erhitzen von Aminosäuren – ganz ohne glutenhaltige Panade.</p>
+                            <p class="text-[12px] text-slate-400 leading-relaxed">Intensive Röstaromen und herzhafte Krusten durch gezieltes Erhitzen von Aminosäuren – ganz ohne glutenhaltige Panade.</p>
                         </div>
                     </label>
 
-                    <!-- Option 2: Emulsion -->
                     <label class="cursor-pointer relative block">
                         <input type="checkbox" id="focus-emulsion" class="sr-only">
                         <div class="feature-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
@@ -159,11 +154,10 @@
                                     <svg class="check-icon w-3 h-3 text-amber-500 opacity-0 transform scale-50 transition-all duration-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
                                 </div>
                             </div>
-                            <p class="text-[12px] text-slate-400 leading-relaxed">Erzeugt cremige, vollmundige Texturen für Saucen durch die perfekte Bindung von Fett und Wasser – ohne Sahne oder Verdickungsmittel.</p>
+                            <p class="text-[12px] text-slate-400 leading-relaxed">Cremige Texturen durch die Bindung von Fett und Wasser – ohne Sahne oder künstliche Verdickungsmittel.</p>
                         </div>
                     </label>
 
-                    <!-- Option 3: Stärke -->
                     <label class="cursor-pointer relative block">
                         <input type="checkbox" id="focus-starch" class="sr-only">
                         <div class="feature-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
@@ -173,11 +167,10 @@
                                     <svg class="check-icon w-3 h-3 text-amber-500 opacity-0 transform scale-50 transition-all duration-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
                                 </div>
                             </div>
-                            <p class="text-[12px] text-slate-400 leading-relaxed">Sorgt für samtige Saucen, geschmeidige Suppen und saftige Teige durch die physikalische Quellung alternativer Stärken (z.B. Tapioka/Kartoffel).</p>
+                            <p class="text-[12px] text-slate-400 leading-relaxed">Samtige Saucen und saftige Teige durch physikalische Quellung alternativer Stärken (z.B. Tapioka/Kartoffel).</p>
                         </div>
                     </label>
 
-                    <!-- Option 4: Umami -->
                     <label class="cursor-pointer relative block">
                         <input type="checkbox" id="focus-umami" class="sr-only">
                         <div class="feature-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
@@ -187,14 +180,12 @@
                                     <svg class="check-icon w-3 h-3 text-amber-500 opacity-0 transform scale-50 transition-all duration-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
                                 </div>
                             </div>
-                            <p class="text-[12px] text-slate-400 leading-relaxed">Baut einen tiefen, herzhaften Geschmack auf, indem es sichere, histaminarme Booster wie Eigelb, Macadamia oder unfermentierte Pilze nutzt.</p>
+                            <p class="text-[12px] text-slate-400 leading-relaxed">Tiefenherzhafter Geschmack durch histaminarme Booster wie Eigelb, Macadamia oder unfermentierte Pilze.</p>
                         </div>
                     </label>
-
                 </div>
             </div>
 
-            <!-- Generate Button -->
             <button onclick="buildPrompt()" class="group relative w-full bg-gradient-to-r from-amber-500 to-amber-700 text-white font-bold py-5 rounded-2xl mt-10 shadow-[0_0_20px_rgba(217,119,6,0.3)] hover:shadow-[0_0_30px_rgba(217,119,6,0.5)] transition-all active:scale-[0.98] overflow-hidden">
                 <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                 <span class="relative flex items-center justify-center gap-2 text-lg">
@@ -204,7 +195,6 @@
             </button>
         </section>
 
-        <!-- STEP 2: Result -->
         <section id="step2" class="hidden glass-panel rounded-[2rem] p-6 sm:p-10 fade-in border-green-500/30">
             <h3 class="text-xl font-bold mb-4 flex items-center gap-3 text-white serif">
                 <span class="bg-green-500/20 text-green-400 p-2 rounded-full">
@@ -218,7 +208,6 @@
                 <div class="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 pointer-events-none rounded-2xl"></div>
             </div>
             
-            <!-- KI Weiterleitungen & Kopieren -->
             <div class="space-y-4">
                 <button onclick="copyToClipboard()" id="copy-btn" class="w-full bg-slate-100 text-slate-900 hover:bg-white py-4 rounded-xl font-bold flex justify-center items-center gap-2 shadow-lg transition-all active:scale-[0.98]">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
@@ -226,22 +215,10 @@
                 </button>
                 
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    <!-- ChatGPT -->
-                    <a href="https://chat.openai.com" target="_blank" class="bg-[#10a37f]/10 text-[#10a37f] border border-[#10a37f]/30 hover:bg-[#10a37f] hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-bold flex justify-center items-center">
-                        ChatGPT
-                    </a>
-                    <!-- Claude -->
-                    <a href="https://claude.ai/new" target="_blank" class="bg-[#d97757]/10 text-[#d97757] border border-[#d97757]/30 hover:bg-[#d97757] hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-bold flex justify-center items-center">
-                        Claude
-                    </a>
-                    <!-- Gemini -->
-                    <a href="https://gemini.google.com/" target="_blank" class="bg-[#8b5cf6]/10 text-[#8b5cf6] border border-[#8b5cf6]/30 hover:bg-[#8b5cf6] hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-bold flex justify-center items-center">
-                        Gemini
-                    </a>
-                    <!-- Grok -->
-                    <a href="https://x.com/i/grok" target="_blank" class="bg-slate-300/10 text-slate-300 border border-slate-300/30 hover:bg-slate-300 hover:text-slate-900 transition-colors text-center py-3 rounded-xl text-sm font-bold flex justify-center items-center">
-                        Grok
-                    </a>
+                    <a href="https://chat.openai.com" target="_blank" class="bg-[#10a37f]/10 text-[#10a37f] border border-[#10a37f]/30 hover:bg-[#10a37f] hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-bold flex justify-center items-center">ChatGPT</a>
+                    <a href="https://claude.ai/new" target="_blank" class="bg-[#d97757]/10 text-[#d97757] border border-[#d97757]/30 hover:bg-[#d97757] hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-bold flex justify-center items-center">Claude</a>
+                    <a href="https://gemini.google.com/" target="_blank" class="bg-[#8b5cf6]/10 text-[#8b5cf6] border border-[#8b5cf6]/30 hover:bg-[#8b5cf6] hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-bold flex justify-center items-center">Gemini</a>
+                    <a href="https://x.com/i/grok" target="_blank" class="bg-slate-300/10 text-slate-300 border border-slate-300/30 hover:bg-slate-300 hover:text-slate-900 transition-colors text-center py-3 rounded-xl text-sm font-bold flex justify-center items-center">Grok</a>
                 </div>
             </div>
             
@@ -250,15 +227,12 @@
             </div>
         </section>
 
-        <!-- History -->
         <section class="glass-panel rounded-3xl p-6 sm:p-8">
             <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-6 flex items-center gap-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 Archivierte Transformationen
             </h3>
-            <div id="history-list" class="space-y-3">
-                <!-- History Items -->
-            </div>
+            <div id="history-list" class="space-y-3"></div>
         </section>
         
     </main>
@@ -285,56 +259,51 @@
 
         function buildPrompt() {
             const mainInput = document.getElementById(currentMode === 'dish' ? 'main-input' : 'fridge-input').value;
-            if(!mainInput.trim()) return alert("Bitte gib ein Gericht oder Zutaten ein, bevor die Transformation starten kann.");
+            if(!mainInput.trim()) return alert("Bitte gib ein Gericht oder Zutaten ein.");
 
             let focusPoints = [];
-            if(document.getElementById('focus-maillard').checked) focusPoints.push("Maximierung der Maillard-Reaktion für Röstaromen");
+            if(document.getElementById('focus-maillard').checked) focusPoints.push("Maximierung der Maillard-Reaktion");
             if(document.getElementById('focus-emulsion').checked) focusPoints.push("Aufbau stabiler, cremiger Emulsionen");
-            if(document.getElementById('focus-starch').checked) focusPoints.push("Gezielte Stärkeverkleisterung für Texturbindung");
-            if(document.getElementById('focus-umami').checked) focusPoints.push("Aufbau von natürlichem Umami (z.B. durch histaminarme Pilze, Macadamia etc.)");
+            if(document.getElementById('focus-starch').checked) focusPoints.push("Gezielte Stärkeverkleisterung");
+            if(document.getElementById('focus-umami').checked) focusPoints.push("Aufbau von natürlichem Umami");
 
             const method = document.getElementById('param-method').value;
             const time = document.getElementById('param-time').value;
+            const portions = document.getElementById('param-portions').value;
 
             const basePrompt = `Rolle: Haubenkoch & Lebensmittelchemiker. 
 Aufgabe: Erschaffe eine Gourmet-Version — strikt glutenfrei & histaminarm. 
-Regel: Keine industriellen Bindemittel-Krücken (Xanthan, Guarkernmehl etc.). Textur entsteht rein durch physikalische Lebensmittelchemie.
+Regel: Keine industriellen Bindemittel-Krücken (Xanthan etc.). Textur entsteht rein durch physikalische Lebensmittelchemie.
 
 ${currentMode === 'dish' ? `ZIEL-GERICHT: ${mainInput}` : `ZUTATEN-POOL: Entwickle ein völlig neues Gourmet-Rezept aus: ${mainInput}`}
 
 PARAMETER:
 - Garmethode: ${method}
 - Zeitfenster: ${time}
+- Personenanzahl: ${portions}
 - Chemischer Fokus: ${focusPoints.length > 0 ? focusPoints.join(" + ") : "Klassische Lebensmittelchemie"}
 
 ANTWORT-STRUKTUR:
 1. Titel des Gerichts
 2. Die Lebensmittelchemie dahinter (Kurzer Laien-Kniff: Wie entsteht die Textur/der Geschmack chemisch?)
-3. Zutatenliste (Exakte Mengen)
+3. Zutatenliste (Exakte Mengen für ${portions} Personen)
 4. Zubereitung (Präzise, alltagstauglich)`;
 
             document.getElementById('result-text').value = basePrompt;
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
-            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function copyToClipboard() {
             const text = document.getElementById('result-text').value;
             navigator.clipboard.writeText(text);
-            
             const btn = document.getElementById('copy-btn');
             const originalHTML = btn.innerHTML;
-            
             btn.innerHTML = `<svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> <span class="text-green-700">Kopiert & im Archiv!</span>`;
-            
             const title = currentMode === 'dish' ? document.getElementById('main-input').value : "Resteverwertung";
-            saveToHistory(title || "Unbekanntes Rezept", text);
-            
-            setTimeout(() => {
-                btn.innerHTML = originalHTML;
-            }, 3000);
+            saveToHistory(title || "Rezept", text);
+            setTimeout(() => { btn.innerHTML = originalHTML; }, 3000);
         }
 
         function saveToHistory(title, prompt) {
@@ -348,9 +317,7 @@ ANTWORT-STRUKTUR:
         function renderHistory() {
             const list = document.getElementById('history-list');
             const history = JSON.parse(localStorage.getItem('alchemie_history') || "[]");
-            
             list.innerHTML = history.length ? '' : '<div class="text-center p-6 border border-dashed border-slate-700 rounded-xl"><p class="text-sm text-slate-500 italic">Noch keine Prompts archiviert.</p></div>';
-            
             history.forEach((item, index) => {
                 const div = document.createElement('div');
                 div.className = "flex flex-col sm:flex-row sm:justify-between sm:items-center p-4 bg-slate-800/40 border border-slate-700/50 rounded-xl hover:bg-slate-700/40 transition-colors gap-3";
@@ -359,9 +326,7 @@ ANTWORT-STRUKTUR:
                         <span class="font-bold text-amber-500 text-sm truncate max-w-[250px]">${item.title}</span> 
                         <span class="text-slate-500 text-[11px]">${item.date}</span>
                     </div>
-                    <button onclick="restoreHistory(${index})" class="px-4 py-1.5 bg-slate-900 border border-slate-600 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-500 hover:border-amber-500 transition-colors shrink-0">
-                        Prompt laden
-                    </button>`;
+                    <button onclick="restoreHistory(${index})" class="px-4 py-1.5 bg-slate-900 border border-slate-600 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-500 hover:border-amber-500 transition-colors shrink-0">Prompt laden</button>`;
                 list.appendChild(div);
             });
         }
@@ -378,7 +343,6 @@ ANTWORT-STRUKTUR:
             document.getElementById('main-input').value = "";
             document.getElementById('fridge-input').value = "";
             document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
-            
             document.getElementById('step2').classList.add('hidden');
             document.getElementById('step1').classList.remove('hidden');
         }
