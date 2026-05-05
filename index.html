@@ -46,6 +46,13 @@
         
         .hidden { display: none; }
         
+        /* Dropdown Styling Reset */
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        
         /* Smooth Fade In */
         .fade-in { animation: fadeIn 0.4s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -78,31 +85,44 @@
 
             <div id="input-dish-group" class="mb-8">
                 <label class="block text-sm font-semibold text-slate-300 mb-3 ml-1">Welches klassische Gericht transformieren wir?</label>
-                <input type="text" id="main-input" placeholder="z.B. Zürcher Geschnetzeltes, Pizza Margherita..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600">
+                <input type="text" id="main-input" placeholder="z.B. Zürcher Geschnetzeltes, Pizza Margherita..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner">
             </div>
             
             <div id="input-fridge-group" class="hidden mb-8">
                 <label class="block text-sm font-semibold text-slate-300 mb-3 ml-1">Welche Zutaten hast du vorrätig?</label>
-                <textarea id="fridge-input" rows="3" placeholder="z.B. Frisches Rinderhack, Karotten, Kartoffeln..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600"></textarea>
+                <textarea id="fridge-input" rows="3" placeholder="z.B. Frisches Rinderhack, Karotten, Kartoffeln..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <!-- Rahmenbedingungen -->
-            <div class="grid grid-cols-2 gap-4 mb-10">
-                <div class="bg-slate-900/40 border border-slate-700/50 rounded-2xl p-4">
-                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">Garmethode</label>
-                    <select id="param-method" class="w-full bg-transparent text-slate-200 font-medium border-none outline-none cursor-pointer appearance-none">
-                        <option value="Herd" class="bg-slate-800">Pfanne / Topf (Herd)</option>
-                        <option value="Backofen" class="bg-slate-800">Backofen</option>
-                        <option value="Airfryer" class="bg-slate-800">Heißluftfritteuse (Airfryer)</option>
-                    </select>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+                <!-- Dropdown 1: Garmethode -->
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2 ml-1">Garmethode</label>
+                    <div class="relative group">
+                        <select id="param-method" class="w-full bg-slate-900/60 border border-slate-700/80 hover:border-amber-500/50 rounded-xl px-4 py-3.5 text-slate-200 font-medium outline-none cursor-pointer transition-colors shadow-inner pr-10">
+                            <option value="Herd" class="bg-slate-800 text-white">Pfanne / Topf (Herd)</option>
+                            <option value="Backofen" class="bg-slate-800 text-white">Backofen</option>
+                            <option value="Airfryer" class="bg-slate-800 text-white">Heißluftfritteuse (Airfryer)</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400 group-hover:text-amber-500 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-slate-900/40 border border-slate-700/50 rounded-2xl p-4">
-                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">Zeitfenster</label>
-                    <select id="param-time" class="w-full bg-transparent text-slate-200 font-medium border-none outline-none cursor-pointer appearance-none">
-                        <option value="ca. 30 Minuten" class="bg-slate-800">Schnell (ca. 30 Min)</option>
-                        <option value="ca. 60 Minuten" class="bg-slate-800">Normal (ca. 60 Min)</option>
-                        <option value="Viel Zeit (Slow Cooking)" class="bg-slate-800">Slow Cooking</option>
-                    </select>
+
+                <!-- Dropdown 2: Zeitfenster -->
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2 ml-1">Zeitfenster</label>
+                    <div class="relative group">
+                        <select id="param-time" class="w-full bg-slate-900/60 border border-slate-700/80 hover:border-amber-500/50 rounded-xl px-4 py-3.5 text-slate-200 font-medium outline-none cursor-pointer transition-colors shadow-inner pr-10">
+                            <option value="ca. 30 Minuten" class="bg-slate-800 text-white">Schnell (ca. 30 Min)</option>
+                            <option value="ca. 60 Minuten" class="bg-slate-800 text-white">Normal (ca. 60 Min)</option>
+                            <option value="Viel Zeit (Slow Cooking)" class="bg-slate-800 text-white">Slow Cooking</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400 group-hover:text-amber-500 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -118,7 +138,7 @@
                     <!-- Option 1: Maillard -->
                     <label class="cursor-pointer relative block">
                         <input type="checkbox" id="focus-maillard" class="sr-only">
-                        <div class="alchemie-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40">
+                        <div class="alchemie-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
                             <div class="flex items-start justify-between mb-2">
                                 <span class="font-bold text-slate-200">Maillard-Reaktion</span>
                                 <div class="w-5 h-5 rounded-full border border-slate-500 flex flex-shrink-0 items-center justify-center">
@@ -132,7 +152,7 @@
                     <!-- Option 2: Emulsion -->
                     <label class="cursor-pointer relative block">
                         <input type="checkbox" id="focus-emulsion" class="sr-only">
-                        <div class="alchemie-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40">
+                        <div class="alchemie-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
                             <div class="flex items-start justify-between mb-2">
                                 <span class="font-bold text-slate-200">Stabile Emulsionen</span>
                                 <div class="w-5 h-5 rounded-full border border-slate-500 flex flex-shrink-0 items-center justify-center">
@@ -146,7 +166,7 @@
                     <!-- Option 3: Stärke -->
                     <label class="cursor-pointer relative block">
                         <input type="checkbox" id="focus-starch" class="sr-only">
-                        <div class="alchemie-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40">
+                        <div class="alchemie-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
                             <div class="flex items-start justify-between mb-2">
                                 <span class="font-bold text-slate-200">Stärkeverkleisterung</span>
                                 <div class="w-5 h-5 rounded-full border border-slate-500 flex flex-shrink-0 items-center justify-center">
@@ -160,7 +180,7 @@
                     <!-- Option 4: Umami -->
                     <label class="cursor-pointer relative block">
                         <input type="checkbox" id="focus-umami" class="sr-only">
-                        <div class="alchemie-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40">
+                        <div class="alchemie-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
                             <div class="flex items-start justify-between mb-2">
                                 <span class="font-bold text-slate-200">Natürliches Umami</span>
                                 <div class="w-5 h-5 rounded-full border border-slate-500 flex flex-shrink-0 items-center justify-center">
@@ -193,27 +213,40 @@
                 Dein Master-Prompt ist bereit
             </h3>
             
-            <div class="relative group">
-                <textarea id="result-text" rows="8" class="w-full bg-slate-900/80 text-amber-50 text-sm font-mono p-5 rounded-2xl border border-slate-700/80 outline-none resize-none" readonly></textarea>
+            <div class="relative group mb-6">
+                <textarea id="result-text" rows="9" class="w-full bg-slate-900/80 text-amber-50 text-sm font-mono p-5 rounded-2xl border border-slate-700/80 outline-none resize-none shadow-inner" readonly></textarea>
                 <div class="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 pointer-events-none rounded-2xl"></div>
             </div>
             
-            <div class="flex flex-col gap-4 mt-6">
+            <!-- KI Weiterleitungen & Kopieren -->
+            <div class="space-y-4">
                 <button onclick="copyToClipboard()" id="copy-btn" class="w-full bg-slate-100 text-slate-900 hover:bg-white py-4 rounded-xl font-bold flex justify-center items-center gap-2 shadow-lg transition-all active:scale-[0.98]">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                     Prompt Kopieren & Speichern
                 </button>
                 
-                <div class="grid grid-cols-2 gap-3">
-                    <a href="https://chat.openai.com" target="_blank" class="bg-[#10a37f]/20 text-[#10a37f] border border-[#10a37f]/50 hover:bg-[#10a37f] hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-bold flex justify-center items-center gap-2">
-                        Zu ChatGPT
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <!-- ChatGPT -->
+                    <a href="https://chat.openai.com" target="_blank" class="bg-[#10a37f]/10 text-[#10a37f] border border-[#10a37f]/30 hover:bg-[#10a37f] hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-bold flex justify-center items-center">
+                        ChatGPT
                     </a>
-                    <a href="https://claude.ai" target="_blank" class="bg-[#d97757]/20 text-[#d97757] border border-[#d97757]/50 hover:bg-[#d97757] hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-bold flex justify-center items-center gap-2">
-                        Zu Claude
+                    <!-- Claude -->
+                    <a href="https://claude.ai/new" target="_blank" class="bg-[#d97757]/10 text-[#d97757] border border-[#d97757]/30 hover:bg-[#d97757] hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-bold flex justify-center items-center">
+                        Claude
+                    </a>
+                    <!-- Gemini -->
+                    <a href="https://gemini.google.com/" target="_blank" class="bg-[#8b5cf6]/10 text-[#8b5cf6] border border-[#8b5cf6]/30 hover:bg-[#8b5cf6] hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-bold flex justify-center items-center">
+                        Gemini
+                    </a>
+                    <!-- Grok -->
+                    <a href="https://x.com/i/grok" target="_blank" class="bg-slate-300/10 text-slate-300 border border-slate-300/30 hover:bg-slate-300 hover:text-slate-900 transition-colors text-center py-3 rounded-xl text-sm font-bold flex justify-center items-center">
+                        Grok
                     </a>
                 </div>
-                
-                <button onclick="resetApp()" class="text-sm font-semibold text-slate-400 hover:text-white mt-4 transition-colors">← Neues Gericht planen</button>
+            </div>
+            
+            <div class="mt-6 text-center">
+                <button onclick="resetApp()" class="text-sm font-semibold text-slate-400 hover:text-white transition-colors">← Neues Gericht planen</button>
             </div>
         </section>
 
@@ -284,7 +317,6 @@ ANTWORT-STRUKTUR:
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
             
-            // Scroll smoothly to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -308,7 +340,7 @@ ANTWORT-STRUKTUR:
         function saveToHistory(title, prompt) {
             let history = JSON.parse(localStorage.getItem('alchemie_history') || "[]");
             history.unshift({ title, prompt, date: new Date().toLocaleDateString('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute:'2-digit'}) });
-            history = history.slice(0, 15); // Behalte die letzten 15
+            history = history.slice(0, 15); 
             localStorage.setItem('alchemie_history', JSON.stringify(history));
             renderHistory();
         }
@@ -351,7 +383,6 @@ ANTWORT-STRUKTUR:
             document.getElementById('step1').classList.remove('hidden');
         }
 
-        // Init
         renderHistory();
 
         if ('serviceWorker' in navigator) {
