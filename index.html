@@ -3,265 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gourmet-Alchemie | Glutenfrei & Histaminarm</title>
+    <title>Gourmet-Alchemie</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#D97706">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #111827; /* Gray 900 */
-            color: #E5E7EB; /* Gray 200 */
-        }
-        h1, h2, h3, .serif {
-            font-family: 'Playfair Display', serif;
-        }
-        .accent {
-            color: #D97706; /* Amber 600 */
-        }
-        .bg-accent {
-            background-color: #D97706;
-        }
-        .bg-accent:hover {
-            background-color: #B45309;
-        }
-        .glass-panel {
-            background: rgba(31, 41, 55, 0.7); /* Gray 800 */
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(75, 85, 99, 0.4);
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #e2e8f0; }
+        .serif { font-family: 'Playfair Display', serif; }
+        .accent-amber { color: #d97706; }
+        .bg-amber-gold { background-color: #d97706; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
         .hidden { display: none; }
+        input:checked + .toggle-label { background-color: #d97706; border-color: #d97706; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
+<body class="min-h-screen pb-12 px-4 pt-8">
 
-    <!-- Header Section -->
-    <header class="text-center max-w-3xl mb-12">
-        <h1 class="text-4xl sm:text-5xl font-bold mb-4">Gourmet-<span class="accent">Alchemie</span></h1>
-        <p class="text-lg text-gray-400 font-light">
-            Klassische Gerichte. Ohne Gluten. Ohne Histamin. Ohne Bindemittel-Krücken. <br>
-            <span class="italic text-gray-500 text-sm">Textur durch echte Lebensmittelchemie.</span>
-        </p>
+    <header class="max-w-2xl mx-auto text-center mb-8">
+        <h1 class="text-4xl font-bold serif mb-2">Gourmet-<span class="accent-amber">Alchemie</span></h1>
+        <div class="flex justify-center gap-4 mt-4">
+            <button onclick="setMode('dish')" id="mode-dish" class="px-4 py-2 rounded-full text-sm font-semibold border border-amber-600 bg-amber-600">Rezept-Planer</button>
+            <button onclick="setMode('fridge')" id="mode-fridge" class="px-4 py-2 rounded-full text-sm font-semibold border border-amber-600">Kühlschrank-Modus</button>
+        </div>
     </header>
 
-    <!-- Main App Container -->
-    <main class="w-full max-w-2xl glass-panel rounded-2xl shadow-2xl p-6 sm:p-10 relative overflow-hidden">
+    <main class="max-w-2xl mx-auto space-y-6">
         
-        <!-- Progress Bar -->
-        <div class="flex justify-between mb-8 relative">
-            <div class="absolute top-1/2 left-0 w-full h-1 bg-gray-700 -z-10 transform -translate-y-1/2"></div>
-            <div id="progress-line" class="absolute top-1/2 left-0 w-0 h-1 bg-accent transition-all duration-500 -z-10 transform -translate-y-1/2"></div>
-            
-            <div class="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center font-bold" id="step1-indicator">1</div>
-            <div class="w-8 h-8 rounded-full bg-gray-700 text-gray-400 flex items-center justify-center font-bold transition-colors duration-500" id="step2-indicator">2</div>
-            <div class="w-8 h-8 rounded-full bg-gray-700 text-gray-400 flex items-center justify-center font-bold transition-colors duration-500" id="step3-indicator">3</div>
-        </div>
-
-        <!-- STEP 1: Was soll gekocht werden? -->
-        <div id="step1" class="transition-opacity duration-300">
-            <h2 class="text-2xl font-bold mb-6 serif text-center">Was darf ich dir heute in eine Gourmet-Version verwandeln?</h2>
-            <div class="mb-6">
-                <input type="text" id="dish-input" placeholder="z.B. Wiener Schnitzel, Rindergulasch, Pizza..." 
-                       class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-600 focus:ring-1 focus:ring-amber-600 transition-colors">
+        <section id="step1" class="glass rounded-3xl p-6 shadow-2xl">
+            <div id="input-dish-group">
+                <label class="block text-sm font-medium text-gray-400 mb-2">Welches Gericht soll transformiert werden?</label>
+                <input type="text" id="main-input" placeholder="z.B. Lasagne, Schnitzel..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:border-amber-600 outline-none transition-all">
             </div>
-            <button onclick="goToStep2()" class="w-full bg-accent text-white font-bold py-3 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02]">
-                Analyse starten
-            </button>
-        </div>
+            
+            <div id="input-fridge-group" class="hidden">
+                <label class="block text-sm font-medium text-gray-400 mb-2">Welche Zutaten hast du vorrätig?</label>
+                <textarea id="fridge-input" rows="3" placeholder="z.B. Zucchini, Rinderhack, Pastinaken..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:border-amber-600 outline-none transition-all"></textarea>
+            </div>
 
-        <!-- STEP 2: Rahmenbedingungen & Zutaten -->
-        <div id="step2" class="hidden transition-opacity duration-300">
-            <h2 class="text-2xl font-bold mb-2 serif text-center">Die Parameter für: <span id="display-dish" class="accent"></span></h2>
-            <p class="text-center text-sm text-gray-400 mb-6">Bitte definiere deine Rahmenbedingungen.</p>
-
-            <div class="space-y-5">
-                <!-- Method -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Gewünschte Methode</label>
-                    <div class="grid grid-cols-3 gap-3">
-                        <label class="cursor-pointer">
-                            <input type="radio" name="method" value="Herd" class="peer sr-only" checked>
-                            <div class="text-center py-2 border border-gray-600 rounded-lg peer-checked:bg-amber-600 peer-checked:border-amber-600 transition-colors">Herd</div>
-                        </label>
-                        <label class="cursor-pointer">
-                            <input type="radio" name="method" value="Backofen" class="peer sr-only">
-                            <div class="text-center py-2 border border-gray-600 rounded-lg peer-checked:bg-amber-600 peer-checked:border-amber-600 transition-colors">Backofen</div>
-                        </label>
-                        <label class="cursor-pointer">
-                            <input type="radio" name="method" value="Airfryer" class="peer sr-only">
-                            <div class="text-center py-2 border border-gray-600 rounded-lg peer-checked:bg-amber-600 peer-checked:border-amber-600 transition-colors">Airfryer</div>
-                        </label>
-                    </div>
+            <div class="mt-6 border-t border-slate-700 pt-4">
+                <p class="text-xs font-bold uppercase tracking-widest text-amber-500 mb-3">Erweiterte Alchemie-Fokus</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg bg-slate-800/50 hover:bg-slate-800 transition-colors">
+                        <input type="checkbox" id="focus-maillard" class="hidden">
+                        <div class="w-4 h-4 border border-amber-600 rounded-sm toggle-label"></div>
+                        <span class="text-xs">Maillard-Reaktion</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg bg-slate-800/50 hover:bg-slate-800 transition-colors">
+                        <input type="checkbox" id="focus-emulsion" class="hidden">
+                        <div class="w-4 h-4 border border-amber-600 rounded-sm toggle-label"></div>
+                        <span class="text-xs">Stabile Emulsionen</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg bg-slate-800/50 hover:bg-slate-800 transition-colors">
+                        <input type="checkbox" id="focus-starch" class="hidden">
+                        <div class="w-4 h-4 border border-amber-600 rounded-sm toggle-label"></div>
+                        <span class="text-xs">Stärkeverkleisterung</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg bg-slate-800/50 hover:bg-slate-800 transition-colors">
+                        <input type="checkbox" id="focus-umami" class="hidden">
+                        <div class="w-4 h-4 border border-amber-600 rounded-sm toggle-label"></div>
+                        <span class="text-xs">Natürliches Umami</span>
+                    </label>
                 </div>
+            </div>
 
-                <!-- Time -->
+            <div class="mt-6 grid grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Verfügbares Zeitfenster</label>
-                    <select id="time-input" class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-amber-600">
-                        <option value="Unter 30 Minuten">Unter 30 Minuten (Quick Prep)</option>
-                        <option value="30 - 60 Minuten" selected>30 - 60 Minuten (Standard)</option>
-                        <option value="Über 1 Stunde">Über 1 Stunde (Slow Cooking)</option>
+                    <label class="block text-[10px] uppercase text-gray-500 mb-1">Methode</label>
+                    <select id="param-method" class="w-full bg-slate-800 rounded-lg p-2 text-sm border-none outline-none">
+                        <option>Herd</option><option>Backofen</option><option>Airfryer</option>
                     </select>
                 </div>
-
-                <!-- Portions -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Personenanzahl</label>
-                    <input type="number" id="portions-input" value="2" min="1" max="12" 
-                           class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-amber-600">
-                </div>
-
-                <!-- Individual Tolerances Feedback -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Persönliche Toleranzen & Zusatzwünsche (Optional)</label>
-                    <p class="text-xs text-gray-400 mb-2">Die KI kocht ohnehin strikt glutenfrei & histaminarm. Nutze dieses Feld für weitere Allergien oder Dinge, die du in kleinen Mengen verträgst.</p>
-                    <textarea id="ingredients-feedback" rows="3" placeholder='z.B. "Bitte auch ohne Knoblauch" oder "Ein kleiner TL Tomatenmark wird gut vertragen."' 
-                              class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-amber-600"></textarea>
+                    <label class="block text-[10px] uppercase text-gray-500 mb-1">Zeit</label>
+                    <select id="param-time" class="w-full bg-slate-800 rounded-lg p-2 text-sm border-none outline-none">
+                        <option>30 Min</option><option>60 Min</option><option>Viel Zeit</option>
+                    </select>
                 </div>
             </div>
 
-            <div class="mt-8 flex gap-4">
-                <button onclick="goToStep1()" class="w-1/3 bg-gray-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg hover:bg-gray-600 transition-colors">
-                    Zurück
-                </button>
-                <button onclick="generatePrompt()" class="w-2/3 bg-accent text-white font-bold py-3 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02]">
-                    Rezept-Prompt generieren
-                </button>
-            </div>
-        </div>
+            <button onclick="buildPrompt()" class="w-full bg-amber-gold hover:bg-amber-700 text-white font-bold py-4 rounded-xl mt-6 shadow-lg shadow-amber-900/20 transition-all active:scale-95">
+                Alchemistischen Prompt bauen
+            </button>
+        </section>
 
-        <!-- STEP 3: Prompt Result -->
-        <div id="step3" class="hidden transition-opacity duration-300">
-            <h2 class="text-2xl font-bold mb-4 serif text-center text-green-400">Dein KI-Prompt ist bereit!</h2>
-            <p class="text-center text-sm text-gray-400 mb-6">
-                Kopiere diesen Text und füge ihn in ChatGPT, Claude oder Gemini ein. Er enthält deine Systemregeln und alle Parameter.
-            </p>
+        <section id="step2" class="hidden glass rounded-3xl p-6">
+            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                <span class="text-green-500">✓</span> Prompt bereit
+            </h3>
+            <textarea id="result-text" rows="8" class="w-full bg-slate-900 text-slate-300 text-xs font-mono p-4 rounded-xl border border-slate-700 mb-4 outline-none" readonly></textarea>
             
-            <div class="relative">
-                <textarea id="final-prompt" readonly rows="12" 
-                          class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-3 text-sm text-gray-300 focus:outline-none font-mono"></textarea>
-                <button onclick="copyPrompt()" class="absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 text-white p-2 rounded shadow transition-colors" title="Kopieren">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
+            <div class="flex flex-col gap-3">
+                <button onclick="copyToClipboard()" id="copy-btn" class="w-full bg-slate-700 hover:bg-slate-600 py-3 rounded-xl font-semibold flex justify-center items-center gap-2">
+                    Kopieren & Speichern
                 </button>
+                <div class="grid grid-cols-2 gap-3">
+                    <a href="https://chat.openai.com" target="_blank" class="bg-emerald-700 hover:bg-emerald-600 text-center py-2 rounded-lg text-xs font-bold">ChatGPT öffnen</a>
+                    <a href="https://claude.ai" target="_blank" class="bg-indigo-700 hover:bg-indigo-600 text-center py-2 rounded-lg text-xs font-bold">Claude öffnen</a>
+                </div>
+                <button onclick="resetApp()" class="text-xs text-slate-500 underline mt-2">Neu starten</button>
             </div>
+        </section>
 
-            <div class="mt-8 text-center">
-                <button onclick="resetApp()" class="text-amber-500 hover:text-amber-400 underline font-medium">
-                    Neues Gericht planen
-                </button>
-            </div>
-        </div>
-
+        <section class="glass rounded-3xl p-6">
+            <h3 class="text-sm font-bold uppercase tracking-widest text-slate-500 mb-4">Letzte Kreationen</h3>
+            <div id="history-list" class="space-y-2">
+                </div>
+        </section>
     </main>
 
-    <!-- System Prompt Template (Hidden) -->
     <script>
-        const systemRules = `Rolle: Du bist Haubenkoch und Lebensmittelchemiker. Deine einzige Aufgabe: klassische Gerichte in Gourmet-Versionen umwandeln — strikt glutenfrei, histaminarm, alltagstauglich.
+        let currentMode = 'dish';
+        
+        function setMode(mode) {
+            currentMode = mode;
+            document.getElementById('mode-dish').classList.toggle('bg-amber-600', mode === 'dish');
+            document.getElementById('mode-fridge').classList.toggle('bg-amber-600', mode === 'fridge');
+            document.getElementById('input-dish-group').classList.toggle('hidden', mode === 'fridge');
+            document.getElementById('input-fridge-group').classList.toggle('hidden', mode === 'dish');
+        }
 
-Grundregeln:
-1. Keine Bindemittel-Krücken. Xanthan, Guarkernmehl, Flohsamenschalen, industrieller Ei-Ersatz — verboten. Textur entsteht durch echte Lebensmittelchemie: Stärkeverkleisterung, Brühstück, Kochstück, Emulsionen.
-2. Alltagstauglich. Hobbyköche, Normalküche, kein Profi-Equipment, kein Stundenprojekt.
-3. Physikalische Grenze. Ist ein Ergebnis ohne Punkt 1 chemisch nicht erreichbar, sagst du das sofort und klar — kein schlechtes Rezept als Trostpflaster.
-4. Standardwissen nutzen.
-5. Konfliktprinzip: Wenn Glutenfreiheit und Histaminarmut kollidieren, hat Glutenfreiheit Vorrang.
+        function buildPrompt() {
+            const mainInput = document.getElementById(currentMode === 'dish' ? 'main-input' : 'fridge-input').value;
+            if(!mainInput) return alert("Eingabe fehlt!");
 
-Arbeitsanweisung für dieses Rezept:
-Erstelle basierend auf den folgenden Parametern das finale Rezept.
-Struktur der Antwort:
-- Titel des Gerichts
-- Ein kurzer Laien-Kniff zur Physik/Chemie dahinter (Wie entsteht die Textur/der Geschmack ohne Gluten/Histamin?)
-- Zutatenliste (mengenmäßig angepasst auf die Personenanzahl)
-- Alltagstaugliche Zubereitung`;
+            let focusPoints = [];
+            if(document.getElementById('focus-maillard').checked) focusPoints.push("Maximierung der Maillard-Reaktion für Röstaromen");
+            if(document.getElementById('focus-emulsion').checked) focusPoints.push("Stabile, cremige Emulsionen ohne Zusatzstoffe");
+            if(document.getElementById('focus-starch').checked) focusPoints.push("Gezielte Stärkeverkleisterung für Texturbindung");
+            if(document.getElementById('focus-umami').checked) focusPoints.push("Natürliche Umami-Synergien (z.B. durch histaminarme Pilze/Algen)");
 
-        // Logic
-        let currentDish = "";
+            const method = document.getElementById('param-method').value;
+            const time = document.getElementById('param-time').value;
 
-        function goToStep2() {
-            const input = document.getElementById('dish-input').value.trim();
-            if (!input) {
-                alert("Bitte gib ein Gericht ein.");
-                return;
-            }
-            currentDish = input;
-            document.getElementById('display-dish').innerText = currentDish;
-            
-            // UI Update
+            const basePrompt = `Rolle: Haubenkoch & Lebensmittelchemiker. Aufgabe: Gourmet-Version (Strikt glutenfrei, histaminarm). 
+Regel: Keine Xanthan/Guarkernmehl-Krücken. Textur nur durch Chemie (Brühstück, Emulsion, Stärke).
+${currentMode === 'dish' ? `Gericht: ${mainInput}` : `Entwickle ein Gourmet-Rezept aus diesen Zutaten: ${mainInput}`}
+Methode: ${method}, Zeit: ${time}.
+Fokus: ${focusPoints.join(", ") || "Standard Gourmet-Alchemie"}.
+Struktur: Titel, Physik-Kniff dahinter, Zutaten, Zubereitung.`;
+
+            document.getElementById('result-text').value = basePrompt;
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
-            
-            // Progress Bar Update
-            document.getElementById('step2-indicator').classList.remove('bg-gray-700', 'text-gray-400');
-            document.getElementById('step2-indicator').classList.add('bg-accent', 'text-white');
-            document.getElementById('progress-line').style.width = '50%';
         }
 
-        function goToStep1() {
-            document.getElementById('step2').classList.add('hidden');
-            document.getElementById('step1').classList.remove('hidden');
-            
-            // Progress Bar Update
-            document.getElementById('step2-indicator').classList.add('bg-gray-700', 'text-gray-400');
-            document.getElementById('step2-indicator').classList.remove('bg-accent', 'text-white');
-            document.getElementById('progress-line').style.width = '0%';
+        function copyToClipboard() {
+            const text = document.getElementById('result-text').value;
+            navigator.clipboard.writeText(text);
+            const btn = document.getElementById('copy-btn');
+            btn.innerText = "✓ Kopiert & Archiviert";
+            btn.classList.replace('bg-slate-700', 'bg-green-700');
+            saveToHistory(currentMode === 'dish' ? document.getElementById('main-input').value : "Kühlschrank-Mix", text);
+            setTimeout(() => {
+                btn.innerText = "Kopieren & Speichern";
+                btn.classList.replace('bg-green-700', 'bg-slate-700');
+            }, 2000);
         }
 
-        function generatePrompt() {
-            const method = document.querySelector('input[name="method"]:checked').value;
-            const time = document.getElementById('time-input').value;
-            const portions = document.getElementById('portions-input').value;
-            const feedback = document.getElementById('ingredients-feedback').value.trim() || "Keine weiteren Einschränkungen. Behalte die strengen Histamin- und Gluten-Regeln bei.";
-
-            const finalPromptText = `${systemRules}
-
------------------------------
-NUTZER-PARAMETER:
-Gericht: ${currentDish}
-Methode: ${method}
-Zeitfenster: ${time}
-Personenanzahl: ${portions}
-Individuelle Toleranzen & Extras: ${feedback}
------------------------------
-
-Bitte generiere jetzt das finale Rezept nach den Vorgaben.`;
-
-            document.getElementById('final-prompt').value = finalPromptText;
-
-            // UI Update
-            document.getElementById('step2').classList.add('hidden');
-            document.getElementById('step3').classList.remove('hidden');
-            
-            // Progress Bar Update
-            document.getElementById('step3-indicator').classList.remove('bg-gray-700', 'text-gray-400');
-            document.getElementById('step3-indicator').classList.add('bg-accent', 'text-white');
-            document.getElementById('progress-line').style.width = '100%';
+        function saveToHistory(title, prompt) {
+            let history = JSON.parse(localStorage.getItem('alchemie_history') || "[]");
+            history.unshift({ title, prompt, date: new Date().toLocaleDateString() });
+            history = history.slice(0, 10);
+            localStorage.setItem('alchemie_history', JSON.stringify(history));
+            renderHistory();
         }
 
-        function copyPrompt() {
-            const copyText = document.getElementById("final-prompt");
-            copyText.select();
-            copyText.setSelectionRange(0, 99999); /* For mobile devices */
-            navigator.clipboard.writeText(copyText.value).then(() => {
-                const btn = document.querySelector('#step3 button');
-                const originalHTML = btn.innerHTML;
-                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>`;
-                setTimeout(() => { btn.innerHTML = originalHTML; }, 2000);
+        function renderHistory() {
+            const list = document.getElementById('history-list');
+            const history = JSON.parse(localStorage.getItem('alchemie_history') || "[]");
+            list.innerHTML = history.length ? '' : '<p class="text-xs text-slate-600 italic">Noch keine Historie vorhanden.</p>';
+            history.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = "flex justify-between items-center p-3 bg-slate-800/30 rounded-xl text-xs";
+                div.innerHTML = `<div><span class="font-bold text-amber-500">${item.title}</span> <span class="text-slate-500 ml-2">${item.date}</span></div>
+                                 <button onclick="restoreHistory(${index})" class="text-amber-500 underline">Laden</button>`;
+                list.appendChild(div);
             });
         }
 
+        function restoreHistory(index) {
+            const history = JSON.parse(localStorage.getItem('alchemie_history'));
+            document.getElementById('result-text').value = history[index].prompt;
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+        }
+
         function resetApp() {
-            document.getElementById('dish-input').value = "";
-            document.getElementById('ingredients-feedback').value = "";
-            
-            document.getElementById('step3').classList.add('hidden');
+            document.getElementById('main-input').value = "";
+            document.getElementById('fridge-input').value = "";
+            document.getElementById('step2').classList.add('hidden');
             document.getElementById('step1').classList.remove('hidden');
-            
-            document.getElementById('step2-indicator').classList.add('bg-gray-700', 'text-gray-400');
-            document.getElementById('step2-indicator').classList.remove('bg-accent', 'text-white');
-            document.getElementById('step3-indicator').classList.add('bg-gray-700', 'text-gray-400');
-            document.getElementById('step3-indicator').classList.remove('bg-accent', 'text-white');
-            document.getElementById('progress-line').style.width = '0%';
+        }
+
+        renderHistory();
+
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
         }
     </script>
 </body>
