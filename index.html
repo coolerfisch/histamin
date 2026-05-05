@@ -112,6 +112,7 @@
                     <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2 ml-1">Garmethode</label>
                     <div class="relative group">
                         <select id="param-method" class="w-full bg-slate-900/60 border border-slate-700/80 hover:border-amber-500/50 rounded-xl px-4 py-3.5 text-slate-200 font-medium outline-none cursor-pointer transition-colors shadow-inner pr-10">
+                            <option value="KI wählt die optimale Methode">KI wählt optimal (Empfohlen)</option>
                             <option value="Herd">Pfanne / Topf (Herd)</option>
                             <option value="Backofen">Backofen</option>
                             <option value="Airfryer">Heißluftfritteuse (Airfryer)</option>
@@ -297,6 +298,7 @@
         
         function setMode(mode) {
             currentMode = mode;
+            
             const modes = ['dish', 'fridge', 'cravings', 'sport', 'soulfood'];
             
             modes.forEach(m => {
@@ -304,10 +306,10 @@
                 const group = document.getElementById(`input-${m}-group`);
                 
                 if (m === mode) {
-                    btn.className = "px-4 sm:px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg";
+                    btn.className = "px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-semibold transition-all bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg";
                     group.classList.remove('hidden');
                 } else {
-                    btn.className = "px-4 sm:px-5 py-2.5 rounded-full text-sm font-medium text-slate-300 hover:text-white transition-all";
+                    btn.className = "px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all";
                     group.classList.add('hidden');
                 }
             });
@@ -331,16 +333,16 @@
                 promptTarget = `FOKUS: HIGH PROTEIN & MUSKELAUFBAU. Entwickle ein proteinreiches Sportler-Gericht für: "${mainInput}"\n(Proteingehalt aus sicheren Quellen maximieren, 100% histaminarm!)`;
             } else if (currentMode === 'soulfood') {
                 mainInput = document.getElementById('soulfood-input').value;
-                promptTarget = `FOKUS: SOULFOOD & TROST. Der Tag war scheiße. Entwickle das ultimative Wohlfühl-Gericht (z.B. Burger, fette Pizza, Comfort Food) für: "${mainInput}"\n(Echtes Junk-Food-Feeling, extrem deftig und befriedigend, aber 100% histaminarm und glutenfrei!)`;
+                promptTarget = `FOKUS: SOULFOOD & TROST. Der Tag war scheiße. Entwickle das ultimative Wohlfühl-Gericht (z.B. Burger, fette Pizza, Comfort Food) für: "${mainInput}"\n(Echtes Junk-Food-Feeling, extrem deftig und befriedigend, aber durch clevere Lebensmittelchemie 100% histaminarm und glutenfrei!)`;
             }
 
-            if(!mainInput.trim()) return alert("Bitte fülle das Eingabefeld aus.");
+            if(!mainInput.trim()) return alert("Bitte fülle das Eingabefeld aus, damit die KI arbeiten kann.");
 
             let focusPoints = [];
-            if(document.getElementById('focus-maillard')?.checked) focusPoints.push("Maximierung der Maillard-Reaktion");
-            if(document.getElementById('focus-emulsion')?.checked) focusPoints.push("Aufbau stabiler, cremiger Emulsionen");
-            if(document.getElementById('focus-starch')?.checked) focusPoints.push("Gezielte Stärkeverkleisterung");
-            if(document.getElementById('focus-umami')?.checked) focusPoints.push("Aufbau von natürlichem Umami");
+            if(document.getElementById('focus-maillard').checked) focusPoints.push("Maximierung der Maillard-Reaktion");
+            if(document.getElementById('focus-emulsion').checked) focusPoints.push("Aufbau stabiler, cremiger Emulsionen");
+            if(document.getElementById('focus-starch').checked) focusPoints.push("Gezielte Stärkeverkleisterung");
+            if(document.getElementById('focus-umami').checked) focusPoints.push("Aufbau von natürlichem Umami");
 
             const method = document.getElementById('param-method').value;
             const time = document.getElementById('param-time').value;
@@ -446,6 +448,10 @@ ANTWORT-STRUKTUR:
         }
 
         renderHistory();
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
     </script>
 </body>
 </html>
