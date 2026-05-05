@@ -72,7 +72,7 @@
         <!-- STEP 2: Rahmenbedingungen & Zutaten -->
         <div id="step2" class="hidden transition-opacity duration-300">
             <h2 class="text-2xl font-bold mb-2 serif text-center">Die Parameter für: <span id="display-dish" class="accent"></span></h2>
-            <p class="text-center text-sm text-gray-400 mb-6">Bitte definiere deine Rahmenbedingungen und prüfe kritische Zutaten.</p>
+            <p class="text-center text-sm text-gray-400 mb-6">Bitte definiere deine Rahmenbedingungen.</p>
 
             <div class="space-y-5">
                 <!-- Method -->
@@ -111,10 +111,11 @@
                            class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-amber-600">
                 </div>
 
-                <!-- Critical Ingredients Feedback -->
+                <!-- Individual Tolerances Feedback -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Kritische Zutaten (Gluten/Histamin)</label>
-                    <textarea id="ingredients-feedback" rows="3" placeholder="Notiere hier, welche klassischen Zutaten zwingend weggelassen werden müssen (z.B. Tomaten weglassen, Parmesan okay...)" 
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Persönliche Toleranzen & Zusatzwünsche (Optional)</label>
+                    <p class="text-xs text-gray-400 mb-2">Die KI kocht ohnehin strikt glutenfrei & histaminarm. Nutze dieses Feld für weitere Allergien oder Dinge, die du in kleinen Mengen verträgst.</p>
+                    <textarea id="ingredients-feedback" rows="3" placeholder='z.B. "Bitte auch ohne Knoblauch" oder "Ein kleiner TL Tomatenmark wird gut vertragen."' 
                               class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-amber-600"></textarea>
                 </div>
             </div>
@@ -133,7 +134,7 @@
         <div id="step3" class="hidden transition-opacity duration-300">
             <h2 class="text-2xl font-bold mb-4 serif text-center text-green-400">Dein KI-Prompt ist bereit!</h2>
             <p class="text-center text-sm text-gray-400 mb-6">
-                Kopiere diesen Text und füge ihn in ChatGPT, Claude, Grok oder Gemini ein. Er enthält deine Systemregeln und alle Parameter.
+                Kopiere diesen Text und füge ihn in ChatGPT, Claude oder Gemini ein. Er enthält deine Systemregeln und alle Parameter.
             </p>
             
             <div class="relative">
@@ -164,7 +165,7 @@ Grundregeln:
 2. Alltagstauglich. Hobbyköche, Normalküche, kein Profi-Equipment, kein Stundenprojekt.
 3. Physikalische Grenze. Ist ein Ergebnis ohne Punkt 1 chemisch nicht erreichbar, sagst du das sofort und klar — kein schlechtes Rezept als Trostpflaster.
 4. Standardwissen nutzen.
-5. Konfliktprinzip: Wenn Glutenfreiheit und Histaminarmut kollidieren, hat Histaminfrei Vorrang.
+5. Konfliktprinzip: Wenn Glutenfreiheit und Histaminarmut kollidieren, hat Glutenfreiheit Vorrang.
 
 Arbeitsanweisung für dieses Rezept:
 Erstelle basierend auf den folgenden Parametern das finale Rezept.
@@ -210,7 +211,7 @@ Struktur der Antwort:
             const method = document.querySelector('input[name="method"]:checked').value;
             const time = document.getElementById('time-input').value;
             const portions = document.getElementById('portions-input').value;
-            const feedback = document.getElementById('ingredients-feedback').value.trim() || "Keine spezifischen Ausnahmen angegeben. Halte dich strikt an die histaminarme/glutenfreie Regel.";
+            const feedback = document.getElementById('ingredients-feedback').value.trim() || "Keine weiteren Einschränkungen. Behalte die strengen Histamin- und Gluten-Regeln bei.";
 
             const finalPromptText = `${systemRules}
 
@@ -220,7 +221,7 @@ Gericht: ${currentDish}
 Methode: ${method}
 Zeitfenster: ${time}
 Personenanzahl: ${portions}
-Kritische Zutaten (Feedback): ${feedback}
+Individuelle Toleranzen & Extras: ${feedback}
 -----------------------------
 
 Bitte generiere jetzt das finale Rezept nach den Vorgaben.`;
