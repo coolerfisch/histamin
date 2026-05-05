@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gourmet-Alchemie</title>
+    <title>Gluten- & Histamin-Transformator</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0f172a">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -34,12 +34,12 @@
         }
 
         /* Checkbox Logic for Custom Cards */
-        .alchemie-card { transition: all 0.3s ease; }
-        input[type="checkbox"]:checked + .alchemie-card {
+        .feature-card { transition: all 0.3s ease; }
+        input[type="checkbox"]:checked + .feature-card {
             background-color: rgba(217, 119, 6, 0.15);
             border-color: #d97706;
         }
-        input[type="checkbox"]:checked + .alchemie-card .check-icon {
+        input[type="checkbox"]:checked + .feature-card .check-icon {
             opacity: 1;
             transform: scale(1);
         }
@@ -63,16 +63,16 @@
     <!-- Header -->
     <header class="max-w-3xl mx-auto text-center mb-10 fade-in">
         <h1 class="text-4xl sm:text-5xl font-bold serif mb-3 tracking-tight">
-            Gourmet-<span class="text-gradient">Alchemie</span>
+            Rezept-<span class="text-gradient">Transformator</span>
         </h1>
         <p class="text-slate-400 text-sm sm:text-base font-light max-w-lg mx-auto">
-            Design und Molekularküche vereint. Erschaffe Meisterwerke – histaminarm & glutenfrei.
+            Klassische Gerichte in Gourmet-Versionen umwandeln – strikt histaminarm & glutenfrei durch echte Lebensmittelchemie.
         </p>
         
         <!-- Mode Switcher -->
         <div class="inline-flex bg-slate-800/80 rounded-full p-1 border border-slate-700/50 mt-8 shadow-inner">
             <button onclick="setMode('dish')" id="mode-dish" class="px-6 py-2.5 rounded-full text-sm font-semibold transition-all bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg">Rezept-Planer</button>
-            <button onclick="setMode('fridge')" id="mode-fridge" class="px-6 py-2.5 rounded-full text-sm font-medium text-slate-300 hover:text-white transition-all">Kühlschrank-Resteverwertung</button>
+            <button onclick="setMode('fridge')" id="mode-fridge" class="px-6 py-2.5 rounded-full text-sm font-medium text-slate-300 hover:text-white transition-all">Resteverwertung</button>
         </div>
     </header>
 
@@ -126,7 +126,7 @@
                 </div>
             </div>
 
-            <!-- Alchemie Toggles -->
+            <!-- Lebensmittelchemie Toggles -->
             <div class="border-t border-slate-700/50 pt-8">
                 <h3 class="text-sm font-bold uppercase tracking-widest text-amber-500 mb-4 flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
@@ -138,7 +138,7 @@
                     <!-- Option 1: Maillard -->
                     <label class="cursor-pointer relative block">
                         <input type="checkbox" id="focus-maillard" class="sr-only">
-                        <div class="alchemie-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
+                        <div class="feature-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
                             <div class="flex items-start justify-between mb-2">
                                 <span class="font-bold text-slate-200">Maillard-Reaktion</span>
                                 <div class="w-5 h-5 rounded-full border border-slate-500 flex flex-shrink-0 items-center justify-center">
@@ -152,7 +152,7 @@
                     <!-- Option 2: Emulsion -->
                     <label class="cursor-pointer relative block">
                         <input type="checkbox" id="focus-emulsion" class="sr-only">
-                        <div class="alchemie-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
+                        <div class="feature-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
                             <div class="flex items-start justify-between mb-2">
                                 <span class="font-bold text-slate-200">Stabile Emulsionen</span>
                                 <div class="w-5 h-5 rounded-full border border-slate-500 flex flex-shrink-0 items-center justify-center">
@@ -166,7 +166,7 @@
                     <!-- Option 3: Stärke -->
                     <label class="cursor-pointer relative block">
                         <input type="checkbox" id="focus-starch" class="sr-only">
-                        <div class="alchemie-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
+                        <div class="feature-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
                             <div class="flex items-start justify-between mb-2">
                                 <span class="font-bold text-slate-200">Stärkeverkleisterung</span>
                                 <div class="w-5 h-5 rounded-full border border-slate-500 flex flex-shrink-0 items-center justify-center">
@@ -180,7 +180,7 @@
                     <!-- Option 4: Umami -->
                     <label class="cursor-pointer relative block">
                         <input type="checkbox" id="focus-umami" class="sr-only">
-                        <div class="alchemie-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
+                        <div class="feature-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
                             <div class="flex items-start justify-between mb-2">
                                 <span class="font-bold text-slate-200">Natürliches Umami</span>
                                 <div class="w-5 h-5 rounded-full border border-slate-500 flex flex-shrink-0 items-center justify-center">
@@ -198,7 +198,7 @@
             <button onclick="buildPrompt()" class="group relative w-full bg-gradient-to-r from-amber-500 to-amber-700 text-white font-bold py-5 rounded-2xl mt-10 shadow-[0_0_20px_rgba(217,119,6,0.3)] hover:shadow-[0_0_30px_rgba(217,119,6,0.5)] transition-all active:scale-[0.98] overflow-hidden">
                 <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                 <span class="relative flex items-center justify-center gap-2 text-lg">
-                    Alchemistischen Prompt generieren
+                    Transformations-Prompt generieren
                     <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                 </span>
             </button>
@@ -254,7 +254,7 @@
         <section class="glass-panel rounded-3xl p-6 sm:p-8">
             <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-6 flex items-center gap-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                Archivierte Kreationen
+                Archivierte Transformationen
             </h3>
             <div id="history-list" class="space-y-3">
                 <!-- History Items -->
@@ -285,7 +285,7 @@
 
         function buildPrompt() {
             const mainInput = document.getElementById(currentMode === 'dish' ? 'main-input' : 'fridge-input').value;
-            if(!mainInput.trim()) return alert("Bitte gib ein Gericht oder Zutaten ein, bevor die Alchemie starten kann.");
+            if(!mainInput.trim()) return alert("Bitte gib ein Gericht oder Zutaten ein, bevor die Transformation starten kann.");
 
             let focusPoints = [];
             if(document.getElementById('focus-maillard').checked) focusPoints.push("Maximierung der Maillard-Reaktion für Röstaromen");
@@ -305,11 +305,11 @@ ${currentMode === 'dish' ? `ZIEL-GERICHT: ${mainInput}` : `ZUTATEN-POOL: Entwick
 PARAMETER:
 - Garmethode: ${method}
 - Zeitfenster: ${time}
-- Chemischer Fokus: ${focusPoints.length > 0 ? focusPoints.join(" + ") : "Klassische Gourmet-Chemie"}
+- Chemischer Fokus: ${focusPoints.length > 0 ? focusPoints.join(" + ") : "Klassische Lebensmittelchemie"}
 
 ANTWORT-STRUKTUR:
 1. Titel des Gerichts
-2. Die Alchemie dahinter (Kurzer Laien-Kniff: Wie entsteht die Textur/der Geschmack chemisch?)
+2. Die Lebensmittelchemie dahinter (Kurzer Laien-Kniff: Wie entsteht die Textur/der Geschmack chemisch?)
 3. Zutatenliste (Exakte Mengen)
 4. Zubereitung (Präzise, alltagstauglich)`;
 
@@ -349,7 +349,7 @@ ANTWORT-STRUKTUR:
             const list = document.getElementById('history-list');
             const history = JSON.parse(localStorage.getItem('alchemie_history') || "[]");
             
-            list.innerHTML = history.length ? '' : '<div class="text-center p-6 border border-dashed border-slate-700 rounded-xl"><p class="text-sm text-slate-500 italic">Noch keine Formeln archiviert.</p></div>';
+            list.innerHTML = history.length ? '' : '<div class="text-center p-6 border border-dashed border-slate-700 rounded-xl"><p class="text-sm text-slate-500 italic">Noch keine Prompts archiviert.</p></div>';
             
             history.forEach((item, index) => {
                 const div = document.createElement('div');
@@ -360,7 +360,7 @@ ANTWORT-STRUKTUR:
                         <span class="text-slate-500 text-[11px]">${item.date}</span>
                     </div>
                     <button onclick="restoreHistory(${index})" class="px-4 py-1.5 bg-slate-900 border border-slate-600 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-500 hover:border-amber-500 transition-colors shrink-0">
-                        Formel laden
+                        Prompt laden
                     </button>`;
                 list.appendChild(div);
             });
