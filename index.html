@@ -76,7 +76,7 @@
             <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-amber-600/10 blur-3xl pointer-events-none"></div>
 
             <div id="input-dish-group" class="mb-8">
-                <label class="block text-sm font-semibold text-slate-300 mb-3 ml-1">Welches Gericht transformieren wir?</label>
+                <label class="block text-sm font-semibold text-slate-300 mb-3 ml-1">Welches klassische Gericht transformieren wir?</label>
                 <input type="text" id="main-input" placeholder="z.B. Saftige Lasagne, Pizza Margherita..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner">
             </div>
             
@@ -163,10 +163,10 @@
             <div class="space-y-4">
                 <button onclick="copyToClipboard()" id="copy-btn" class="w-full bg-white text-slate-900 py-4 rounded-xl font-black uppercase shadow-lg transition-all active:scale-[0.98]">Kopieren</button>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    <a href="https://chat.openai.com" target="_blank" class="bg-white/5 p-3 rounded-xl text-[10px] font-bold text-center border border-white/5">ChatGPT</a>
-                    <a href="https://claude.ai/new" target="_blank" class="bg-white/5 p-3 rounded-xl text-[10px] font-bold text-center border border-white/5">Claude</a>
-                    <a href="https://gemini.google.com/" target="_blank" class="bg-white/5 p-3 rounded-xl text-[10px] font-bold text-center border border-white/5">Gemini</a>
-                    <a href="https://x.com/i/grok" target="_blank" class="bg-white/5 p-3 rounded-xl text-[10px] font-bold text-center border border-white/5">Grok</a>
+                    <a href="https://chat.openai.com" target="_blank" class="bg-white/5 p-3 rounded-xl text-[10px] font-bold text-center border border-white/5 hover:bg-white/10 transition-colors">ChatGPT</a>
+                    <a href="https://claude.ai/new" target="_blank" class="bg-white/5 p-3 rounded-xl text-[10px] font-bold text-center border border-white/5 hover:bg-white/10 transition-colors">Claude</a>
+                    <a href="https://gemini.google.com/" target="_blank" class="bg-white/5 p-3 rounded-xl text-[10px] font-bold text-center border border-white/5 hover:bg-white/10 transition-colors">Gemini</a>
+                    <a href="https://x.com/i/grok" target="_blank" class="bg-white/5 p-3 rounded-xl text-[10px] font-bold text-center border border-white/5 hover:bg-white/10 transition-colors">Grok</a>
                 </div>
                 <button onclick="resetApp()" class="w-full text-slate-500 text-xs py-4">← Zurück</button>
             </div>
@@ -177,11 +177,16 @@
             <div id="history-list" class="space-y-2"></div>
         </section>
 
-        <footer class="text-center pt-8 pb-4 fade-in">
-            <a href="https://bunq.me/MAssenbrunner" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-amber-500/50 transition-all group active:scale-95">
-                <span class="text-xl group-hover:rotate-12 transition-transform">☕</span>
-                <span class="text-xs font-bold uppercase tracking-widest text-slate-300 group-hover:text-amber-500">Spendier mir einen Kaffee</span>
-            </a>
+        <footer class="mt-12 mb-8 text-center fade-in">
+            <div class="flex flex-col items-center gap-4">
+                <a href="https://bunq.me/MAssenbrunner" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-amber-500/50 transition-all group active:scale-95">
+                    <span class="text-xl group-hover:rotate-12 transition-transform">☕</span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-slate-300 group-hover:text-amber-500">Spendier mir einen Kaffee</span>
+                </a>
+                <div class="text-slate-600 text-[10px] uppercase tracking-[0.3em] font-medium">
+                    Made with ❤️ by <span class="text-slate-500 font-bold">Gemini Pro</span>
+                </div>
+            </div>
         </footer>
         
     </main>
@@ -251,7 +256,7 @@ STRUKTUR:
             navigator.clipboard.writeText(document.getElementById('result-text').value);
             document.getElementById('copy-btn').innerHTML = "✅ Kopiert!";
             let title = currentMode === 'dish' ? document.getElementById('main-input').value : "Anfrage";
-            saveToHistory(title || "Transformation", document.getElementById('result-text').value);
+            saveToHistory(title, document.getElementById('result-text').value);
             setTimeout(() => { document.getElementById('copy-btn').innerHTML = "Kopieren"; }, 2000);
         }
 
