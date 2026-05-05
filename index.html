@@ -109,7 +109,7 @@
                             <option value="Viel Zeit">Slow Cooking</option>
                         </select>
                         <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400 group-hover:text-amber-500 transition-colors">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                     </div>
                 </div>
@@ -117,9 +117,9 @@
                 <div>
                     <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2 ml-1">Personen</label>
                     <div class="relative group">
-                        <input type="number" id="param-portions" value="2" min="1" max="20" class="w-full bg-slate-900/60 border border-slate-700/80 hover:border-amber-500/50 rounded-xl px-4 py-3.5 text-slate-200 font-medium outline-none transition-colors shadow-inner">
+                        <input type="number" id="param-portions" value="2" min="1" max="20" class="w-full bg-slate-900/60 border border-slate-700/80 hover:border-amber-500/50 rounded-xl pl-4 pr-10 py-3.5 text-slate-200 font-medium outline-none transition-colors shadow-inner">
                         <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400 group-hover:text-amber-500 transition-colors">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg>
                         </div>
                     </div>
                 </div>
@@ -217,7 +217,7 @@
             </h3>
             
             <div class="relative group mb-6">
-                <textarea id="result-text" rows="9" class="w-full bg-slate-900/80 text-amber-50 text-sm font-mono p-5 rounded-2xl border border-slate-700/80 outline-none resize-none shadow-inner" readonly></textarea>
+                <textarea id="result-text" rows="10" class="w-full bg-slate-900/80 text-amber-50 text-sm font-mono p-5 rounded-2xl border border-slate-700/80 outline-none resize-none shadow-inner" readonly></textarea>
                 <div class="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 pointer-events-none rounded-2xl"></div>
             </div>
             
@@ -285,8 +285,10 @@
             const portions = document.getElementById('param-portions').value;
 
             const basePrompt = `Rolle: Haubenkoch & Lebensmittelchemiker. 
-Aufgabe: Erschaffe eine Gourmet-Version — strikt glutenfrei & histaminarm. 
-Regel: Keine industriellen Bindemittel-Krücken (Xanthan etc.). Textur entsteht rein durch physikalische Lebensmittelchemie.
+Aufgabe: Erschaffe eine Gourmet-Version — strikt histaminarm & glutenfrei. 
+Regeln:
+1. Konfliktprinzip: Wenn Histaminarmut und Glutenfreiheit kollidieren, hat HISTAMINARMUT absoluten Vorrang!
+2. Technik: Keine industriellen Bindemittel-Krücken (Xanthan etc.). Textur entsteht rein durch physikalische Lebensmittelchemie.
 
 ${currentMode === 'dish' ? `ZIEL-GERICHT: ${mainInput}` : `ZUTATEN-POOL: Entwickle ein völlig neues Gourmet-Rezept aus: ${mainInput}`}
 
