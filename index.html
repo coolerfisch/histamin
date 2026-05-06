@@ -32,13 +32,23 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .feature-card { transition: all 0.3s ease; cursor: pointer; }
+        .feature-card { transition: all 0.3s ease; }
         input[type="checkbox"]:checked + .feature-card {
             background-color: rgba(217, 119, 6, 0.15);
             border-color: #d97706;
         }
+        input[type="checkbox"]:checked + .feature-card .check-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
         
         .hidden { display: none !important; }
+        
+        select, input[type="number"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
         
         .fade-in { animation: fadeIn 0.4s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -46,377 +56,845 @@
 </head>
 <body class="pb-12 px-4 pt-10 sm:pt-16">
 
-    <header class="max-w-4xl mx-auto text-center mb-10 fade-in">
+    <header class="max-w-3xl mx-auto text-center mb-10 fade-in">
         <h1 class="text-4xl sm:text-5xl font-bold serif mb-3 tracking-tight flex justify-center items-center gap-3">
             <span class="text-3xl sm:text-4xl">🥄</span>
             Histamin-<span class="text-gradient">Zauber</span>
         </h1>
-        <p id="main-subtitle" class="text-slate-400 text-sm sm:text-base font-light max-w-lg mx-auto transition-all duration-300 min-h-[3rem]">
+        <p id="main-subtitle" class="text-slate-400 text-sm sm:text-base font-light max-w-lg mx-auto transition-all duration-300">
             Klassische Gerichte umwandeln – strikt histaminarm & glutenfrei durch echte Lebensmittelchemie.
         </p>
         
-        <div class="mt-8">
+        <div class="mt-10">
             <span class="text-[11px] font-bold uppercase tracking-widest text-slate-500 block mb-3">Bitte Modus wählen</span>
             <div class="inline-flex flex-wrap justify-center bg-slate-800/80 rounded-3xl p-1 border border-slate-700/50 shadow-inner gap-1">
-                <button onclick="setMode('dish')" id="mode-dish" class="px-4 py-2.5 rounded-full text-[13px] font-semibold transition-all bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg">Rezept</button>
-                <button onclick="setMode('fridge')" id="mode-fridge" class="px-4 py-2.5 rounded-full text-[13px] font-medium text-slate-300 transition-all">Reste</button>
-                <button onclick="setMode('cravings')" id="mode-cravings" class="px-4 py-2.5 rounded-full text-[13px] font-medium text-slate-300 transition-all">Gelüste</button>
-                <button onclick="setMode('noob')" id="mode-noob" class="px-4 py-2.5 rounded-full text-[13px] font-medium text-slate-300 transition-all">Anfänger</button>
-                <button onclick="setMode('vital')" id="mode-vital" class="px-4 py-2.5 rounded-full text-[13px] font-medium text-slate-300 transition-all">Vitalstoffe</button>
-                <button onclick="setMode('togo')" id="mode-togo" class="px-4 py-2.5 rounded-full text-[13px] font-medium text-slate-300 transition-all">Unterwegs</button>
-                <button onclick="setMode('alternative')" id="mode-alternative" class="px-4 py-2.5 rounded-full text-[13px] font-medium text-slate-300 transition-all">Tausch</button>
-                <button onclick="setMode('grill')" id="mode-grill" class="px-4 py-2.5 rounded-full text-[13px] font-medium text-slate-300 transition-all">Grillen</button>
-                <button onclick="setMode('baking')" id="mode-baking" class="px-4 py-2.5 rounded-full text-[13px] font-medium text-slate-300 transition-all">Backen</button>
-                <button onclick="setMode('sport')" id="mode-sport" class="px-4 py-2.5 rounded-full text-[13px] font-medium text-slate-300 transition-all">Sportler</button>
-                <button onclick="setMode('soulfood')" id="mode-soulfood" class="px-4 py-2.5 rounded-full text-[13px] font-medium text-slate-300 transition-all">Scheiß Tag</button>
-                <button onclick="setMode('family')" id="mode-family" class="px-4 py-2.5 rounded-full text-[13px] font-medium text-slate-300 transition-all">Familie</button>
-                <button onclick="setMode('holiday')" id="mode-holiday" class="px-4 py-2.5 rounded-full text-[13px] font-medium text-slate-300 transition-all">Festtag</button>
-                <button onclick="setMode('guests')" id="mode-guests" class="px-4 py-2.5 rounded-full text-[13px] font-medium text-slate-300 transition-all">Gäste</button>
-                <button onclick="setMode('custom')" id="mode-custom" class="px-4 py-2.5 rounded-full text-[13px] font-medium text-indigo-300 transition-all bg-indigo-900/30 border border-indigo-500/30">Freestyle</button>
+                <button onclick="setMode('dish')" id="mode-dish" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-semibold transition-all bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg">Rezept</button>
+                <button onclick="setMode('fridge')" id="mode-fridge" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Reste</button>
+                <button onclick="setMode('cravings')" id="mode-cravings" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Gelüste</button>
+                <button onclick="setMode('vital')" id="mode-vital" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Vitalstoffe</button>
+                <button onclick="setMode('togo')" id="mode-togo" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Unterwegs</button>
+                <button onclick="setMode('alternative')" id="mode-alternative" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Zutaten-Tausch</button>
+                <button onclick="setMode('grill')" id="mode-grill" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Grillen</button>
+                <button onclick="setMode('baking')" id="mode-baking" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Backen</button>
+                <button onclick="setMode('sport')" id="mode-sport" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Sportler</button>
+                <button onclick="setMode('soulfood')" id="mode-soulfood" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Scheiß Tag</button>
+                <button onclick="setMode('family')" id="mode-family" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Familie</button>
+                <button onclick="setMode('holiday')" id="mode-holiday" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Festtag</button>
+                <button onclick="setMode('guests')" id="mode-guests" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Gäste</button>
+                <button onclick="setMode('custom')" id="mode-custom" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-indigo-300 hover:text-white transition-all bg-indigo-900/30 border border-indigo-500/30">Freestyle</button>
             </div>
         </div>
     </header>
 
     <main class="max-w-3xl mx-auto space-y-8 fade-in">
+        
         <section id="step1" class="glass-panel rounded-[2rem] p-6 sm:p-10 relative overflow-hidden">
             <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-amber-600/10 blur-3xl pointer-events-none"></div>
 
-            <div id="freestyle-banner" class="hidden bg-indigo-500/10 border-l-4 border-indigo-500 p-5 rounded-r-2xl mb-8 shadow-inner">
-                <h3 class="text-indigo-400 font-bold mb-1">FREESTYLE MODUS AKTIV</h3>
-                <p class="text-sm text-indigo-200/80">Histamin-Filter ist deaktiviert. Die KI kocht klassisch nach deinen Regeln.</p>
+            <div id="freestyle-banner" class="hidden bg-indigo-500/10 border-l-4 border-indigo-500 p-5 rounded-r-2xl mb-8 shadow-inner relative overflow-hidden">
+                <div class="absolute inset-0 bg-indigo-500/5 pointer-events-none"></div>
+                <h3 class="text-indigo-400 font-bold flex items-center gap-2 mb-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    FREESTYLE MODUS AKTIV
+                </h3>
+                <p class="text-sm text-indigo-200/80">Der strikte Histamin- & Gluten-Filter ist für diese Abfrage <strong>deaktiviert</strong>. Die KI kocht jetzt klassisch oder exakt nach den Ernährungsregeln, die du ihr unten im neuen Feld vorgibst.</p>
             </div>
 
             <div id="input-dish-group" class="mb-8">
                 <div class="flex justify-between items-end mb-3 ml-1">
-                    <label class="block text-sm font-semibold text-slate-300">Welches Gericht transformieren wir?</label>
-                    <button onclick="surpriseMe('dish')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                    <label class="block text-sm font-semibold text-slate-300">Welches klassische Gericht transformieren wir?</label>
+                    <button onclick="surpriseMe('dish')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
                 </div>
-                <input type="text" id="dish-input" placeholder="z.B. Zürcher Geschnetzeltes, Lasagne..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 outline-none shadow-inner">
+                <input type="text" id="main-input" placeholder="z.B. Zürcher Geschnetzeltes, Pizza Margherita..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner">
             </div>
             
             <div id="input-fridge-group" class="hidden mb-8">
                 <div class="flex justify-between items-end mb-1 ml-1">
-                    <label class="block text-sm font-semibold text-slate-300">Deine Vorräte:</label>
-                    <button onclick="surpriseMe('fridge')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                    <label class="block text-sm font-semibold text-slate-300">Welche Zutaten hast du vorrätig?</label>
+                    <button onclick="surpriseMe('fridge')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
                 </div>
-                <textarea id="fridge-input" rows="3" placeholder="z.B. 250g Rinderhack, 3 Karotten..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Tipp: Gib nach Möglichkeit auch die Mengen an (z.B. 3 Karotten, 200g Skyr).</p>
+                <textarea id="fridge-input" rows="3" placeholder="z.B. 250g Rinderhack, 3 Karotten, halber Becher Skyr..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-cravings-group" class="hidden mb-8">
                 <div class="flex justify-between items-end mb-1 ml-1">
-                    <label class="block text-sm font-semibold text-slate-300">Worauf hast du Lust?</label>
-                    <button onclick="surpriseMe('cravings')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                    <label class="block text-sm font-semibold text-slate-300">Worauf hast du gerade Lust?</label>
+                    <button onclick="surpriseMe('cravings')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
                 </div>
-                <textarea id="cravings-input" rows="3" placeholder="z.B. Etwas Knuspriges und Süßes..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
-            </div>
-
-            <div id="input-noob-group" class="hidden mb-8">
-                <div class="flex justify-between items-end mb-1 ml-1">
-                    <label class="block text-sm font-semibold text-slate-300">Hilfe, ich kann nicht kochen:</label>
-                    <button onclick="surpriseMe('noob')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
-                </div>
-                <textarea id="noob-input" rows="3" placeholder="z.B. Maximal 3 Zutaten, idiotensicher..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Beschreibe einfach die Textur, den Geschmack oder dein Verlangen.</p>
+                <textarea id="cravings-input" rows="3" placeholder="z.B. Ich hätte total Lust auf etwas knuspriges und süßes..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-vital-group" class="hidden mb-8">
                 <div class="flex justify-between items-end mb-1 ml-1">
-                    <label class="block text-sm font-semibold text-slate-300">Nährstoff-Fokus:</label>
-                    <button onclick="surpriseMe('vital')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                    <label class="block text-sm font-semibold text-slate-300">Nährstoff-Boost (Vitamine & Mineralien):</label>
+                    <button onclick="surpriseMe('vital')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
                 </div>
-                <textarea id="vital-input" rows="3" placeholder="z.B. Vitamin C Bombe für das Immunsystem..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Welche Nährstoffe möchtest du maximieren? Die KI berechnet hier auch automatisch Kalorien & Makros.</p>
+                <textarea id="vital-input" rows="3" placeholder="z.B. Eine absolute Vitamin-C Bombe zur Immunabwehr, oder ein extrem eisenreiches Gericht..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-togo-group" class="hidden mb-8">
                 <div class="flex justify-between items-end mb-1 ml-1">
-                    <label class="block text-sm font-semibold text-slate-300">Unterwegs & Pausenbrot:</label>
-                    <button onclick="surpriseMe('togo')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                    <label class="block text-sm font-semibold text-slate-300">Für Büro, Schule & Ausflug:</label>
+                    <button onclick="surpriseMe('togo')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
                 </div>
-                <textarea id="togo-input" rows="3" placeholder="z.B. Herzhafter Wrap, glutenfrei..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Kalt lecker, gut zu transportieren und sicher ohne starke Kühlung.</p>
+                <textarea id="togo-input" rows="3" placeholder="z.B. Ein herzhafter Wrap, Pausenbrot-Alternative oder ein Meal-Prep Salat..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-alternative-group" class="hidden mb-8">
                 <div class="flex justify-between items-end mb-1 ml-1">
-                    <label class="block text-sm font-semibold text-slate-300">Zutaten-Tausch:</label>
-                    <button onclick="surpriseMe('alternative')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                    <label class="block text-sm font-semibold text-slate-300">Finde eine Alternative zu Zutat xy:</label>
+                    <button onclick="surpriseMe('alternative')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
                 </div>
-                <textarea id="alternative-input" rows="2" placeholder="z.B. Was ist der beste Ersatz für Tomatenmark?" class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Welche problematische Zutat möchtest du histaminfrei & glutenfrei ersetzen?</p>
+                <textarea id="alternative-input" rows="2" placeholder="z.B. Tomatenmark, Sojasauce, Parmesan, Hefe, Weizenmehl..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-grill-group" class="hidden mb-8">
                 <div class="flex justify-between items-end mb-1 ml-1">
-                    <label class="block text-sm font-semibold text-slate-300">BBQ & Marinaden:</label>
-                    <button onclick="surpriseMe('grill')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                    <label class="block text-sm font-semibold text-slate-300">Grill-Saison (BBQ & Marinaden):</label>
+                    <button onclick="surpriseMe('grill')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
                 </div>
-                <textarea id="grill-input" rows="3" placeholder="z.B. Saftige Hähnchenspieße..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Die KI entwirft histaminarme Marinaden, Grillgut oder perfekte Dips ohne Tomate & Sojasauce.</p>
+                <textarea id="grill-input" rows="3" placeholder="z.B. Saftige Hähnchenspieße, Grillgemüse oder ein rauchiger Dip..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-baking-group" class="hidden mb-8">
                 <div class="flex justify-between items-end mb-1 ml-1">
-                    <label class="block text-sm font-semibold text-slate-300">Backen ohne Hefe:</label>
-                    <button onclick="surpriseMe('baking')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                    <label class="block text-sm font-semibold text-slate-300">Backstube (Kuchen, Brot & Teig):</label>
+                    <button onclick="surpriseMe('baking')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
                 </div>
-                <textarea id="baking-input" rows="3" placeholder="z.B. Saftiger Apfelkuchen..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Glutenfrei und ohne Hefe backen – mit perfekter Teigstruktur und Krume.</p>
+                <textarea id="baking-input" rows="3" placeholder="z.B. Ein saftiger Apfelkuchen, knuspriges Brot oder Pfannkuchen..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-sport-group" class="hidden mb-8">
                 <div class="flex justify-between items-end mb-1 ml-1">
-                    <label class="block text-sm font-semibold text-slate-300">High-Protein Sportlermahlzeit:</label>
-                    <button onclick="surpriseMe('sport')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                    <label class="block text-sm font-semibold text-slate-300">Sportler (High Protein Fokus):</label>
+                    <button onclick="surpriseMe('sport')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
                 </div>
-                <textarea id="sport-input" rows="3" placeholder="z.B. Post-Workout Meal..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Die KI maximiert den Proteingehalt. Wofür brauchst du es?</p>
+                <textarea id="sport-input" rows="3" placeholder="z.B. Post-Workout Mahlzeit nach dem Gym, gerne mit Fleisch..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-soulfood-group" class="hidden mb-8">
                 <div class="flex justify-between items-end mb-1 ml-1">
-                    <label class="block text-sm font-semibold text-slate-300">Soulfood (Scheiß Tag):</label>
-                    <button onclick="surpriseMe('soulfood')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                    <label class="block text-sm font-semibold text-slate-300">Der Tag war scheiße...</label>
+                    <button onclick="surpriseMe('soulfood')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
                 </div>
-                <textarea id="soulfood-input" rows="3" placeholder="z.B. Deftiger Burger, verträglich..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Die KI entwirft echtes Soulfood (z.B. Burger, Pizza) zur Aufmunterung.</p>
+                <textarea id="soulfood-input" rows="3" placeholder="z.B. Ich brauche einfach nur einen fetten Burger oder was richtig extrem Deftiges..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-family-group" class="hidden mb-8">
                 <div class="flex justify-between items-end mb-1 ml-1">
-                    <label class="block text-sm font-semibold text-slate-300">Familienessen (Veggie & Fleisch):</label>
-                    <button onclick="surpriseMe('family')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                    <label class="block text-sm font-semibold text-slate-300">Familien-Essen (Vegan & Fleisch):</label>
+                    <button onclick="surpriseMe('family')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
                 </div>
-                <textarea id="family-input" rows="3" placeholder="z.B. Modulares Baukasten-Essen..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Die KI plant ein modulares Festmahl. Auch perfekt für Sophie (Veganerin) sowie Tobias und Moritz (Fleisch-Fans) geeignet!</p>
+                <textarea id="family-input" rows="3" placeholder="z.B. Ein großer Topf für alle, oder ein Baukasten-System zum Selbstbelegen..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-holiday-group" class="hidden mb-8">
                 <div class="flex justify-between items-end mb-1 ml-1">
-                    <label class="block text-sm font-semibold text-slate-300">Festtagsmenü:</label>
-                    <button onclick="surpriseMe('holiday')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                    <label class="block text-sm font-semibold text-slate-300">Sonntag & Feiertag (Weihnachten/Ostern):</label>
+                    <button onclick="surpriseMe('holiday')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
                 </div>
-                <textarea id="holiday-input" rows="3" placeholder="z.B. Weihnachtsbraten..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Ein besonders festliches, aufwendigeres Menü für besondere Tage.</p>
+                <textarea id="holiday-input" rows="3" placeholder="z.B. Ein klassischer Festtagsbraten, edles Ragout oder ein toller Brunch..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-guests-group" class="hidden mb-8">
                 <div class="flex justify-between items-end mb-1 ml-1">
                     <label class="block text-sm font-semibold text-slate-300">Gäste beeindrucken:</label>
-                    <button onclick="surpriseMe('guests')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                    <button onclick="surpriseMe('guests')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
                 </div>
-                <textarea id="guests-input" rows="3" placeholder="z.B. Gourmet-Niveau..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Gourmet-Niveau. Niemand darf merken, dass es histaminarm und glutenfrei ist!</p>
+                <textarea id="guests-input" rows="3" placeholder="z.B. Etwas optisch extrem Raffiniertes, das unfassbar edel schmeckt..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-custom-group" class="hidden mb-8">
                 <div class="flex justify-between items-end mb-1 ml-1">
-                    <label class="block text-sm font-semibold text-indigo-300">Freestyle (Alles erlaubt):</label>
-                    <button onclick="surpriseMe('custom')" class="text-xs text-indigo-400 font-bold">🎲 Überrasch mich</button>
+                    <label class="block text-sm font-semibold text-indigo-300">Was möchtest du kochen?</label>
+                    <button onclick="surpriseMe('custom')" class="text-xs text-indigo-400 hover:text-indigo-300 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
                 </div>
-                <input type="text" id="custom-input" placeholder="Was willst du kochen?" class="w-full bg-indigo-900/20 border border-indigo-700/50 rounded-2xl px-5 py-4 text-white text-lg mb-4 outline-none">
-                <input type="text" id="custom-diet-input" placeholder="Besondere Ernährungsregeln..." class="w-full bg-indigo-900/20 border border-indigo-700/50 rounded-2xl px-5 py-4 text-white text-lg outline-none">
+                <input type="text" id="custom-input" placeholder="z.B. Pad Thai, Schokoladenkuchen, Lasagne..." class="w-full bg-indigo-900/20 border border-indigo-700/50 rounded-2xl px-5 py-4 text-white text-lg focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all placeholder-slate-600 shadow-inner mb-4">
+                
+                <label class="block text-sm font-semibold text-indigo-300 mb-1 ml-1">Gilt eine spezielle Ernährungsform oder Allergie?</label>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Falls du alles isst, lass das Feld einfach leer!</p>
+                <input type="text" id="custom-diet-input" placeholder="z.B. Nussallergie, Laktosefrei, Vegan, Pescetarisch..." class="w-full bg-indigo-900/20 border border-indigo-700/50 rounded-2xl px-5 py-4 text-white text-lg focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all placeholder-slate-600 shadow-inner">
             </div>
 
-            <div id="cooking-params" class="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div><label class="block text-[11px] font-bold uppercase text-slate-500 mb-2">Garmethode</label>
-                    <select id="param-method" class="w-full bg-slate-900/60 border border-slate-700/80 rounded-xl px-4 py-3.5 text-slate-200 outline-none">
-                        <option value="KI wählt optimal">KI wählt optimal</option><option value="Herd">Herd</option><option value="Backofen">Backofen</option><option value="Airfryer">Airfryer</option>
-                    </select>
-                </div>
-                <div><label class="block text-[11px] font-bold uppercase text-slate-500 mb-2">Zeit</label>
-                    <select id="param-time" class="w-full bg-slate-900/60 border border-slate-700/80 rounded-xl px-4 py-3.5 text-slate-200 outline-none">
-                        <option value="30 Min">Schnell (30 Min)</option><option value="60 Min">Normal (60 Min)</option>
-                    </select>
-                </div>
-                <div><label class="block text-[11px] font-bold uppercase text-slate-500 mb-2">Portionen</label>
-                    <input type="number" id="param-portions" value="2" class="w-full bg-slate-900/60 border border-slate-700/80 rounded-xl px-4 py-3.5 text-slate-200 outline-none">
+
+            <div id="cooking-params" class="mb-6">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2 ml-1">Garmethode</label>
+                        <div class="relative group">
+                            <select id="param-method" class="w-full bg-slate-900/60 border border-slate-700/80 hover:border-amber-500/50 rounded-xl px-4 py-3.5 text-slate-200 font-medium outline-none cursor-pointer transition-colors shadow-inner pr-10">
+                                <option value="KI wählt die optimale Methode">KI wählt optimal (Empfohlen)</option>
+                                <option value="Herd">Pfanne / Topf (Herd)</option>
+                                <option value="Backofen">Backofen</option>
+                                <option value="Grill">Grillrost</option>
+                                <option value="Mikrowelle">Mikrowelle</option>
+                                <option value="Airfryer">Heißluftfritteuse (Airfryer)</option>
+                                <option value="Waffeleisen">Waffeleisen</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400 group-hover:text-amber-500 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2 ml-1">Zeitfenster</label>
+                        <div class="relative group">
+                            <select id="param-time" class="w-full bg-slate-900/60 border border-slate-700/80 hover:border-amber-500/50 rounded-xl px-4 py-3.5 text-slate-200 font-medium outline-none cursor-pointer transition-colors shadow-inner pr-10">
+                                <option value="ca. 30 Minuten">Schnell (ca. 30 Min)</option>
+                                <option value="ca. 60 Minuten">Normal (ca. 60 Min)</option>
+                                <option value="Viel Zeit">Slow Cooking / Aufwendig</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400 group-hover:text-amber-500 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2 ml-1">Personen / Menge</label>
+                        <div class="relative group">
+                            <input type="number" id="param-portions" value="2" min="1" max="20" class="w-full bg-slate-900/60 border border-slate-700/80 hover:border-amber-500/50 rounded-xl pl-4 pr-10 py-3.5 text-slate-200 font-medium outline-none transition-colors shadow-inner">
+                            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400 group-hover:text-amber-500 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div id="nutrition-toggle" class="mb-6">
-                <label class="cursor-pointer inline-flex items-center gap-3">
-                    <input type="checkbox" id="param-macros" class="accent-amber-500 w-5 h-5">
-                    <span class="text-sm text-slate-300">Nährwerte & Kalorien mitberechnen</span>
+            <div id="nutrition-toggle" class="mb-8 pl-1">
+                <label class="cursor-pointer inline-flex items-center gap-3 group">
+                    <div class="w-5 h-5 rounded border border-slate-500 flex items-center justify-center bg-slate-900/60 group-hover:border-amber-500 transition-colors shadow-inner">
+                        <svg class="w-3 h-3 text-amber-500 opacity-0 transition-opacity duration-200" id="macro-check-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <input type="checkbox" id="param-macros" class="sr-only" onchange="document.getElementById('macro-check-icon').style.opacity = this.checked ? '1' : '0'">
+                    <span class="text-sm font-medium text-slate-300 group-hover:text-amber-400 transition-colors">Makros, Kalorien & Nährwerte pro Portion mitberechnen</span>
                 </label>
             </div>
 
             <div id="tolerances-params" class="mb-10">
-                <label class="block text-[11px] font-bold uppercase text-slate-500 mb-1 ml-1">Toleranzen, No-Gos & Wünsche (Optional)</label>
-                <p class="text-[12px] text-slate-400 mb-3 ml-1">Was geht ausnahmsweise (bisschen Tomatenmark)? Was gar nicht? Wovon viel?</p>
-                <textarea id="param-tolerances" rows="2" placeholder="Z.B. Etwas Tomatenmark ist ok. Knoblauch verboten! Viel Petersilie..." class="w-full bg-slate-900/60 border border-slate-700/80 focus:border-amber-500 rounded-2xl px-5 py-4 text-white outline-none shadow-inner"></textarea>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1 ml-1">Toleranzen, No-Gos & Wünsche (Optional)</label>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Was geht ausnahmsweise klar (z.B. etwas Tomatenmark)? Was geht gar nicht? Wovon bitte extra viel?</p>
+                <textarea id="param-tolerances" rows="2" placeholder="z.B. Ein bisschen Tomatenmark vertrage ich gut. Knoblauch geht gar nicht! Davon bitte ganz viel frische Petersilie..." class="w-full bg-slate-900/60 border border-slate-700/80 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 hover:border-amber-500/50 rounded-2xl px-5 py-4 text-white outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="texture-params" class="border-t border-slate-700/50 pt-8">
-                <h3 class="text-sm font-bold uppercase text-amber-500 mb-4">Textur-Fokus</h3>
+                <div class="mb-5">
+                    <h3 class="text-sm font-bold uppercase tracking-widest text-amber-500 flex items-center gap-2 mb-3" id="texture-title">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        Optionaler Textur-Fokus
+                    </h3>
+                    <div class="bg-slate-900/40 p-4 rounded-xl border border-slate-700/50 shadow-inner">
+                        <p class="text-[13px] text-slate-300 leading-relaxed mb-2">
+                            <span class="font-bold text-amber-500 block mb-1" id="texture-subtitle">Bei Wunsch auswählen (Mehrfachauswahl möglich):</span>
+                            Du willst, dass dein Gericht <strong class="text-white">extra knusprige Röstaromen</strong> bekommt? Es soll <strong class="text-white">besonders cremig</strong> werden, oder die Sauce <strong class="text-white">perfekt gebunden</strong> sein? 
+                        </p>
+                    </div>
+                </div>
+                
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <label class="cursor-pointer">
+                    <label class="cursor-pointer relative block">
                         <input type="checkbox" id="focus-maillard" class="sr-only">
-                        <div class="feature-card p-4 rounded-xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 transition-colors">Maillard-Reaktion (Knusprig)</div>
+                        <div class="feature-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
+                            <div class="flex items-start justify-between mb-2">
+                                <span class="font-bold text-slate-200">Maillard-Reaktion</span>
+                                <div class="w-5 h-5 rounded-full border border-slate-500 flex flex-shrink-0 items-center justify-center">
+                                    <svg class="check-icon w-3 h-3 text-amber-500 opacity-0 transform scale-50 transition-all duration-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                </div>
+                            </div>
+                            <p class="text-[12px] text-slate-400 leading-relaxed">Intensive Röstaromen und herzhafte Krusten durch gezieltes Erhitzen von Aminosäuren.</p>
+                        </div>
                     </label>
-                    <label class="cursor-pointer">
+
+                    <label class="cursor-pointer relative block">
+                        <input type="checkbox" id="focus-emulsion" class="sr-only">
+                        <div class="feature-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
+                            <div class="flex items-start justify-between mb-2">
+                                <span class="font-bold text-slate-200">Stabile Emulsionen</span>
+                                <div class="w-5 h-5 rounded-full border border-slate-500 flex flex-shrink-0 items-center justify-center">
+                                    <svg class="check-icon w-3 h-3 text-amber-500 opacity-0 transform scale-50 transition-all duration-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                </div>
+                            </div>
+                            <p class="text-[12px] text-slate-400 leading-relaxed">Cremige Texturen durch die perfekte Bindung von Fett und Wasser.</p>
+                        </div>
+                    </label>
+
+                    <label class="cursor-pointer relative block">
+                        <input type="checkbox" id="focus-starch" class="sr-only">
+                        <div class="feature-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
+                            <div class="flex items-start justify-between mb-2">
+                                <span class="font-bold text-slate-200">Stärkeverkleisterung</span>
+                                <div class="w-5 h-5 rounded-full border border-slate-500 flex flex-shrink-0 items-center justify-center">
+                                    <svg class="check-icon w-3 h-3 text-amber-500 opacity-0 transform scale-50 transition-all duration-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                </div>
+                            </div>
+                            <p class="text-[12px] text-slate-400 leading-relaxed">Samtige Saucen und perfekte Teige durch physikalische Quellung.</p>
+                        </div>
+                    </label>
+
+                    <label class="cursor-pointer relative block">
                         <input type="checkbox" id="focus-umami" class="sr-only">
-                        <div class="feature-card p-4 rounded-xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 transition-colors">Natürliches Umami (Herzhaft)</div>
+                        <div class="feature-card h-full p-5 rounded-2xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 shadow-inner">
+                            <div class="flex items-start justify-between mb-2">
+                                <span class="font-bold text-slate-200">Natürliches Umami</span>
+                                <div class="w-5 h-5 rounded-full border border-slate-500 flex flex-shrink-0 items-center justify-center">
+                                    <svg class="check-icon w-3 h-3 text-amber-500 opacity-0 transform scale-50 transition-all duration-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                </div>
+                            </div>
+                            <p class="text-[12px] text-slate-400 leading-relaxed">Ein extrem tiefenherzhafter, vollmundiger Geschmacksausbau.</p>
+                        </div>
                     </label>
                 </div>
             </div>
 
-            <button onclick="buildPrompt()" id="generate-btn" class="w-full bg-gradient-to-r from-amber-500 to-amber-700 text-white font-bold py-5 rounded-2xl mt-10 shadow-lg active:scale-[0.98]">Prompt generieren</button>
+            <button onclick="buildPrompt()" id="generate-btn" class="group relative w-full bg-gradient-to-r from-amber-500 to-amber-700 text-white font-bold py-5 rounded-2xl mt-10 shadow-[0_0_20px_rgba(217,119,6,0.3)] hover:shadow-[0_0_30px_rgba(217,119,6,0.5)] transition-all active:scale-[0.98] overflow-hidden">
+                <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <span class="relative flex items-center justify-center gap-2 text-lg uppercase tracking-tighter" id="generate-btn-text">
+                    Prompt generieren
+                </span>
+            </button>
         </section>
 
-        <section id="step2" class="hidden glass-panel rounded-[2rem] p-6 sm:p-10 fade-in">
-            <h3 class="text-xl font-bold mb-4 text-white serif">Dein Master-Prompt</h3>
-            <textarea id="result-text" rows="11" class="w-full bg-slate-900/80 text-amber-50 text-sm font-mono p-5 rounded-2xl border border-slate-700/80 outline-none resize-none shadow-inner" readonly></textarea>
-            <button onclick="copyToClipboard()" id="copy-btn" class="w-full bg-slate-100 text-slate-900 py-4 rounded-xl font-bold mt-6 uppercase hover:bg-white transition-colors">Kopieren & Archivieren</button>
-            <button onclick="resetApp()" class="w-full text-sm text-slate-400 mt-4">← Zurück zur Planung</button>
+        <section id="step2" class="hidden glass-panel rounded-[2rem] p-6 sm:p-10 fade-in border-green-500/30">
+            <h3 class="text-xl font-bold mb-4 flex items-center gap-3 text-white serif">
+                <span class="bg-green-500/20 text-green-400 p-2 rounded-full">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </span>
+                Dein Master-Prompt ist bereit
+            </h3>
+            
+            <div class="relative group mb-6">
+                <textarea id="result-text" rows="11" class="w-full bg-slate-900/80 text-amber-50 text-sm font-mono p-5 rounded-2xl border border-slate-700/80 outline-none resize-none shadow-inner" readonly></textarea>
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 pointer-events-none rounded-2xl"></div>
+            </div>
+            
+            <div class="space-y-4">
+                <button onclick="copyToClipboard()" id="copy-btn" class="w-full bg-slate-100 text-slate-900 hover:bg-white py-4 rounded-xl font-bold flex justify-center items-center gap-2 shadow-lg transition-all active:scale-[0.98] uppercase">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    Kopieren & Speichern
+                </button>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <a href="https://chat.openai.com" target="_blank" class="bg-[#10a37f]/10 text-[#10a37f] border border-[#10a37f]/30 hover:bg-[#10a37f] hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-bold">ChatGPT</a>
+                    <a href="https://claude.ai/new" target="_blank" class="bg-[#d97757]/10 text-[#d97757] border border-[#d97757]/30 hover:bg-[#d97757] hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-bold">Claude</a>
+                    <a href="https://gemini.google.com/" target="_blank" class="bg-[#8b5cf6]/10 text-[#8b5cf6] border border-[#8b5cf6]/30 hover:bg-[#8b5cf6] hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-bold">Gemini</a>
+                    <a href="https://x.com/i/grok" target="_blank" class="bg-slate-300/10 text-slate-300 border border-slate-300/30 hover:bg-slate-300 hover:text-slate-900 transition-colors text-center py-3 rounded-xl text-sm font-bold">Grok</a>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center">
+                <button onclick="resetApp()" class="text-sm font-semibold text-slate-400 hover:text-white transition-colors">← Zurück zur Planung</button>
+            </div>
         </section>
 
-        <section class="glass-panel rounded-3xl p-6">
-            <h3 class="text-xs font-bold uppercase text-slate-500 mb-4">Archiv</h3>
-            <div id="history-list" class="space-y-2"></div>
+        <section class="glass-panel rounded-3xl p-6 sm:p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Archiv
+                </h3>
+                <button onclick="clearHistory()" class="text-[10px] text-red-400 hover:text-white font-bold uppercase tracking-wider transition-colors border border-red-500/30 hover:bg-red-500/80 rounded-lg px-3 py-1.5 bg-red-500/10">Alle löschen</button>
+            </div>
+            <div id="history-list" class="space-y-3"></div>
         </section>
+
+        <footer class="mt-12 mb-8 text-center fade-in">
+            <div class="flex flex-col items-center gap-5">
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em] font-medium leading-relaxed bg-slate-800/40 px-6 py-3 rounded-2xl border border-slate-700/50">
+                    Speziell programmiert für <span class="text-amber-400 font-bold">Veronika</span> & <span class="text-amber-400 font-bold">Leonie</span> ✨<br>
+                </div>
+                
+                <a href="https://bunq.me/MAssenbrunner" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-amber-500/50 transition-all group active:scale-95">
+                    <span class="text-xl group-hover:rotate-12 transition-transform">☕</span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-slate-300 group-hover:text-amber-500">Spendier mir einen Kaffee</span>
+                </a>
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em] font-medium leading-relaxed">
+                    Idee von <span class="text-slate-300 font-bold">Martin</span><br>
+                    Mit ❤️ umgesetzt von <span class="text-amber-500 font-bold">Gemini Pro</span>
+                </div>
+            </div>
+        </footer>
+        
     </main>
-
-    <footer class="mt-12 mb-8 text-center text-slate-500 text-[10px] uppercase tracking-[0.2em]">
-        Programmiert für <span class="text-amber-400 font-bold">Veronika</span> & <span class="text-amber-400 font-bold">Leonie</span> ✨<br>
-        Idee: <span class="text-slate-300">Martin</span> | Alchemie: <span class="text-amber-500">Gemini Pro</span>
-    </footer>
 
     <script>
         let currentMode = 'dish';
         
         const modeSubtitles = {
-            dish: "Klassische Gerichte umwandeln – strikt histaminarm & glutenfrei durch Lebensmittelchemie.",
+            dish: "Klassische Gerichte umwandeln – strikt histaminarm & glutenfrei durch echte Lebensmittelchemie.",
             fridge: "Mach aus deinen Resten ein histaminarmes 5-Sterne-Gericht.",
             cravings: "Still dein Verlangen – 100% verträglich und ohne Reue.",
-            noob: "Idiotensichere, extrem einfache Rezepte für absolute Koch-Anfänger.",
-            vital: "Nährstoff-Boost: Optimiere dein Gericht auf Vitamine und Bioverfügbarkeit.",
-            togo: "Meal-Prep & Pausenbrot: Kalt lecker, gut transportierbar und histamin-sicher.",
-            alternative: "Finde den perfekten Ersatz für problematische Zutaten (z.B. Tomatenmark).",
-            grill: "Sicheres BBQ: Marinaden, Dips und Grillideen ohne Reue.",
+            vital: "Gezielter Nährstoff-Boost: Optimiere dein Gericht auf Vitamine, Mineralien und beste Bioverfügbarkeit.",
+            togo: "Meal-Prep, Pausenbrot & Snacks für Büro, Schule oder Ausflüge – kalt lecker und sicher.",
+            alternative: "Finde den perfekten chemischen & geschmacklichen Ersatz für problematische Zutaten.",
+            grill: "Sicheres BBQ: Histaminarme Marinaden, Dips und Grillideen.",
             baking: "Backen ohne Hefe & Gluten – perfekte Krume durch Stärkekombinationen.",
             sport: "Maximaler Proteingehalt für den Muskelaufbau, 100% histaminarm.",
-            soulfood: "Junk-Food-Feeling für miese Tage – deftig, aber verträglich.",
-            family: "Modulare Festmähler, die Veganer und Fleisch-Fans am Tisch vereinen.",
-            holiday: "Edle Gourmet-Gerichte für besondere Anlässe ohne Verzicht.",
-            guests: "Gourmet-Niveau: Deine Gäste werden nicht merken, dass es Diät ist.",
-            custom: "Freestyle: Die KI kocht klassisch nach deinen ganz eigenen Regeln."
+            soulfood: "Richtiges Junk-Food-Feeling für miese Tage – extrem deftig, aber verträglich.",
+            family: "Modulare Festmähler, die Veganer, Fleisch-Fans und Allergiker vereinen.",
+            holiday: "Edle, feierliche Gourmet-Gerichte für besondere Anlässe ohne Verzicht.",
+            guests: "Gourmet-Niveau: Niemand am Tisch wird merken, dass es eine Diät ist.",
+            custom: "Freestyle: Die KI kocht klassisch nach deinen ganz eigenen Ernährungsregeln."
         };
-
+        
         const surpriseData = {
-            dish: ["Lasagne al Forno", "Tiramisu", "Beef Wellington", "Spaghetti Carbonara", "Kaiserschmarrn"],
-            fridge: ["250g Rinderhack, 3 Karotten", "Zucchini, 3 Eier, frische Kräuter", "Hähnchenbrust, Kürbis, Kokosmilch"],
-            cravings: ["Etwas Knuspriges und Süßes", "Deftig, käsig und warm", "Eiscreme-Alternative"],
-            noob: ["Maximal 3 Zutaten zusammenwerfen", "Idiotensichere Pasta", "Eintopf ohne Anbrennen"],
-            vital: ["Vitamin C Bombe", "Eisen-Boost", "Magnesiumreiches Abendessen"],
-            togo: ["Glutenfreier Wrap", "Salat im Glas", "Sicheres Pausenbrot"],
-            alternative: ["Tomatenmark", "Sojasauce", "Hefe", "Parmesan"],
-            grill: ["Hähnchen-Marinade", "Grillbrot ohne Hefe", "Rauchiger Dip"],
-            baking: ["Apfelkuchen", "Krustenbrot ohne Weizen", "Pfannkuchen"],
-            sport: ["Post-Workout Meal", "Protein-Power Bowl"],
-            soulfood: ["Deftiger Burger", "Creamy Mac & Cheese", "Pizza-Style"],
-            family: ["Tacos zum Selbstbelegen", "Große Kartoffel-Bowl"],
-            holiday: ["Gänsebraten-Style", "Edles Ragout"],
-            guests: ["Lachsforelle in Salzkruste", "Rinderfilet mit Beeren-Jus"],
-            custom: ["Pad Thai", "Moussaka", "Zimtschnecken"]
+            dish: [
+                "Klassische Lasagne al Forno",
+                "Cremiges Tiramisu",
+                "Kaiserschmarrn mit Apfelmus",
+                "Herzhaftes Beef Wellington",
+                "Spaghetti Carbonara",
+                "Crispy Fried Chicken"
+            ],
+            fridge: [
+                "200g Hähnchenbrust, halber Kürbis, Kokosmilch",
+                "Rinderhackfleisch, 2 Karotten, Macadamianüsse",
+                "Zucchini, 3 Eier, frische Kräuter"
+            ],
+            cravings: [
+                "Etwas richtig Süßes, das auf der Zunge schmilzt",
+                "Deftig, käsig (ohne echten Käse!) und wärmend",
+                "Extrem knusprig mit einem cremigen Dip"
+            ],
+            vital: [
+                "Eine absolute Vitamin-C Bombe für das Immunsystem",
+                "Ein extrem eisenreiches Gericht",
+                "Fokus auf Zink und Omega-3 Fettsäuren",
+                "Magnesium-Boost für die Muskeln",
+                "Ein Gericht mit viel B-Vitaminen für die Nerven"
+            ],
+            togo: [
+                "Sandwich-Alternativen ohne Gluten",
+                "Meal-Prep Salat im Glas",
+                "Herzhafte Muffins für unterwegs",
+                "Histaminarme Wraps",
+                "Energie-Kugeln für zwischendurch"
+            ],
+            alternative: [
+                "Tomaten / Tomatenmark",
+                "Sojasauce",
+                "Hefe",
+                "Weizenmehl (für Saucenbindung)"
+            ],
+            grill: [
+                "Marinierte Hähnchenspieße mit Kräutern",
+                "Histaminarmes Grillbrot",
+                "Ein rauchiger Dip ohne Tomate"
+            ],
+            baking: [
+                "Saftiges Haferbrot ohne Hefe",
+                "Blaubeer-Muffins",
+                "Glutenfreier Pizzateig"
+            ],
+            sport: [
+                "Schnelles Post-Workout Meal mit viel Fleisch",
+                "Proteinreiche Pancakes für den Muskelaufbau"
+            ],
+            soulfood: [
+                "Ein gigantischer, saftiger Burger mit Spezialsauce",
+                "Mac & Cheese, aber so richtig dick und cremig"
+            ],
+            family: [
+                "Modulares Tacos/Fajitas-System zum Selbstbelegen",
+                "Eine deftige Kartoffel-Bowl mit verschiedenen Toppings"
+            ],
+            holiday: [
+                "Festlicher falscher Entenbraten / Festtagsbraten",
+                "Ein edles 3-Gänge Menü für Heiligabend"
+            ],
+            guests: [
+                "Ein optisches Meisterwerk mit Raucharoma",
+                "Edles Rinderfilet mit raffiniertem veganen Püree"
+            ],
+            custom: [
+                "Echtes Pad Thai Streetfood",
+                "Eine cremige Pilzpfanne",
+                "Moussaka (Griechischer Auflauf)",
+                "Pekingente mit Pfannkuchen",
+                "Saftige Zimtschnecken"
+            ]
         };
 
+        function surpriseMe(mode) {
+            const list = surpriseData[mode];
+            const randomIndex = Math.floor(Math.random() * list.length);
+            const inputField = document.getElementById(mode === 'dish' ? 'main-input' : mode + '-input');
+            inputField.value = list[randomIndex];
+            
+            inputField.classList.add('ring-2', mode === 'custom' ? 'ring-indigo-500' : 'ring-amber-500');
+            setTimeout(() => inputField.classList.remove('ring-2', 'ring-indigo-500', 'ring-amber-500'), 400);
+        }
+        
         function setMode(mode) {
             currentMode = mode;
-            const modes = ['dish', 'fridge', 'cravings', 'noob', 'vital', 'togo', 'alternative', 'grill', 'baking', 'sport', 'soulfood', 'family', 'holiday', 'guests', 'custom'];
             
-            // UNTERTITEL
+            const modes = ['dish', 'fridge', 'cravings', 'vital', 'togo', 'alternative', 'grill', 'baking', 'sport', 'soulfood', 'family', 'holiday', 'guests', 'custom'];
+            
+            // Untertitel aktualisieren
             const subtitleEl = document.getElementById('main-subtitle');
             subtitleEl.style.opacity = '0';
             setTimeout(() => {
                 subtitleEl.innerText = modeSubtitles[mode];
                 subtitleEl.style.opacity = '1';
             }, 150);
-
-            // INPUTS & BUTTONS
+            
+            // Nährwerte-Checkbox Logik
+            const macroCheckbox = document.getElementById('param-macros');
+            const macroIcon = document.getElementById('macro-check-icon');
+            if (mode === 'vital' || mode === 'sport') {
+                macroCheckbox.checked = true;
+                macroIcon.style.opacity = '1';
+            } else {
+                macroCheckbox.checked = false;
+                macroIcon.style.opacity = '0';
+            }
+            
             modes.forEach(m => {
-                document.getElementById(`mode-${m}`).className = (m === mode) ? 
-                    "px-4 py-2.5 rounded-full text-[13px] font-semibold bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg" : 
-                    "px-4 py-2.5 rounded-full text-[13px] font-medium text-slate-300";
-                document.getElementById(`input-${m}-group`).classList.toggle('hidden', m !== mode);
+                const btn = document.getElementById(`mode-${m}`);
+                const group = document.getElementById(`input-${m}-group`);
+                
+                if (m === mode) {
+                    if (m === 'custom') {
+                        btn.className = "px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-semibold transition-all bg-indigo-600 text-white shadow-lg";
+                    } else {
+                        btn.className = "px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-semibold transition-all bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg";
+                    }
+                    group.classList.remove('hidden');
+                } else {
+                    if (m === 'custom') {
+                        btn.className = "px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-indigo-300 hover:text-white transition-all bg-indigo-900/30 border border-indigo-500/30";
+                    } else {
+                        btn.className = "px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all";
+                    }
+                    group.classList.add('hidden');
+                }
             });
 
-            const isAlt = (mode === 'alternative');
-            document.getElementById('cooking-params').classList.toggle('hidden', isAlt);
-            document.getElementById('nutrition-toggle').classList.toggle('hidden', isAlt);
-            document.getElementById('tolerances-params').classList.toggle('hidden', isAlt);
-            document.getElementById('freestyle-banner').classList.toggle('hidden', mode !== 'custom');
+            // UI-Anpassungen basierend auf Modus
+            const generateBtn = document.getElementById('generate-btn');
+            const generateBtnText = document.getElementById('generate-btn-text');
+            const textureIcons = document.querySelectorAll('.check-icon');
+            const textureSubtitle = document.getElementById('texture-subtitle');
+            const textureTitle = document.getElementById('texture-title');
 
-            if(mode === 'vital' || mode === 'sport') document.getElementById('param-macros').checked = true;
-        }
+            if (mode === 'custom') {
+                document.getElementById('freestyle-banner').classList.remove('hidden');
+                document.getElementById('cooking-params').classList.remove('hidden');
+                document.getElementById('texture-params').classList.remove('hidden');
+                document.getElementById('tolerances-params').classList.remove('hidden');
+                document.getElementById('nutrition-toggle').classList.remove('hidden');
+                
+                generateBtn.className = "group relative w-full bg-indigo-600 text-white font-bold py-5 rounded-2xl mt-10 shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_30px_rgba(79,70,229,0.5)] transition-all active:scale-[0.98] overflow-hidden";
+                generateBtnText.innerHTML = "Freestyle Prompt generieren";
+                
+                textureIcons.forEach(icon => icon.classList.replace('text-amber-500', 'text-indigo-400'));
+                textureSubtitle.classList.replace('text-amber-500', 'text-indigo-400');
+                textureTitle.classList.replace('text-amber-500', 'text-indigo-400');
+            } else {
+                document.getElementById('freestyle-banner').classList.add('hidden');
+                
+                generateBtn.className = "group relative w-full bg-gradient-to-r from-amber-500 to-amber-700 text-white font-bold py-5 rounded-2xl mt-10 shadow-[0_0_20px_rgba(217,119,6,0.3)] hover:shadow-[0_0_30px_rgba(217,119,6,0.5)] transition-all active:scale-[0.98] overflow-hidden";
+                generateBtnText.innerHTML = "Prompt generieren";
 
-        function surpriseMe(mode) {
-            const list = surpriseData[mode];
-            const val = list[Math.floor(Math.random() * list.length)];
-            const field = document.getElementById(mode + '-input');
-            if(field) field.value = val;
+                textureIcons.forEach(icon => icon.classList.replace('text-indigo-400', 'text-amber-500'));
+                textureSubtitle.classList.replace('text-indigo-400', 'text-amber-500');
+                textureTitle.classList.replace('text-indigo-400', 'text-amber-500');
+
+                if (mode === 'alternative') {
+                    document.getElementById('cooking-params').classList.add('hidden');
+                    document.getElementById('texture-params').classList.add('hidden');
+                    document.getElementById('tolerances-params').classList.remove('hidden');
+                    document.getElementById('nutrition-toggle').classList.add('hidden');
+                } else {
+                    document.getElementById('cooking-params').classList.remove('hidden');
+                    document.getElementById('texture-params').classList.remove('hidden');
+                    document.getElementById('tolerances-params').classList.remove('hidden');
+                    document.getElementById('nutrition-toggle').classList.remove('hidden');
+                }
+            }
         }
 
         function buildPrompt() {
-            const inputField = document.getElementById(currentMode + '-input');
-            const mainInput = inputField.value;
-            if(!mainInput.trim()) return alert("Bitte Eingabe tätigen!");
+            let mainInput = "";
+            let promptTarget = "";
+            let isFreestyle = (currentMode === 'custom');
+            
+            if (currentMode === 'dish') {
+                mainInput = document.getElementById('main-input').value;
+                promptTarget = `ZIEL-GERICHT: ${mainInput}`;
+            } else if (currentMode === 'fridge') {
+                mainInput = document.getElementById('fridge-input').value;
+                promptTarget = `ZUTATEN-POOL: Entwickle ein völlig neues Gourmet-Rezept aus: ${mainInput}`;
+            } else if (currentMode === 'cravings') {
+                mainInput = document.getElementById('cravings-input').value;
+                promptTarget = `INSPIRATION & GELÜSTE: Entwickle ein völlig neues Gourmet-Rezept, das genau dieses Verlangen stillt: "${mainInput}"`;
+            } else if (currentMode === 'vital') {
+                mainInput = document.getElementById('vital-input').value;
+                promptTarget = `FOKUS: NÄHRSTOFF-BOOST (Vitamine & Mineralien). Entwickle ein Rezept passend zu: "${mainInput}"\n(Maximiere die gewünschten Mikronährstoffe mit histaminarmen Zutaten. Achte zwingend auf synergetische Bioverfügbarkeit (z.B. Eisen + Vitamin C), natürlich 100% histaminarm und glutenfrei!)`;
+            } else if (currentMode === 'togo') {
+                mainInput = document.getElementById('togo-input').value;
+                promptTarget = `FOKUS: UNTERWEGS & PAUSENBROT (Meal-Prep, Büro, Schule, Ausflug). Entwickle ein Rezept passend zu: "${mainInput}"\n(Muss gut transportierbar sein, schmeckt kalt oder lauwarm hervorragend, idealerweise auch ohne durchgehende Kühlung histamin-sicher, natürlich 100% histaminarm und glutenfrei!)`;
+            } else if (currentMode === 'alternative') {
+                mainInput = document.getElementById('alternative-input').value;
+                promptTarget = `FOKUS: ZUTATEN-ALTERNATIVE. Finde den absolut besten histaminarmen und glutenfreien Ersatz für diese Zutat: "${mainInput}"\n(Erkläre kurz chemisch/geschmacklich, wieso die Alternative funktioniert und in welchem Mengenverhältnis sie getauscht wird!)`;
+            } else if (currentMode === 'grill') {
+                mainInput = document.getElementById('grill-input').value;
+                promptTarget = `FOKUS: GRILLEN & BBQ. Entwickle ein perfektes Rezept (Fleisch, Gemüse, Marinade oder Dip) passend zu: "${mainInput}"\n(Röstaromen maximieren, absolut keine stark histaminhaltigen Gewürze/Zutaten wie Tomate oder Sojasauce, 100% histaminarm und glutenfrei!)`;
+            } else if (currentMode === 'baking') {
+                mainInput = document.getElementById('baking-input').value;
+                promptTarget = `FOKUS: BACKEN (Brot, Kuchen, Süßes, Teigwaren). Entwickle ein Back-Rezept passend zu: "${mainInput}"\n(Absolut keine Hefe, kein Weizen/Gluten, keine fermentierten Zutaten. Perfekte Krume und Textur durch intelligente Stärkekombinationen und physikalische Triebmittel!)`;
+            } else if (currentMode === 'sport') {
+                mainInput = document.getElementById('sport-input').value;
+                promptTarget = `FOKUS: HIGH PROTEIN & MUSKELAUFBAU. Entwickle ein proteinreiches Sportler-Gericht für: "${mainInput}"\n(Proteingehalt aus sicheren Quellen maximieren, 100% histaminarm!)`;
+            } else if (currentMode === 'soulfood') {
+                mainInput = document.getElementById('soulfood-input').value;
+                promptTarget = `FOKUS: SOULFOOD & TROST. Der Tag war scheiße. Entwickle das ultimative Wohlfühl-Gericht (z.B. Burger, fette Pizza, Comfort Food) für: "${mainInput}"\n(Echtes Junk-Food-Feeling, extrem deftig und befriedigend, aber durch clevere Lebensmittelchemie 100% histaminarm und glutenfrei!)`;
+            } else if (currentMode === 'family') {
+                mainInput = document.getElementById('family-input').value;
+                promptTarget = `FOKUS: FAMILIENESSEN. Entwickle ein Rezept oder modulares Baukasten-Konzept passend zu: "${mainInput}"\n(Perfekt geeignet für 1 Veganerin (Sophie) und 2 Fleisch-Fans (Tobias & Moritz). Muss allen extrem gut schmecken, sättigend sein und natürlich 100% histaminarm und glutenfrei!)`;
+            } else if (currentMode === 'holiday') {
+                mainInput = document.getElementById('holiday-input').value;
+                promptTarget = `FOKUS: FESTTAGSGERICHT (Sonntag, Weihnachten, Ostern). Entwickle ein edles, feierliches Gourmet-Gericht passend zu: "${mainInput}"\n(Festliche Atmosphäre, optisches Highlight, raffinierter Geschmack, 100% histaminarm und glutenfrei!)`;
+            } else if (currentMode === 'guests') {
+                mainInput = document.getElementById('guests-input').value;
+                promptTarget = `FOKUS: GÄSTE BEEINDRUCKEN. Entwickle ein spektakuläres Gericht passend zu: "${mainInput}"\n(Die Gäste dürfen absolut nicht merken, dass es sich um eine Diätform handelt. Maximaler Geschmack, High-End Anrichteweise auf Restaurant-Niveau, 100% histaminarm und glutenfrei!)`;
+            } else if (currentMode === 'custom') {
+                mainInput = document.getElementById('custom-input').value;
+                let customDiet = document.getElementById('custom-diet-input').value.trim();
+                if (!customDiet) customDiet = "Keine Einschränkungen (Klassisch / Allesesser)";
+                promptTarget = `ZIEL-GERICHT: ${mainInput}\nERNÄHRUNGS-REGELN FÜR DIESES GERICHT: ${customDiet}\n(Ignoriere hierbei den üblichen Histamin-Filter, es sei denn, es wird oben explizit gefordert!)`;
+            }
+
+            if(!mainInput.trim()) return alert("Bitte fülle das Eingabefeld aus, damit die KI arbeiten kann.");
+
+            let focusPoints = [];
+            if(document.getElementById('focus-maillard').checked) focusPoints.push("Maximierung der Maillard-Reaktion");
+            if(document.getElementById('focus-emulsion').checked) focusPoints.push("Aufbau stabiler, cremiger Emulsionen");
+            if(document.getElementById('focus-starch').checked) focusPoints.push("Gezielte Stärkeverkleisterung");
+            if(document.getElementById('focus-umami').checked) focusPoints.push("Aufbau von natürlichem Umami");
 
             const method = document.getElementById('param-method').value;
             const time = document.getElementById('param-time').value;
             const portions = document.getElementById('param-portions').value;
             const tolerances = document.getElementById('param-tolerances').value.trim();
-            const macros = document.getElementById('param-macros').checked;
-            const focuses = [];
-            if(document.getElementById('focus-maillard').checked) focuses.push("Maillard-Reaktion");
-            if(document.getElementById('focus-umami').checked) focuses.push("Umami-Aufbau");
+            const includeMacros = document.getElementById('param-macros').checked;
 
-            let basePrompt = `Rolle: Haubenkoch & Lebensmittelchemiker. 
-Aufgabe: Erschaffe Gourmet-Rezept — strikt histaminarm & glutenfrei.
-REGEL: Histaminarmut hat Priorität! Keine industriellen Krücken.
+            const tolerancesText = tolerances ? `\n- Persönliche Toleranzen & Wünsche: ${tolerances}` : "";
+            
+            let extraStructure = "";
+            if (includeMacros) {
+                extraStructure = `\n5. Detaillierte Nährwerte (Kalorien, Makros & relevante Mikronährstoffe pro Portion)`;
+            }
 
-MODUS: ${currentMode.toUpperCase()}
-ZIEL: ${mainInput}
-PARAMETER: Methode: ${method}, Zeit: ${time}, Portionen: ${portions}
-${tolerances ? `SPEZIELLE TOLERANZEN & WÜNSCHE: ${tolerances}` : ""}
-FOKUS: ${focuses.length > 0 ? focuses.join(" & ") : "Geschmack & Verträglichkeit"}
+            let parametersSection = "";
+            let structureText = "";
 
-STRUKTUR:
-1. Titel
-2. Lebensmittelchemie (Warum schmeckt das so gut?)
-3. Zutatenliste (für ${portions} Port.)
-4. Schritt-für-Schritt Zubereitung
-${macros ? "5. Nährwerte & Kalorien pro Portion" : ""}`;
+            if (currentMode !== 'alternative') {
+                parametersSection = `PARAMETER:\n- Garmethode: ${method}\n- Zeitfenster: ${time}\n- Personenanzahl/Menge: ${portions}${tolerancesText}\n- Chemischer Fokus: ${focusPoints.length > 0 ? focusPoints.join(" + ") : "Klassische Lebensmittelchemie"}\n\n`;
+                structureText = `ANTWORT-STRUKTUR:
+1. Titel des Gerichts
+2. Die Lebensmittelchemie dahinter (Kurzer Laien-Kniff: Wie entsteht die Textur/der Geschmack chemisch?)
+3. Zutatenliste (Exakte Mengen für ${portions} Personen/Stücke)
+4. Zubereitung (Präzise, alltagstauglich)${extraStructure}`;
+            } else {
+                if (tolerancesText) parametersSection = `PARAMETER:${tolerancesText}\n\n`;
+                structureText = `ANTWORT-STRUKTUR:
+1. Beste Alternativen für: ${mainInput}
+2. Lebensmittelchemische Erklärung (Warum funktioniert das?)
+3. Dosierung / Umrechnung
+4. Kurzes Anwendungsbeispiel`;
+            }
+
+            let basePrompt = "";
+
+            if (isFreestyle) {
+                // Eigener Prompt-Kern ohne Histamin-Zwang
+                basePrompt = `Rolle: Haubenkoch & Lebensmittelchemiker. 
+Aufgabe: Erschaffe ein herausragendes Gourmet-Rezept durch clevere Anwendung von physikalischer Lebensmittelchemie.
+
+${promptTarget}
+
+${parametersSection}${structureText}`;
+            } else {
+                // Der klassische Histamin-Zauber Kern
+                basePrompt = `Rolle: Haubenkoch & Lebensmittelchemiker. 
+Aufgabe: Erschaffe eine Gourmet-Version — strikt histaminarm & glutenfrei. 
+Regeln:
+1. Konfliktprinzip: Wenn Histaminarmut und Glutenfreiheit kollidieren, hat HISTAMINARMUT absoluten Vorrang!
+2. Technik: Keine industriellen Bindemittel-Krücken (Xanthan etc.). Textur entsteht rein durch physikalische Lebensmittelchemie.
+
+${promptTarget}
+
+${parametersSection}${structureText}`;
+            }
 
             document.getElementById('result-text').value = basePrompt;
+            
+            // UI für Step 2 anpassen (Blau vs Grün)
+            const step2Section = document.getElementById('step2');
+            if (isFreestyle) {
+                step2Section.className = "glass-panel rounded-[2rem] p-6 sm:p-10 fade-in border-indigo-500/30";
+                step2Section.querySelector('h3 span').className = "bg-indigo-500/20 text-indigo-400 p-2 rounded-full";
+            } else {
+                step2Section.className = "glass-panel rounded-[2rem] p-6 sm:p-10 fade-in border-green-500/30";
+                step2Section.querySelector('h3 span').className = "bg-green-500/20 text-green-400 p-2 rounded-full";
+            }
+
             document.getElementById('step1').classList.add('hidden');
-            document.getElementById('step2').classList.remove('hidden');
-            window.scrollTo(0,0);
+            step2Section.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function copyToClipboard() {
             const text = document.getElementById('result-text').value;
             navigator.clipboard.writeText(text);
-            saveToHistory();
             const btn = document.getElementById('copy-btn');
-            btn.innerText = "Kopiert!";
-            setTimeout(() => btn.innerText = "Kopieren & Archivieren", 2000);
+            const originalHTML = btn.innerHTML;
+            
+            const isFreestyle = (currentMode === 'custom');
+            const colorClass = isFreestyle ? "text-indigo-600" : "text-green-600";
+            const textClass = isFreestyle ? "text-indigo-700" : "text-green-700";
+            
+            btn.innerHTML = `<svg class="w-5 h-5 ${colorClass}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> <span class="${textClass}">Kopiert & im Archiv!</span>`;
+            
+            let title = "Transformation";
+            if (currentMode === 'dish') title = document.getElementById('main-input').value || "Rezept";
+            else if (currentMode === 'fridge') title = "Reste-Mix";
+            else if (currentMode === 'cravings') {
+                let val = document.getElementById('cravings-input').value;
+                title = "Lust auf: " + (val.length > 20 ? val.substring(0, 20) + "..." : val);
+            }
+            else if (currentMode === 'vital') title = "Nährstoff-Boost";
+            else if (currentMode === 'togo') title = "Pausenbrot / To Go";
+            else if (currentMode === 'alternative') {
+                let val = document.getElementById('alternative-input').value;
+                title = "Tausch: " + (val.length > 18 ? val.substring(0, 18) + "..." : val);
+            }
+            else if (currentMode === 'grill') title = "BBQ & Grill";
+            else if (currentMode === 'baking') title = "Backstube";
+            else if (currentMode === 'sport') title = "High-Protein Meal";
+            else if (currentMode === 'soulfood') title = "Soulfood Tag";
+            else if (currentMode === 'family') title = "Familien-Essen";
+            else if (currentMode === 'holiday') title = "Festtags-Menü";
+            else if (currentMode === 'guests') title = "Gäste-Highlight";
+            else if (currentMode === 'custom') {
+                let val = document.getElementById('custom-input').value;
+                title = "Freestyle: " + (val.length > 15 ? val.substring(0, 15) + "..." : val);
+            }
+            
+            saveToHistory(title, text, isFreestyle);
+            setTimeout(() => { btn.innerHTML = originalHTML; }, 3000);
         }
 
-        function saveToHistory() {
+        function saveToHistory(title, prompt, isFreestyle) {
             let history = JSON.parse(localStorage.getItem('alchemie_history') || "[]");
-            history.unshift({ title: currentMode, date: new Date().toLocaleTimeString() });
-            localStorage.setItem('alchemie_history', JSON.stringify(history.slice(0,8)));
+            history.unshift({ 
+                title, 
+                prompt, 
+                isFreestyle,
+                date: new Date().toLocaleDateString('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute:'2-digit'}) 
+            });
+            history = history.slice(0, 15); 
+            localStorage.setItem('alchemie_history', JSON.stringify(history));
             renderHistory();
         }
 
         function renderHistory() {
             const list = document.getElementById('history-list');
             const history = JSON.parse(localStorage.getItem('alchemie_history') || "[]");
-            list.innerHTML = history.map(h => `<div class="p-2 bg-slate-800/40 border border-slate-700/50 rounded-lg text-[10px] flex justify-between uppercase"><span>${h.title}</span><span class="text-slate-500">${h.date}</span></div>`).join('');
+            list.innerHTML = history.length ? '' : '<div class="text-center p-6 border border-dashed border-slate-700 rounded-xl"><p class="text-sm text-slate-500 italic">Noch keine Prompts archiviert.</p></div>';
+            history.forEach((item, index) => {
+                const titleColor = item.isFreestyle ? "text-indigo-400" : "text-amber-500";
+                const badge = item.isFreestyle ? `<span class="bg-indigo-500/20 text-indigo-300 text-[9px] px-2 py-0.5 rounded uppercase ml-2">Freestyle</span>` : "";
+                
+                const div = document.createElement('div');
+                div.className = "flex flex-col sm:flex-row sm:justify-between sm:items-center p-4 bg-slate-800/40 border border-slate-700/50 rounded-xl hover:bg-slate-700/40 transition-colors gap-3";
+                div.innerHTML = `
+                    <div class="flex flex-col">
+                        <span class="font-bold ${titleColor} text-sm flex items-center"><span class="truncate max-w-[200px]">${item.title}</span> ${badge}</span> 
+                        <span class="text-slate-500 text-[11px]">${item.date}</span>
+                    </div>
+                    <div class="flex gap-2 shrink-0">
+                        <button onclick="restoreHistory(${index})" class="px-4 py-1.5 bg-slate-900 border border-slate-600 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-500 hover:border-amber-500 transition-colors">Laden</button>
+                        <button onclick="deleteHistoryItem(${index})" class="px-3 py-1.5 bg-slate-900 border border-slate-600 rounded-lg text-xs font-semibold text-red-400 hover:text-red-300 hover:border-red-400 transition-colors flex items-center justify-center" title="Eintrag löschen">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                    </div>`;
+                list.appendChild(div);
+            });
         }
 
-        function clearHistory() {
-            localStorage.removeItem('alchemie_history');
+        function restoreHistory(index) {
+            const history = JSON.parse(localStorage.getItem('alchemie_history'));
+            const isFreestyle = history[index].isFreestyle;
+            
+            document.getElementById('result-text').value = history[index].prompt;
+            
+            const step2Section = document.getElementById('step2');
+            if (isFreestyle) {
+                step2Section.className = "glass-panel rounded-[2rem] p-6 sm:p-10 fade-in border-indigo-500/30";
+                step2Section.querySelector('h3 span').className = "bg-indigo-500/20 text-indigo-400 p-2 rounded-full";
+            } else {
+                step2Section.className = "glass-panel rounded-[2rem] p-6 sm:p-10 fade-in border-green-500/30";
+                step2Section.querySelector('h3 span').className = "bg-green-500/20 text-green-400 p-2 rounded-full";
+            }
+            
+            document.getElementById('step1').classList.add('hidden');
+            step2Section.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function deleteHistoryItem(index) {
+            let history = JSON.parse(localStorage.getItem('alchemie_history') || "[]");
+            history.splice(index, 1);
+            localStorage.setItem('alchemie_history', JSON.stringify(history));
             renderHistory();
         }
 
+        function clearHistory() {
+            if (confirm("Möchtest du wirklich alle Archiv-Einträge endgültig löschen?")) {
+                localStorage.removeItem('alchemie_history');
+                renderHistory();
+            }
+        }
+
         function resetApp() {
+            const modes = ['main', 'fridge', 'cravings', 'vital', 'togo', 'alternative', 'grill', 'baking', 'sport', 'soulfood', 'family', 'holiday', 'guests', 'custom', 'custom-diet'];
+            modes.forEach(m => {
+                if(document.getElementById(m + '-input')) {
+                    document.getElementById(m + '-input').value = "";
+                }
+            });
+            document.getElementById('param-tolerances').value = "";
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+            
+            document.getElementById('param-macros').checked = false;
+            document.getElementById('macro-check-icon').style.opacity = '0';
+            
+            setMode('dish');
+            
             document.getElementById('step2').classList.add('hidden');
             document.getElementById('step1').classList.remove('hidden');
         }
 
-        setMode('dish');
         renderHistory();
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
     </script>
 </body>
 </html>
