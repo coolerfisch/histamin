@@ -80,30 +80,45 @@
             <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-amber-600/10 blur-3xl pointer-events-none"></div>
 
             <div id="input-dish-group" class="mb-8">
-                <label class="block text-sm font-semibold text-slate-300 mb-3 ml-1">Welches klassische Gericht transformieren wir?</label>
+                <div class="flex justify-between items-end mb-3 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Welches klassische Gericht transformieren wir?</label>
+                    <button onclick="surpriseMe('dish')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
+                </div>
                 <input type="text" id="main-input" placeholder="z.B. Zürcher Geschnetzeltes, Pizza Margherita..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner">
             </div>
             
             <div id="input-fridge-group" class="hidden mb-8">
-                <label class="block text-sm font-semibold text-slate-300 mb-1 ml-1">Welche Zutaten hast du vorrätig?</label>
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Welche Zutaten hast du vorrätig?</label>
+                    <button onclick="surpriseMe('fridge')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
+                </div>
                 <p class="text-[12px] text-slate-400 mb-3 ml-1">Tipp: Gib nach Möglichkeit auch die Mengen an (z.B. 3 Karotten, 200g Skyr), damit die KI chemisch präzise arbeiten kann.</p>
                 <textarea id="fridge-input" rows="3" placeholder="z.B. 250g Rinderhack, 3 Karotten, halber Becher Skyr..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-cravings-group" class="hidden mb-8">
-                <label class="block text-sm font-semibold text-slate-300 mb-1 ml-1">Worauf hast du gerade Lust?</label>
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Worauf hast du gerade Lust?</label>
+                    <button onclick="surpriseMe('cravings')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
+                </div>
                 <p class="text-[12px] text-slate-400 mb-3 ml-1">Beschreibe einfach die Textur, den Geschmack oder dein Verlangen.</p>
-                <textarea id="cravings-input" rows="3" placeholder="z.B. Ich hätte total Lust auf etwas knuspriges und süßes..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
+                <textarea id="cravings-input" rows="3" placeholder="z.B. Ich hätte total Lust auf etwas knuspriges und süßes. Oder: Etwas richtig deftig cremiges, das von innen wärmt..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-sport-group" class="hidden mb-8">
-                <label class="block text-sm font-semibold text-slate-300 mb-1 ml-1">Sportler (High Protein Fokus):</label>
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Sportler (High Protein Fokus):</label>
+                    <button onclick="surpriseMe('sport')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
+                </div>
                 <p class="text-[12px] text-slate-400 mb-3 ml-1">Die KI maximiert den Proteingehalt. Wofür brauchst du es?</p>
                 <textarea id="sport-input" rows="3" placeholder="z.B. Post-Workout Mahlzeit nach dem Gym, gerne mit Fleisch..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-soulfood-group" class="hidden mb-8">
-                <label class="block text-sm font-semibold text-slate-300 mb-1 ml-1">Der Tag war scheiße...</label>
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Der Tag war scheiße...</label>
+                    <button onclick="surpriseMe('soulfood')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
+                </div>
                 <p class="text-[12px] text-slate-400 mb-3 ml-1">Die KI entwirft echtes Soulfood (z.B. Burger, Pizza, Comfort Food) zur Aufmunterung.</p>
                 <textarea id="soulfood-input" rows="3" placeholder="z.B. Ich brauche einfach nur einen fetten Burger oder was richtig extrem Deftiges..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
@@ -296,6 +311,63 @@
     <script>
         let currentMode = 'dish';
         
+        // Die Datenbank für die "Überrasch mich" Funktion
+        const surpriseData = {
+            dish: [
+                "Klassische Lasagne al Forno",
+                "Cremiges Tiramisu",
+                "Kaiserschmarrn mit Apfelmus",
+                "Herzhaftes Beef Wellington",
+                "Spaghetti Carbonara",
+                "Crispy Fried Chicken",
+                "Saftige Rinderrouladen",
+                "Eggs Benedict"
+            ],
+            fridge: [
+                "200g Hähnchenbrust, halber Kürbis, Kokosmilch",
+                "Rinderhackfleisch, 2 Karotten, Macadamianüsse",
+                "Quinoa, Blaubeeren, 1 Apfel",
+                "Zucchini, 3 Eier, frische Kräuter",
+                "Lachsfilet, Süßkartoffel, Olivenöl",
+                "Eine Handvoll Brokkoli, 1 Paprika, etwas Hirse"
+            ],
+            cravings: [
+                "Etwas richtig Süßes, das auf der Zunge schmilzt",
+                "Deftig, käsig (ohne echten Käse!) und wärmend",
+                "Extrem knusprig mit einem cremigen Dip",
+                "Ein richtiges Katerfrühstück, aber gesund",
+                "Comfort Food wie bei Oma, nur ohne Reue",
+                "Eine Art Eiscreme-Feeling, aber warm und saftig"
+            ],
+            sport: [
+                "Schnelles Post-Workout Meal mit viel Fleisch",
+                "Proteinreiche Pancakes für den Muskelaufbau",
+                "Leichter, aber proteinreicher Pre-Workout Snack",
+                "Meal Prep für 2 Tage (High Protein)",
+                "Ein Steak-Gericht mit perfekten Makros",
+                "Eine cremige Protein-Bowl"
+            ],
+            soulfood: [
+                "Ein gigantischer, saftiger Burger mit Spezialsauce",
+                "Mac & Cheese, aber so richtig dick und cremig",
+                "Eine riesige, fettige Pizza (aber verträglich)",
+                "Warmes, weiches Schokodessert zum Löffeln",
+                "Deftige 'Käse'-Spätzle mit knusprigem Topping",
+                "Saftige Chicken Nuggets Style mit Barbecue-Dip"
+            ]
+        };
+
+        function surpriseMe(mode) {
+            const list = surpriseData[mode];
+            const randomIndex = Math.floor(Math.random() * list.length);
+            const inputField = mode === 'dish' ? document.getElementById('main-input') : document.getElementById(mode + '-input');
+            inputField.value = list[randomIndex];
+            
+            // Kleine Animation, um zu zeigen, dass sich was getan hat
+            inputField.classList.add('ring-2', 'ring-amber-500');
+            setTimeout(() => inputField.classList.remove('ring-2', 'ring-amber-500'), 400);
+        }
+        
         function setMode(mode) {
             currentMode = mode;
             
@@ -321,19 +393,19 @@
             
             if (currentMode === 'dish') {
                 mainInput = document.getElementById('main-input').value;
-                promptTarget = `ZIEL: Transformiere folgendes Gericht: ${mainInput}`;
+                promptTarget = `ZIEL-GERICHT: ${mainInput}`;
             } else if (currentMode === 'fridge') {
                 mainInput = document.getElementById('fridge-input').value;
-                promptTarget = `ZIEL: Entwickle ein völlig neues Gourmet-Rezept aus folgendem Zutaten-Pool: ${mainInput}`;
+                promptTarget = `ZUTATEN-POOL: Entwickle ein völlig neues Gourmet-Rezept aus: ${mainInput}`;
             } else if (currentMode === 'cravings') {
                 mainInput = document.getElementById('cravings-input').value;
-                promptTarget = `ZIEL: Entwickle ein völlig neues Gourmet-Rezept, das genau dieses Verlangen stillt: "${mainInput}"`;
+                promptTarget = `INSPIRATION & GELÜSTE: Entwickle ein völlig neues Gourmet-Rezept, das genau dieses Verlangen stillt: "${mainInput}"`;
             } else if (currentMode === 'sport') {
                 mainInput = document.getElementById('sport-input').value;
-                promptTarget = `ZIEL: Entwickle ein HIGH-PROTEIN Sportler-Gericht für maximalen Muskelaufbau/Regeneration passend zu: "${mainInput}".\nFOKUS: Sehr hoher Proteingehalt (z.B. durch frisches Fleisch, Eigelb, proteinreiche verträgliche Pflanzen) ohne Histamin-Risiko!`;
+                promptTarget = `FOKUS: HIGH PROTEIN & MUSKELAUFBAU. Entwickle ein proteinreiches Sportler-Gericht für: "${mainInput}"\n(Proteingehalt aus sicheren Quellen maximieren, 100% histaminarm!)`;
             } else if (currentMode === 'soulfood') {
                 mainInput = document.getElementById('soulfood-input').value;
-                promptTarget = `ZIEL: Entwickle das ultimative SOULFOOD-Gericht (z.B. Burger, Pizza, Comfort Food) als Trostpflaster für einen miesen Tag passend zu: "${mainInput}".\nFOKUS: Deftig, sättigend, extrem lecker - echtes Junk-Food-Feeling, aber durch clevere Lebensmittelchemie 100% histaminarm und glutenfrei!`;
+                promptTarget = `FOKUS: SOULFOOD & TROST. Der Tag war scheiße. Entwickle das ultimative Wohlfühl-Gericht (z.B. Burger, fette Pizza, Comfort Food) für: "${mainInput}"\n(Echtes Junk-Food-Feeling, extrem deftig und befriedigend, aber durch clevere Lebensmittelchemie 100% histaminarm und glutenfrei!)`;
             }
 
             if(!mainInput.trim()) return alert("Bitte fülle das Eingabefeld aus, damit die KI arbeiten kann.");
