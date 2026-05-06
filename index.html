@@ -91,7 +91,7 @@
                     <label class="block text-sm font-semibold text-slate-300">Welches Gericht transformieren wir?</label>
                     <button onclick="surpriseMe('dish')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
                 </div>
-                <input type="text" id="main-input" placeholder="z.B. Zürcher Geschnetzeltes, Lasagne..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 outline-none shadow-inner">
+                <input type="text" id="dish-input" placeholder="z.B. Zürcher Geschnetzeltes, Lasagne..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 outline-none shadow-inner">
             </div>
             
             <div id="input-fridge-group" class="hidden mb-8">
@@ -102,21 +102,109 @@
                 <textarea id="fridge-input" rows="3" placeholder="z.B. 250g Rinderhack, 3 Karotten..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
             </div>
 
-            <div id="input-cravings-group" class="hidden mb-8"><textarea id="cravings-input" rows="3" placeholder="Worauf hast du Lust?" class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea></div>
-            <div id="input-noob-group" class="hidden mb-8"><textarea id="noob-input" rows="3" placeholder="Idiotensicher kochen..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea></div>
-            <div id="input-vital-group" class="hidden mb-8"><textarea id="vital-input" rows="3" placeholder="Z.B. Vitamin C Bombe..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea></div>
-            <div id="input-togo-group" class="hidden mb-8"><textarea id="togo-input" rows="3" placeholder="Pausenbrot alternative..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea></div>
-            <div id="input-alternative-group" class="hidden mb-8"><textarea id="alternative-input" rows="2" placeholder="Was ersetzen wir?" class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea></div>
-            <div id="input-grill-group" class="hidden mb-8"><textarea id="grill-input" rows="3" placeholder="Grillgut / Marinade..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea></div>
-            <div id="input-baking-group" class="hidden mb-8"><textarea id="baking-input" rows="3" placeholder="Backen ohne Hefe..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea></div>
-            <div id="input-sport-group" class="hidden mb-8"><textarea id="sport-input" rows="3" placeholder="High Protein Fokus..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea></div>
-            <div id="input-soulfood-group" class="hidden mb-8"><textarea id="soulfood-input" rows="3" placeholder="Wenn alles blöd ist..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea></div>
-            <div id="input-family-group" class="hidden mb-8"><textarea id="family-input" rows="3" placeholder="Veggie & Fleisch mix..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea></div>
-            <div id="input-holiday-group" class="hidden mb-8"><textarea id="holiday-input" rows="3" placeholder="Festliches Menü..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea></div>
-            <div id="input-guests-group" class="hidden mb-8"><textarea id="guests-input" rows="3" placeholder="Gourmet Level..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea></div>
+            <div id="input-cravings-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Worauf hast du Lust?</label>
+                    <button onclick="surpriseMe('cravings')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                </div>
+                <textarea id="cravings-input" rows="3" placeholder="z.B. Etwas Knuspriges und Süßes..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+            </div>
+
+            <div id="input-noob-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Hilfe, ich kann nicht kochen:</label>
+                    <button onclick="surpriseMe('noob')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                </div>
+                <textarea id="noob-input" rows="3" placeholder="z.B. Maximal 3 Zutaten, idiotensicher..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+            </div>
+
+            <div id="input-vital-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Nährstoff-Fokus:</label>
+                    <button onclick="surpriseMe('vital')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                </div>
+                <textarea id="vital-input" rows="3" placeholder="z.B. Vitamin C Bombe für das Immunsystem..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+            </div>
+
+            <div id="input-togo-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Unterwegs & Pausenbrot:</label>
+                    <button onclick="surpriseMe('togo')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                </div>
+                <textarea id="togo-input" rows="3" placeholder="z.B. Herzhafter Wrap, glutenfrei..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+            </div>
+
+            <div id="input-alternative-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Zutaten-Tausch:</label>
+                    <button onclick="surpriseMe('alternative')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                </div>
+                <textarea id="alternative-input" rows="2" placeholder="z.B. Was ist der beste Ersatz für Tomatenmark?" class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+            </div>
+
+            <div id="input-grill-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">BBQ & Marinaden:</label>
+                    <button onclick="surpriseMe('grill')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                </div>
+                <textarea id="grill-input" rows="3" placeholder="z.B. Saftige Hähnchenspieße..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+            </div>
+
+            <div id="input-baking-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Backen ohne Hefe:</label>
+                    <button onclick="surpriseMe('baking')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                </div>
+                <textarea id="baking-input" rows="3" placeholder="z.B. Saftiger Apfelkuchen..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+            </div>
+
+            <div id="input-sport-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">High-Protein Sportlermahlzeit:</label>
+                    <button onclick="surpriseMe('sport')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                </div>
+                <textarea id="sport-input" rows="3" placeholder="z.B. Post-Workout Meal..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+            </div>
+
+            <div id="input-soulfood-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Soulfood (Scheiß Tag):</label>
+                    <button onclick="surpriseMe('soulfood')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                </div>
+                <textarea id="soulfood-input" rows="3" placeholder="z.B. Deftiger Burger, verträglich..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+            </div>
+
+            <div id="input-family-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Familienessen (Veggie & Fleisch):</label>
+                    <button onclick="surpriseMe('family')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                </div>
+                <textarea id="family-input" rows="3" placeholder="z.B. Modulares Baukasten-Essen..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+            </div>
+
+            <div id="input-holiday-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Festtagsmenü:</label>
+                    <button onclick="surpriseMe('holiday')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                </div>
+                <textarea id="holiday-input" rows="3" placeholder="z.B. Weihnachtsbraten..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+            </div>
+
+            <div id="input-guests-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Gäste beeindrucken:</label>
+                    <button onclick="surpriseMe('guests')" class="text-xs text-amber-500 font-bold">🎲 Überrasch mich</button>
+                </div>
+                <textarea id="guests-input" rows="3" placeholder="z.B. Gourmet-Niveau..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg outline-none shadow-inner"></textarea>
+            </div>
+
             <div id="input-custom-group" class="hidden mb-8">
-                <input type="text" id="custom-input" placeholder="Gericht..." class="w-full bg-indigo-900/20 border border-indigo-700/50 rounded-2xl px-5 py-4 text-white text-lg mb-4 outline-none">
-                <input type="text" id="custom-diet-input" placeholder="Deine Ernährungsregeln..." class="w-full bg-indigo-900/20 border border-indigo-700/50 rounded-2xl px-5 py-4 text-white text-lg outline-none">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-indigo-300">Freestyle (Alles erlaubt):</label>
+                    <button onclick="surpriseMe('custom')" class="text-xs text-indigo-400 font-bold">🎲 Überrasch mich</button>
+                </div>
+                <input type="text" id="custom-input" placeholder="Was willst du kochen?" class="w-full bg-indigo-900/20 border border-indigo-700/50 rounded-2xl px-5 py-4 text-white text-lg mb-4 outline-none">
+                <input type="text" id="custom-diet-input" placeholder="Besondere Ernährungsregeln..." class="w-full bg-indigo-900/20 border border-indigo-700/50 rounded-2xl px-5 py-4 text-white text-lg outline-none">
             </div>
 
             <div id="cooking-params" class="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -144,16 +232,31 @@
 
             <div id="tolerances-params" class="mb-10">
                 <label class="block text-[11px] font-bold uppercase text-slate-500 mb-1 ml-1">Toleranzen, No-Gos & Wünsche (Optional)</label>
-                <textarea id="param-tolerances" rows="2" placeholder="Z.B. Ein bisschen Tomatenmark vertrage ich gut. Knoblauch geht gar nicht! Davon bitte ganz viel Petersilie..." class="w-full bg-slate-900/60 border border-slate-700/80 focus:border-amber-500 rounded-2xl px-5 py-4 text-white outline-none shadow-inner"></textarea>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Was geht ausnahmsweise (bisschen Tomatenmark)? Was gar nicht? Wovon viel?</p>
+                <textarea id="param-tolerances" rows="2" placeholder="Z.B. Etwas Tomatenmark ist ok. Knoblauch verboten! Viel Petersilie..." class="w-full bg-slate-900/60 border border-slate-700/80 focus:border-amber-500 rounded-2xl px-5 py-4 text-white outline-none shadow-inner"></textarea>
             </div>
 
-            <button onclick="buildPrompt()" id="generate-btn" class="w-full bg-gradient-to-r from-amber-500 to-amber-700 text-white font-bold py-5 rounded-2xl shadow-lg active:scale-[0.98]">Prompt generieren</button>
+            <div id="texture-params" class="border-t border-slate-700/50 pt-8">
+                <h3 class="text-sm font-bold uppercase text-amber-500 mb-4">Textur-Fokus</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <label class="cursor-pointer">
+                        <input type="checkbox" id="focus-maillard" class="sr-only">
+                        <div class="feature-card p-4 rounded-xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 transition-colors">Maillard-Reaktion (Knusprig)</div>
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="checkbox" id="focus-umami" class="sr-only">
+                        <div class="feature-card p-4 rounded-xl border border-slate-700 bg-slate-800/40 hover:bg-slate-700/40 transition-colors">Natürliches Umami (Herzhaft)</div>
+                    </label>
+                </div>
+            </div>
+
+            <button onclick="buildPrompt()" id="generate-btn" class="w-full bg-gradient-to-r from-amber-500 to-amber-700 text-white font-bold py-5 rounded-2xl mt-10 shadow-lg active:scale-[0.98]">Prompt generieren</button>
         </section>
 
         <section id="step2" class="hidden glass-panel rounded-[2rem] p-6 sm:p-10 fade-in">
             <h3 class="text-xl font-bold mb-4 text-white serif">Dein Master-Prompt</h3>
             <textarea id="result-text" rows="11" class="w-full bg-slate-900/80 text-amber-50 text-sm font-mono p-5 rounded-2xl border border-slate-700/80 outline-none resize-none shadow-inner" readonly></textarea>
-            <button onclick="copyToClipboard()" id="copy-btn" class="w-full bg-slate-100 text-slate-900 py-4 rounded-xl font-bold mt-6 uppercase">Kopieren & Archivieren</button>
+            <button onclick="copyToClipboard()" id="copy-btn" class="w-full bg-slate-100 text-slate-900 py-4 rounded-xl font-bold mt-6 uppercase hover:bg-white transition-colors">Kopieren & Archivieren</button>
             <button onclick="resetApp()" class="w-full text-sm text-slate-400 mt-4">← Zurück zur Planung</button>
         </section>
 
@@ -162,6 +265,11 @@
             <div id="history-list" class="space-y-2"></div>
         </section>
     </main>
+
+    <footer class="mt-12 mb-8 text-center text-slate-500 text-[10px] uppercase tracking-[0.2em]">
+        Programmiert für <span class="text-amber-400 font-bold">Veronika</span> & <span class="text-amber-400 font-bold">Leonie</span> ✨<br>
+        Idee: <span class="text-slate-300">Martin</span> | Alchemie: <span class="text-amber-500">Gemini Pro</span>
+    </footer>
 
     <script>
         let currentMode = 'dish';
@@ -184,11 +292,29 @@
             custom: "Freestyle: Die KI kocht klassisch nach deinen ganz eigenen Regeln."
         };
 
+        const surpriseData = {
+            dish: ["Lasagne al Forno", "Tiramisu", "Beef Wellington", "Spaghetti Carbonara", "Kaiserschmarrn"],
+            fridge: ["250g Rinderhack, 3 Karotten", "Zucchini, 3 Eier, frische Kräuter", "Hähnchenbrust, Kürbis, Kokosmilch"],
+            cravings: ["Etwas Knuspriges und Süßes", "Deftig, käsig und warm", "Eiscreme-Alternative"],
+            noob: ["Maximal 3 Zutaten zusammenwerfen", "Idiotensichere Pasta", "Eintopf ohne Anbrennen"],
+            vital: ["Vitamin C Bombe", "Eisen-Boost", "Magnesiumreiches Abendessen"],
+            togo: ["Glutenfreier Wrap", "Salat im Glas", "Sicheres Pausenbrot"],
+            alternative: ["Tomatenmark", "Sojasauce", "Hefe", "Parmesan"],
+            grill: ["Hähnchen-Marinade", "Grillbrot ohne Hefe", "Rauchiger Dip"],
+            baking: ["Apfelkuchen", "Krustenbrot ohne Weizen", "Pfannkuchen"],
+            sport: ["Post-Workout Meal", "Protein-Power Bowl"],
+            soulfood: ["Deftiger Burger", "Creamy Mac & Cheese", "Pizza-Style"],
+            family: ["Tacos zum Selbstbelegen", "Große Kartoffel-Bowl"],
+            holiday: ["Gänsebraten-Style", "Edles Ragout"],
+            guests: ["Lachsforelle in Salzkruste", "Rinderfilet mit Beeren-Jus"],
+            custom: ["Pad Thai", "Moussaka", "Zimtschnecken"]
+        };
+
         function setMode(mode) {
             currentMode = mode;
             const modes = ['dish', 'fridge', 'cravings', 'noob', 'vital', 'togo', 'alternative', 'grill', 'baking', 'sport', 'soulfood', 'family', 'holiday', 'guests', 'custom'];
             
-            // UNTERTITEL AKTUALISIEREN
+            // UNTERTITEL
             const subtitleEl = document.getElementById('main-subtitle');
             subtitleEl.style.opacity = '0';
             setTimeout(() => {
@@ -196,6 +322,7 @@
                 subtitleEl.style.opacity = '1';
             }, 150);
 
+            // INPUTS & BUTTONS
             modes.forEach(m => {
                 document.getElementById(`mode-${m}`).className = (m === mode) ? 
                     "px-4 py-2.5 rounded-full text-[13px] font-semibold bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg" : 
@@ -208,60 +335,67 @@
             document.getElementById('nutrition-toggle').classList.toggle('hidden', isAlt);
             document.getElementById('tolerances-params').classList.toggle('hidden', isAlt);
             document.getElementById('freestyle-banner').classList.toggle('hidden', mode !== 'custom');
+
+            if(mode === 'vital' || mode === 'sport') document.getElementById('param-macros').checked = true;
         }
 
         function surpriseMe(mode) {
-            const data = {
-                dish: ["Lasagne al Forno", "Tiramisu", "Beef Wellington", "Spaghetti Carbonara"],
-                fridge: ["200g Hähnchen, halber Kürbis", "Hackfleisch, Karotten, Macadamias"],
-                noob: ["Maximal 3 Zutaten zusammenwerfen", "Idiotensichere Pasta"],
-                vital: ["Vitamin C Bombe für das Immunsystem", "Eisenreiches Power-Meal"],
-                togo: ["Sandwich-Alternative ohne Gluten", "Wrap für das Büro"]
-            };
-            const list = data[mode] || ["Überrasch mich!"];
+            const list = surpriseData[mode];
             const val = list[Math.floor(Math.random() * list.length)];
-            const inputField = document.getElementById(mode === 'dish' ? 'main-input' : mode + '-input');
-            if(inputField) inputField.value = val;
+            const field = document.getElementById(mode + '-input');
+            if(field) field.value = val;
         }
 
         function buildPrompt() {
-            let inputFieldId = currentMode === 'dish' ? 'main-input' : currentMode + '-input';
-            let mainInput = document.getElementById(inputFieldId).value;
-            if(!mainInput.trim()) return alert("Feld ausfüllen!");
+            const inputField = document.getElementById(currentMode + '-input');
+            const mainInput = inputField.value;
+            if(!mainInput.trim()) return alert("Bitte Eingabe tätigen!");
 
             const method = document.getElementById('param-method').value;
             const time = document.getElementById('param-time').value;
             const portions = document.getElementById('param-portions').value;
             const tolerances = document.getElementById('param-tolerances').value.trim();
             const macros = document.getElementById('param-macros').checked;
+            const focuses = [];
+            if(document.getElementById('focus-maillard').checked) focuses.push("Maillard-Reaktion");
+            if(document.getElementById('focus-umami').checked) focuses.push("Umami-Aufbau");
 
-            let prompt = `Rolle: Haubenkoch & Lebensmittelchemiker. 
+            let basePrompt = `Rolle: Haubenkoch & Lebensmittelchemiker. 
 Aufgabe: Erschaffe Gourmet-Rezept — strikt histaminarm & glutenfrei.
-REGEL: Histaminarmut hat Vorrang! Keine Krücken wie Xanthan, nur reine Chemie.
+REGEL: Histaminarmut hat Priorität! Keine industriellen Krücken.
 
 MODUS: ${currentMode.toUpperCase()}
-INPUT: ${mainInput}
+ZIEL: ${mainInput}
 PARAMETER: Methode: ${method}, Zeit: ${time}, Portionen: ${portions}
-${tolerances ? `WICHTIGE TOLERANZEN & WÜNSCHE: ${tolerances}` : ""}
+${tolerances ? `SPEZIELLE TOLERANZEN & WÜNSCHE: ${tolerances}` : ""}
+FOKUS: ${focuses.length > 0 ? focuses.join(" & ") : "Geschmack & Verträglichkeit"}
 
-STRUKTUR: Titel, Chemie-Kniff (wie entsteht Geschmack?), Zutaten, Zubereitung ${macros ? ", Nährwerte" : ""}`;
+STRUKTUR:
+1. Titel
+2. Lebensmittelchemie (Warum schmeckt das so gut?)
+3. Zutatenliste (für ${portions} Port.)
+4. Schritt-für-Schritt Zubereitung
+${macros ? "5. Nährwerte & Kalorien pro Portion" : ""}`;
 
-            document.getElementById('result-text').value = prompt;
+            document.getElementById('result-text').value = basePrompt;
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
+            window.scrollTo(0,0);
         }
 
         function copyToClipboard() {
             const text = document.getElementById('result-text').value;
             navigator.clipboard.writeText(text);
             saveToHistory();
-            alert("Kopiert & Gespeichert!");
+            const btn = document.getElementById('copy-btn');
+            btn.innerText = "Kopiert!";
+            setTimeout(() => btn.innerText = "Kopieren & Archivieren", 2000);
         }
 
         function saveToHistory() {
             let history = JSON.parse(localStorage.getItem('alchemie_history') || "[]");
             history.unshift({ title: currentMode, date: new Date().toLocaleTimeString() });
-            localStorage.setItem('alchemie_history', JSON.stringify(history.slice(0,5)));
+            localStorage.setItem('alchemie_history', JSON.stringify(history.slice(0,8)));
             renderHistory();
         }
 
@@ -269,6 +403,11 @@ STRUKTUR: Titel, Chemie-Kniff (wie entsteht Geschmack?), Zutaten, Zubereitung ${
             const list = document.getElementById('history-list');
             const history = JSON.parse(localStorage.getItem('alchemie_history') || "[]");
             list.innerHTML = history.map(h => `<div class="p-2 bg-slate-800/40 border border-slate-700/50 rounded-lg text-[10px] flex justify-between uppercase"><span>${h.title}</span><span class="text-slate-500">${h.date}</span></div>`).join('');
+        }
+
+        function clearHistory() {
+            localStorage.removeItem('alchemie_history');
+            renderHistory();
         }
 
         function resetApp() {
