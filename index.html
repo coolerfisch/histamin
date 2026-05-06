@@ -286,9 +286,9 @@
             </div>
 
             <div id="tolerances-params" class="mb-10">
-                <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1 ml-1">Toleranzen, No-Gos & Wünsche (Optional)</label>
-                <p class="text-[12px] text-slate-400 mb-3 ml-1">Was geht ausnahmsweise klar (z.B. etwas Tomatenmark)? Was geht gar nicht? Wovon bitte extra viel?</p>
-                <textarea id="param-tolerances" rows="2" placeholder="z.B. Ein bisschen Tomatenmark vertrage ich gut. Knoblauch geht gar nicht! Davon bitte ganz viel frische Petersilie..." class="w-full bg-slate-900/60 border border-slate-700/80 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 hover:border-amber-500/50 rounded-2xl px-5 py-4 text-white outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1 ml-1">Persönliche Geschmacks-Ausnahmen (Optional)</label>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Gibt es Zutaten, die du geschmacklich einfach nicht magst (z.B. Koriander)?</p>
+                <textarea id="param-tolerances" rows="2" placeholder="z.B. Bitte keinen Koriander verwenden." class="w-full bg-slate-900/60 border border-slate-700/80 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 hover:border-amber-500/50 rounded-2xl px-5 py-4 text-white outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="texture-params" class="border-t border-slate-700/50 pt-8">
@@ -692,7 +692,7 @@
             const tolerances = document.getElementById('param-tolerances').value.trim();
             const includeMacros = document.getElementById('param-macros').checked;
 
-            const tolerancesText = tolerances ? `\n- Persönliche Toleranzen & Wünsche: ${tolerances}` : "";
+            const tolerancesText = tolerances ? `\n- Individuelle Geschmacks-Ausnahmen: ${tolerances}` : "";
             
             let extraStructure = "";
             if (includeMacros) {
