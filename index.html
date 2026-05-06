@@ -61,7 +61,7 @@
             <span class="text-3xl sm:text-4xl">🥄</span>
             Histamin-<span class="text-gradient">Zauber</span>
         </h1>
-        <p class="text-slate-400 text-sm sm:text-base font-light max-w-lg mx-auto">
+        <p id="main-subtitle" class="text-slate-400 text-sm sm:text-base font-light max-w-lg mx-auto transition-all duration-300">
             Klassische Gerichte umwandeln – strikt histaminarm & glutenfrei durch echte Lebensmittelchemie.
         </p>
         
@@ -215,6 +215,7 @@
                             <option value="Herd">Pfanne / Topf (Herd)</option>
                             <option value="Backofen">Backofen</option>
                             <option value="Grill">Grillrost</option>
+                            <option value="Mikrowelle">Mikrowelle</option>
                             <option value="Airfryer">Heißluftfritteuse (Airfryer)</option>
                             <option value="Waffeleisen">Waffeleisen</option>
                         </select>
@@ -250,7 +251,7 @@
             </div>
 
             <div id="tolerances-params" class="mb-10">
-                <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1 ml-1">Persönliche Geschmacksausnahmen (Optional)</label>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1 ml-1">Persönliche Geschmacks-Ausnahmen (Optional)</label>
                 <p class="text-[12px] text-slate-400 mb-3 ml-1">Gibt es Zutaten, die du geschmacklich einfach nicht magst (z.B. Koriander)?</p>
                 <textarea id="param-tolerances" rows="2" placeholder="z.B. Bitte keinen Koriander verwenden." class="w-full bg-slate-900/60 border border-slate-700/80 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 hover:border-amber-500/50 rounded-2xl px-5 py-4 text-white outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
@@ -397,6 +398,21 @@
     <script>
         let currentMode = 'dish';
         
+        const modeSubtitles = {
+            dish: "Klassische Gerichte umwandeln – strikt histaminarm & glutenfrei durch echte Lebensmittelchemie.",
+            fridge: "Mach aus deinen Resten ein histaminarmes 5-Sterne-Gericht.",
+            cravings: "Still dein Verlangen – 100% verträglich und ohne Reue.",
+            alternative: "Finde den perfekten chemischen & geschmacklichen Ersatz für problematische Zutaten.",
+            grill: "Sicheres BBQ: Histaminarme Marinaden, Dips und Grillideen.",
+            baking: "Backen ohne Hefe & Gluten – perfekte Krume durch Stärkekombinationen.",
+            sport: "Maximaler Proteingehalt für den Muskelaufbau, 100% histaminarm.",
+            soulfood: "Richtiges Junk-Food-Feeling für miese Tage – extrem deftig, aber verträglich.",
+            family: "Modulare Festmähler, die Veganer, Fleisch-Fans und Allergiker vereinen.",
+            holiday: "Edle, feierliche Gourmet-Gerichte für besondere Anlässe ohne Verzicht.",
+            guests: "Gourmet-Niveau: Niemand am Tisch wird merken, dass es eine Diät ist.",
+            custom: "Freestyle: Die KI kocht klassisch nach deinen ganz eigenen Ernährungsregeln."
+        };
+        
         const surpriseData = {
             dish: [
                 "Klassische Lasagne al Forno",
@@ -475,6 +491,14 @@
             currentMode = mode;
             
             const modes = ['dish', 'fridge', 'cravings', 'alternative', 'grill', 'baking', 'sport', 'soulfood', 'family', 'holiday', 'guests', 'custom'];
+            
+            // Untertitel aktualisieren
+            const subtitleEl = document.getElementById('main-subtitle');
+            subtitleEl.style.opacity = '0';
+            setTimeout(() => {
+                subtitleEl.innerText = modeSubtitles[mode];
+                subtitleEl.style.opacity = '1';
+            }, 150);
             
             modes.forEach(m => {
                 const btn = document.getElementById(`mode-${m}`);
