@@ -71,6 +71,9 @@
             <button onclick="setMode('cravings')" id="mode-cravings" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Gelüste</button>
             <button onclick="setMode('sport')" id="mode-sport" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Sportler</button>
             <button onclick="setMode('soulfood')" id="mode-soulfood" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Scheiß Tag</button>
+            <button onclick="setMode('family')" id="mode-family" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Familie</button>
+            <button onclick="setMode('holiday')" id="mode-holiday" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Festtag</button>
+            <button onclick="setMode('guests')" id="mode-guests" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Gäste</button>
         </div>
     </header>
 
@@ -122,6 +125,34 @@
                 <p class="text-[12px] text-slate-400 mb-3 ml-1">Die KI entwirft echtes Soulfood (z.B. Burger, Pizza, Comfort Food) zur Aufmunterung.</p>
                 <textarea id="soulfood-input" rows="3" placeholder="z.B. Ich brauche einfach nur einen fetten Burger oder was richtig extrem Deftiges..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
+
+            <div id="input-family-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Familien-Essen (Vegan & Fleisch):</label>
+                    <button onclick="surpriseMe('family')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
+                </div>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Die KI plant ein modulares Festmahl, das 1 Veganerin und 2 Fleisch-Fans begeistert.</p>
+                <textarea id="family-input" rows="3" placeholder="z.B. Ein großer Topf für alle, oder ein Baukasten-System zum Selbstbelegen..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
+            </div>
+
+            <div id="input-holiday-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Sonntag & Feiertag (Weihnachten/Ostern):</label>
+                    <button onclick="surpriseMe('holiday')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
+                </div>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Ein besonders festliches, aufwendigeres Menü für besondere Tage.</p>
+                <textarea id="holiday-input" rows="3" placeholder="z.B. Ein klassischer Festtagsbraten, edles Ragout oder ein toller Brunch..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
+            </div>
+
+            <div id="input-guests-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Gäste beeindrucken:</label>
+                    <button onclick="surpriseMe('guests')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
+                </div>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Gourmet-Niveau. Niemand darf merken, dass es histaminarm und glutenfrei ist!</p>
+                <textarea id="guests-input" rows="3" placeholder="z.B. Etwas optisch extrem Raffiniertes, das unfassbar edel schmeckt..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
+            </div>
+
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                 <div>
@@ -354,13 +385,37 @@
                 "Warmes, weiches Schokodessert zum Löffeln",
                 "Deftige 'Käse'-Spätzle mit knusprigem Topping",
                 "Saftige Chicken Nuggets Style mit Barbecue-Dip"
+            ],
+            family: [
+                "Modulares Tacos/Fajitas-System zum Selbstbelegen",
+                "Eine deftige Kartoffel-Bowl mit verschiedenen Toppings",
+                "Raclette-Ideen für alle ohne Käse-Histamin-Bombe",
+                "Ein großes Ofengericht, halb vegan, halb Fleisch",
+                "Pasta-Abend mit zwei verschiedenen verträglichen Saucen",
+                "Grillabend: Vegane Spieße und saftiges Fleisch perfekt mariniert"
+            ],
+            holiday: [
+                "Festlicher falscher Entenbraten / Festtagsbraten",
+                "Ein edles 3-Gänge Menü für Heiligabend",
+                "Oster-Brunch mit verträglichem Gebäck und Aufstrichen",
+                "Ein aufwendiges Sonntagsgulasch (histaminarm geschmort!)",
+                "Gefüllter Festtagskürbis mit Maronen und Fleischbeilage",
+                "Weihnachtliche Gewürze in einem wärmenden Ragout"
+            ],
+            guests: [
+                "Ein optisches Meisterwerk mit Raucharoma",
+                "Edles Rinderfilet mit raffiniertem veganen Püree",
+                "Fingerfood-Platte, die unfassbar edel aussieht",
+                "Ein cremiges Risotto mit Blattgold-Verzierung",
+                "Sous-Vide gegartes Highlight mit zwei Saucen",
+                "Ein himmlisches, mehrschichtiges Dessert im Glas"
             ]
         };
 
         function surpriseMe(mode) {
             const list = surpriseData[mode];
             const randomIndex = Math.floor(Math.random() * list.length);
-            const inputField = mode === 'dish' ? document.getElementById('main-input') : document.getElementById(mode + '-input');
+            const inputField = document.getElementById(mode === 'dish' ? 'main-input' : mode + '-input');
             inputField.value = list[randomIndex];
             
             // Kleine Animation, um zu zeigen, dass sich was getan hat
@@ -371,7 +426,7 @@
         function setMode(mode) {
             currentMode = mode;
             
-            const modes = ['dish', 'fridge', 'cravings', 'sport', 'soulfood'];
+            const modes = ['dish', 'fridge', 'cravings', 'sport', 'soulfood', 'family', 'holiday', 'guests'];
             
             modes.forEach(m => {
                 const btn = document.getElementById(`mode-${m}`);
@@ -406,6 +461,15 @@
             } else if (currentMode === 'soulfood') {
                 mainInput = document.getElementById('soulfood-input').value;
                 promptTarget = `FOKUS: SOULFOOD & TROST. Der Tag war scheiße. Entwickle das ultimative Wohlfühl-Gericht (z.B. Burger, fette Pizza, Comfort Food) für: "${mainInput}"\n(Echtes Junk-Food-Feeling, extrem deftig und befriedigend, aber durch clevere Lebensmittelchemie 100% histaminarm und glutenfrei!)`;
+            } else if (currentMode === 'family') {
+                mainInput = document.getElementById('family-input').value;
+                promptTarget = `FOKUS: FAMILIENESSEN (1 Veganerin + 2 absolute Fleischfans). Entwickle ein Rezept oder modulares Baukasten-Konzept passend zu: "${mainInput}"\n(Muss allen extrem gut schmecken, sättigend sein und natürlich 100% histaminarm und glutenfrei!)`;
+            } else if (currentMode === 'holiday') {
+                mainInput = document.getElementById('holiday-input').value;
+                promptTarget = `FOKUS: FESTTAGSGERICHT (Sonntag, Weihnachten, Ostern). Entwickle ein edles, feierliches Gourmet-Gericht passend zu: "${mainInput}"\n(Festliche Atmosphäre, optisches Highlight, raffinierter Geschmack, 100% histaminarm und glutenfrei!)`;
+            } else if (currentMode === 'guests') {
+                mainInput = document.getElementById('guests-input').value;
+                promptTarget = `FOKUS: GÄSTE BEEINDRUCKEN. Entwickle ein spektakuläres Gericht passend zu: "${mainInput}"\n(Die Gäste dürfen absolut nicht merken, dass es sich um eine Diätform handelt. Maximaler Geschmack, High-End Anrichteweise auf Restaurant-Niveau, 100% histaminarm und glutenfrei!)`;
             }
 
             if(!mainInput.trim()) return alert("Bitte fülle das Eingabefeld aus, damit die KI arbeiten kann.");
@@ -465,6 +529,9 @@ ANTWORT-STRUKTUR:
             }
             else if (currentMode === 'sport') title = "High-Protein Meal";
             else if (currentMode === 'soulfood') title = "Soulfood Tag";
+            else if (currentMode === 'family') title = "Familien-Essen";
+            else if (currentMode === 'holiday') title = "Festtags-Menü";
+            else if (currentMode === 'guests') title = "Gäste-Highlight";
             
             saveToHistory(title, text);
             setTimeout(() => { btn.innerHTML = originalHTML; }, 3000);
@@ -504,11 +571,12 @@ ANTWORT-STRUKTUR:
         }
 
         function resetApp() {
-            document.getElementById('main-input').value = "";
-            document.getElementById('fridge-input').value = "";
-            document.getElementById('cravings-input').value = "";
-            document.getElementById('sport-input').value = "";
-            document.getElementById('soulfood-input').value = "";
+            const modes = ['main', 'fridge', 'cravings', 'sport', 'soulfood', 'family', 'holiday', 'guests'];
+            modes.forEach(m => {
+                if(document.getElementById(m + '-input')) {
+                    document.getElementById(m + '-input').value = "";
+                }
+            });
             document.getElementById('param-tolerances').value = "";
             document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
             document.getElementById('step2').classList.add('hidden');
