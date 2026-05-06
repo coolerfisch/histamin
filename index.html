@@ -71,6 +71,7 @@
                 <button onclick="setMode('dish')" id="mode-dish" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-semibold transition-all bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg">Rezept</button>
                 <button onclick="setMode('fridge')" id="mode-fridge" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Reste</button>
                 <button onclick="setMode('cravings')" id="mode-cravings" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Gelüste</button>
+                <button onclick="setMode('noob')" id="mode-noob" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Anfänger</button>
                 <button onclick="setMode('vital')" id="mode-vital" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Vitalstoffe</button>
                 <button onclick="setMode('togo')" id="mode-togo" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Unterwegs</button>
                 <button onclick="setMode('alternative')" id="mode-alternative" class="px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-medium text-slate-300 hover:text-white transition-all">Zutaten-Tausch</button>
@@ -124,6 +125,15 @@
                 </div>
                 <p class="text-[12px] text-slate-400 mb-3 ml-1">Beschreibe einfach die Textur, den Geschmack oder dein Verlangen.</p>
                 <textarea id="cravings-input" rows="3" placeholder="z.B. Ich hätte total Lust auf etwas knuspriges und süßes..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
+            </div>
+
+            <div id="input-noob-group" class="hidden mb-8">
+                <div class="flex justify-between items-end mb-1 ml-1">
+                    <label class="block text-sm font-semibold text-slate-300">Hilfe, ich kann nicht kochen!</label>
+                    <button onclick="surpriseMe('noob')" class="text-xs text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 transition-colors shrink-0">🎲 Überrasch mich</button>
+                </div>
+                <p class="text-[12px] text-slate-400 mb-3 ml-1">Idiotensichere Rezepte, extrem simpel erklärt und mit Geling-Garantie.</p>
+                <textarea id="noob-input" rows="3" placeholder="z.B. Ich habe echt zwei linke Hände, brauche maximal 3 Zutaten und es darf nicht anbrennen..." class="w-full bg-slate-900/50 border border-slate-700/80 rounded-2xl px-5 py-4 text-white text-lg focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-slate-600 shadow-inner"></textarea>
             </div>
 
             <div id="input-vital-group" class="hidden mb-8">
@@ -437,6 +447,7 @@
             dish: "Klassische Gerichte umwandeln – strikt histaminarm & glutenfrei durch echte Lebensmittelchemie.",
             fridge: "Mach aus deinen Resten ein histaminarmes 5-Sterne-Gericht.",
             cravings: "Still dein Verlangen – 100% verträglich und ohne Reue.",
+            noob: "Idiotensichere, extrem einfache Rezepte mit minimalen Zutaten und null Aufwand für absolute Koch-Anfänger.",
             vital: "Gezielter Nährstoff-Boost: Optimiere dein Gericht auf Vitamine, Mineralien und beste Bioverfügbarkeit.",
             togo: "Meal-Prep, Pausenbrot & Snacks für Büro, Schule oder Ausflüge – kalt lecker und sicher.",
             alternative: "Finde den perfekten chemischen & geschmacklichen Ersatz für problematische Zutaten.",
@@ -468,6 +479,13 @@
                 "Etwas richtig Süßes, das auf der Zunge schmilzt",
                 "Deftig, käsig (ohne echten Käse!) und wärmend",
                 "Extrem knusprig mit einem cremigen Dip"
+            ],
+            noob: [
+                "Maximal 3 Zutaten zusammenwerfen",
+                "Ich habe noch nie gekocht, brauche was Warmes",
+                "Etwas, das man wirklich nicht anbrennen lassen kann",
+                "Ein extrem einfaches Nudelgericht",
+                "Ein idiotensicheres Frühstück"
             ],
             vital: [
                 "Eine absolute Vitamin-C Bombe für das Immunsystem",
@@ -541,7 +559,7 @@
         function setMode(mode) {
             currentMode = mode;
             
-            const modes = ['dish', 'fridge', 'cravings', 'vital', 'togo', 'alternative', 'grill', 'baking', 'sport', 'soulfood', 'family', 'holiday', 'guests', 'custom'];
+            const modes = ['dish', 'fridge', 'cravings', 'noob', 'vital', 'togo', 'alternative', 'grill', 'baking', 'sport', 'soulfood', 'family', 'holiday', 'guests', 'custom'];
             
             // Untertitel aktualisieren
             const subtitleEl = document.getElementById('main-subtitle');
@@ -641,6 +659,9 @@
             } else if (currentMode === 'cravings') {
                 mainInput = document.getElementById('cravings-input').value;
                 promptTarget = `INSPIRATION & GELÜSTE: Entwickle ein völlig neues Gourmet-Rezept, das genau dieses Verlangen stillt: "${mainInput}"`;
+            } else if (currentMode === 'noob') {
+                mainInput = document.getElementById('noob-input').value;
+                promptTarget = `FOKUS: ABSOLUTER ANFÄNGER ("Ich kann nicht kochen"). Entwickle ein Rezept passend zu: "${mainInput}"\n(Das Rezept muss extrem einfach, idiotensicher und in maximal 3-4 ganz simplen Schritten erklärt sein. Verwende keine Küchen-Fachbegriffe wie "ablöschen" oder "reduzieren", halte die Zutatenliste minimal, erkläre es für absolute Koch-Neulinge, aber halte es 100% histaminarm und glutenfrei!)`;
             } else if (currentMode === 'vital') {
                 mainInput = document.getElementById('vital-input').value;
                 promptTarget = `FOKUS: NÄHRSTOFF-BOOST (Vitamine & Mineralien). Entwickle ein Rezept passend zu: "${mainInput}"\n(Maximiere die gewünschten Mikronährstoffe mit histaminarmen Zutaten. Achte zwingend auf synergetische Bioverfügbarkeit (z.B. Eisen + Vitamin C), natürlich 100% histaminarm und glutenfrei!)`;
@@ -777,6 +798,7 @@ ${parametersSection}${structureText}`;
                 let val = document.getElementById('cravings-input').value;
                 title = "Lust auf: " + (val.length > 20 ? val.substring(0, 20) + "..." : val);
             }
+            else if (currentMode === 'noob') title = "Anfänger-Rezept";
             else if (currentMode === 'vital') title = "Nährstoff-Boost";
             else if (currentMode === 'togo') title = "Pausenbrot / To Go";
             else if (currentMode === 'alternative') {
@@ -872,7 +894,7 @@ ${parametersSection}${structureText}`;
         }
 
         function resetApp() {
-            const modes = ['main', 'fridge', 'cravings', 'vital', 'togo', 'alternative', 'grill', 'baking', 'sport', 'soulfood', 'family', 'holiday', 'guests', 'custom', 'custom-diet'];
+            const modes = ['main', 'fridge', 'cravings', 'noob', 'vital', 'togo', 'alternative', 'grill', 'baking', 'sport', 'soulfood', 'family', 'holiday', 'guests', 'custom', 'custom-diet'];
             modes.forEach(m => {
                 if(document.getElementById(m + '-input')) {
                     document.getElementById(m + '-input').value = "";
