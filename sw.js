@@ -1,4 +1,4 @@
-// Version 2.0 - Neue Modi
+// Version 2.1 - Neue Modi
 const CACHE_NAME = 'alchemie-v1';
 const urlsToCache = ['index.html', 'manifest.json'];
 
