@@ -9,7 +9,6 @@
         .wizard-step { transition: all 0.3s ease-in-out; }
         .hidden-step { display: none; opacity: 0; transform: translateY(10px); }
         .active-step { display: block; opacity: 1; transform: translateY(0); }
-        /* Verhindert iOS-Standard-Styling bei Selects */
         select { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
     </style>
 </head>
@@ -17,6 +16,7 @@
 
     <div class="max-w-3xl mx-auto px-4 pt-6 md:pt-10">
         
+        <!-- Header & Modus-Wechsler -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 bg-slate-800/60 p-4 md:p-5 rounded-2xl border border-slate-700/50">
             <div>
                 <h1 id="main-title" class="text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600 mb-1 transition-all duration-500">
@@ -38,8 +38,10 @@
 
         <div id="main-card" class="bg-slate-800 rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-2xl border border-slate-700 transition-all duration-500">
 
+            <!-- Globales Error-Panel -->
             <div id="error-banner" class="hidden mb-5 p-4 bg-red-950/40 border border-red-500/50 text-red-200 rounded-xl text-xs md:text-sm text-center font-medium"></div>
 
+            <!-- SCHRITT 1 -->
             <div id="step-1" class="wizard-step active-step">
                 <h2 class="text-lg md:text-xl font-bold mb-2 text-white flex items-center gap-2">
                     <span class="step-number-badge flex-shrink-0 bg-amber-500 text-slate-950 w-5 h-5 rounded-full inline-flex items-center justify-center text-[11px] font-black">1</span>
@@ -48,7 +50,7 @@
                 <p class="text-slate-400 text-xs md:text-sm mb-5">Wähle die passende Logik für deinen Koch-Ansatz.</p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="mode-buttons-container">
-                    <button id="mode-dish" onclick="setMode('dish'); nextStep(2);" class="mode-btn p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 hover:border-amber-500 text-left transition-all group flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 active:bg-slate-900">
+                    <button id="mode-dish" onclick="setMode('dish'); nextStep(2);" class="mode-btn p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 text-left transition-all group flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
                         <span class="text-2xl md:mb-2 bg-slate-800 p-2 rounded-lg md:p-0 md:bg-transparent">🍳</span>
                         <div>
                             <span class="font-bold text-sm text-white block group-hover:text-amber-400 transition-colors">Gericht umbauen</span>
@@ -56,7 +58,7 @@
                         </div>
                     </button>
 
-                    <button id="mode-fridge" onclick="setMode('fridge'); nextStep(2);" class="mode-btn p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 hover:border-amber-500 text-left transition-all group flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 active:bg-slate-900">
+                    <button id="mode-fridge" onclick="setMode('fridge'); nextStep(2);" class="mode-btn p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 text-left transition-all group flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
                         <span class="text-2xl md:mb-2 bg-slate-800 p-2 rounded-lg md:p-0 md:bg-transparent">🧊</span>
                         <div>
                             <span class="font-bold text-sm text-white block group-hover:text-amber-400 transition-colors">Reste-Küche</span>
@@ -64,7 +66,7 @@
                         </div>
                     </button>
 
-                    <button id="mode-alternative" onclick="setMode('alternative'); nextStep(2);" class="mode-btn p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 hover:border-amber-500 text-left transition-all group flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 active:bg-slate-900">
+                    <button id="mode-alternative" onclick="setMode('alternative'); nextStep(2);" class="mode-btn p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 text-left transition-all group flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
                         <span class="text-2xl md:mb-2 bg-slate-800 p-2 rounded-lg md:p-0 md:bg-transparent">🔄</span>
                         <div>
                             <span class="font-bold text-sm text-white block group-hover:text-amber-400 transition-colors">Zutat ersetzen</span>
@@ -74,6 +76,7 @@
                 </div>
             </div>
 
+            <!-- SCHRITT 2 -->
             <div id="step-2" class="wizard-step hidden-step pt-5 md:pt-0 mt-5 md:mt-0 border-t border-slate-700 md:border-0">
                 <h2 class="text-lg md:text-xl font-bold mb-2 text-white flex items-center gap-2">
                     <span class="step-number-badge flex-shrink-0 bg-amber-500 text-slate-950 w-5 h-5 rounded-full inline-flex items-center justify-center text-[11px] font-black">2</span>
@@ -88,7 +91,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Persönliche Toleranzen / Ausschlüsse (Optional)</label>
+                        <label id="secondary-input-label" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Persönliche Toleranzen / Ausschlüsse (Optional)</label>
                         <textarea id="tolerances-input" rows="2" placeholder="z.B. Ein bisschen Tomatenmark wird vertragen, aber absolut kein Knoblauch!" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white placeholder-slate-500 focus:ring-2 focus:ring-amber-500 transition-all outline-none resize-none"></textarea>
                     </div>
                 </div>
@@ -99,6 +102,7 @@
                 </div>
             </div>
 
+            <!-- SCHRITT 3 -->
             <div id="step-3" class="wizard-step hidden-step pt-5 md:pt-0 mt-5 md:mt-0 border-t border-slate-700 md:border-0">
                 <h2 class="text-lg md:text-xl font-bold mb-2 text-white flex items-center gap-2">
                     <span class="step-number-badge flex-shrink-0 bg-amber-500 text-slate-950 w-5 h-5 rounded-full inline-flex items-center justify-center text-[11px] font-black">3</span>
@@ -106,6 +110,7 @@
                 </h2>
                 <p class="text-slate-400 text-xs md:text-sm mb-4">Hier verpassen wir dem Prompt den Feinschliff.</p>
                 
+                <!-- Sichtbar für Koch-Modi (Gericht / Reste) -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6" id="cooking-params">
                     <div class="sm:col-span-2">
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Stil des Gerichts</label>
@@ -145,6 +150,19 @@
                     </div>
                 </div>
 
+                <!-- NUR sichtbar im Modus "Zutat ersetzen" -->
+                <div class="mb-6 hidden" id="replacement-params">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Priorität für den Ersatz</label>
+                    <div class="relative">
+                        <select id="param-replace-focus" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:ring-2 focus:ring-amber-500">
+                            <option value="flavor" selected>Geschmacksprofil imitieren (z.B. Umami, Säure, Salzigkeit)</option>
+                            <option value="texture">Konsistenz & Physikalische Eigenschaft (z.B. Bindung, Feuchtigkeit)</option>
+                            <option value="safety">Maximale Histamin-Sicherheit (Strengster SIGHI 0 Fokus)</option>
+                        </select>
+                        <span class="absolute right-3 top-3.5 text-xs pointer-events-none text-slate-500">▼</span>
+                    </div>
+                </div>
+
                 <div class="flex justify-between mt-6 wizard-nav gap-2">
                     <button onclick="prevStep(2)" class="px-4 py-2.5 text-sm font-semibold text-slate-400 hover:text-white transition-colors">⬅️ Zurück</button>
                     <button onclick="buildPrompt()" class="px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 rounded-xl text-sm font-black shadow-xl hover:scale-102 active:scale-98 transition-all flex-1 md:flex-none text-center">
@@ -161,6 +179,7 @@
 
         </div>
 
+        <!-- Ergebnis-Box -->
         <div id="result-container" class="mt-6 bg-slate-800 rounded-2xl p-5 shadow-xl border border-slate-700 hidden">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-3">
                 <h3 id="result-title" class="text-base font-bold text-amber-400 uppercase tracking-wide">Dein KI-Befehl steht bereit</h3>
@@ -312,8 +331,20 @@
             
             const labelField = document.getElementById('main-input-label');
             const inputField = document.getElementById('main-input');
+            const secondaryLabel = document.getElementById('secondary-input-label');
+            const secondaryInput = document.getElementById('tolerances-input');
+            
             labelField.innerText = modeLabels[mode];
             inputField.placeholder = modePlaceholders[mode];
+            
+            // Dynamischer Feld-Umbau für Schritt 2 basierend auf dem Modus
+            if (mode === 'alternative') {
+                secondaryLabel.innerText = "Wofür wird der Ersatz gebraucht? (Optional)";
+                secondaryInput.placeholder = "z.B. Für ein asiatisches Wok-Gericht, zum Marinieren oder für Salatdressings";
+            } else {
+                secondaryLabel.innerText = "Persönliche Toleranzen / Ausschlüsse (Optional)";
+                secondaryInput.placeholder = "z.B. Ein bisschen Tomatenmark wird vertragen, aber absolut kein Knoblauch!";
+            }
             
             document.querySelectorAll('.mode-btn').forEach(btn => {
                 if (btn.id === `mode-${mode}`) {
@@ -326,6 +357,7 @@
 
             const isAlt = (mode === 'alternative');
             document.getElementById('cooking-params').style.display = isAlt ? 'none' : 'grid';
+            document.getElementById('replacement-params').style.display = isAlt ? 'block' : 'none';
         }
 
         function buildPrompt() {
@@ -344,25 +376,35 @@
                 return;
             }
 
-            const tolerances = document.getElementById('tolerances-input').value.trim();
-            const vibe = document.getElementById('param-vibe').value;
-            const persons = document.getElementById('param-persons').value;
-            const method = document.getElementById('param-method').value;
-
+            const secondaryVal = document.getElementById('tolerances-input').value.trim();
             let promptText = `Du agierst als hochqualifizierter Experte für Lebensmittelchemie und diätetische Küche (strikte SIGHI-Liste, histaminfrei, glutenfrei). Nutze physikalische Kochtechniken statt chemischer oder hochverarbeiteter Ersatzstoffe. Verwende für kritische Zutaten ausschließlich Lebensmittel mit dem SIGHI-Wert 0 oder maximal 1.\n\n`;
             
             promptText += `LOGIK-MODUS: ${currentMode.toUpperCase()}\n`;
             promptText += `ZIELGERICHT / ZUTATEN-BASIS: ${inputVal}\n\n`;
             
             if (currentMode !== 'alternative') {
+                const vibe = document.getElementById('param-vibe').value;
+                const persons = document.getElementById('param-persons').value;
+                const method = document.getElementById('param-method').value;
+                
                 promptText += `RAHMENBEDINGUNGEN:\n- Kulinarische Ausrichtung: ${vibe.toUpperCase()}\n- Portionen: ${persons}\n- Garmethode: ${method}\n\n`;
+                
+                if (secondaryVal) {
+                    promptText += `WICHTIGE INDIVIDUELLE TOLERANZEN / AUSNAHMEN:\n"${secondaryVal}" (Diese Bedingungen haben absolute Priorität!)\n\n`;
+                }
+                
+                promptText += `AUFGABE:\nErstelle ein perfekt strukturiertes, leicht verständliches Rezept passend zur gewählten kulinarischen Ausrichtung. Erkläre bei den einzelnen Zubereitungsschritten kurz und präzise das "Warum" (den chemischen/physikalischen Hintergrund, warum das Gericht dadurch histaminarm bleibt). Verzichte komplett auf einleitende Floskeln, sei direkt und lösungsorientiert.`;
+            } else {
+                const replaceFocus = document.getElementById('param-replace-focus').value;
+                
+                promptText += `RAHMENBEDINGUNGEN:\n- Austausch-Fokus: ${replaceFocus.toUpperCase()}\n\n`;
+                
+                if (secondaryVal) {
+                    promptText += `KULINARISCHER VERWENDUNGSZWECK / KONTEXT:\n"${secondaryVal}" (Passe die Empfehlungen gezielt an diesen Verwendungszweck an!)\n\n`;
+                }
+                
+                promptText += `AUFGABE:\nAnalysiere die zu ersetzende Zutat lebensmittelchemisch. Nenne 2 bis 3 histaminfreie (SIGHI 0/1) Alternativen, aufgeteilt nach Verwendungszweck (z.B. kalte Küche vs. Kochen/Reduzieren). Erkläre präzise das "Warum" hinter den chemischen Eigenschaften des Ersatzes (z.B. Aminosäure-Profil für Umami, pH-Wert für Säure). Keine Floskeln, komm direkt zum Punkt.`;
             }
-
-            if (tolerances) {
-                promptText += `WICHTIGE INDIVIDUELLE TOLERANZEN / AUSNAHMEN:\n"${tolerances}" (Diese Bedingungen haben absolute Priorität!)\n\n`;
-            }
-
-            promptText += `AUFGABE:\nErstelle ein perfekt strukturiertes, leicht verständliches Rezept passend zur gewählten kulinarischen Ausrichtung. Erkläre bei den einzelnen Zubereitungsschritten kurz und präzise das "Warum" (den chemischen/physikalischen Hintergrund, warum das Gericht dadurch histaminarm bleibt oder chemisch funktioniert, z.B. Reifungsprozesse stoppen oder Hitzeanwendung). Verzichte komplett auf einleitende Floskeln, sei direkt und lösungsorientiert.`;
 
             const resultContainer = document.getElementById('result-container');
             document.getElementById('output-prompt').value = promptText;
