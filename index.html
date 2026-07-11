@@ -16,6 +16,7 @@
 
     <div class="max-w-3xl mx-auto px-4 pt-6 md:pt-10">
         
+        <!-- Header & Modus-Wechsler -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 bg-slate-800/60 p-4 md:p-5 rounded-2xl border border-slate-700/50">
             <div>
                 <h1 id="main-title" class="text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600 mb-1 transition-all duration-500">
@@ -37,8 +38,10 @@
 
         <div id="main-card" class="bg-slate-800 rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-2xl border border-slate-700 transition-all duration-500">
 
+            <!-- Globales Error-Panel -->
             <div id="error-banner" class="hidden mb-5 p-4 bg-red-950/40 border border-red-500/50 text-red-200 rounded-xl text-xs md:text-sm text-center font-medium"></div>
 
+            <!-- SCHRITT 1 -->
             <div id="step-1" class="wizard-step active-step">
                 <h2 class="text-lg md:text-xl font-bold mb-2 text-white flex items-center gap-2">
                     <span class="step-number-badge flex-shrink-0 bg-amber-500 text-slate-950 w-5 h-5 rounded-full inline-flex items-center justify-center text-[11px] font-black">1</span>
@@ -73,6 +76,7 @@
                 </div>
             </div>
 
+            <!-- SCHRITT 2 -->
             <div id="step-2" class="wizard-step hidden-step pt-5 md:pt-0 mt-5 md:mt-0 border-t border-slate-700 md:border-0">
                 <h2 class="text-lg md:text-xl font-bold mb-2 text-white flex items-center gap-2">
                     <span class="step-number-badge flex-shrink-0 bg-amber-500 text-slate-950 w-5 h-5 rounded-full inline-flex items-center justify-center text-[11px] font-black">2</span>
@@ -98,6 +102,7 @@
                 </div>
             </div>
 
+            <!-- SCHRITT 3 -->
             <div id="step-3" class="wizard-step hidden-step pt-5 md:pt-0 mt-5 md:mt-0 border-t border-slate-700 md:border-0">
                 <h2 id="step3-title" class="text-lg md:text-xl font-bold mb-2 text-white flex items-center gap-2">
                     <span class="step-number-badge flex-shrink-0 bg-amber-500 text-slate-950 w-5 h-5 rounded-full inline-flex items-center justify-center text-[11px] font-black">3</span>
@@ -105,6 +110,7 @@
                 </h2>
                 <p id="step3-desc" class="text-slate-400 text-xs md:text-sm mb-4">Hier verpassen wir dem Prompt den Feinschliff.</p>
                 
+                <!-- Sichtbar für Koch-Modi -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6" id="cooking-params">
                     <div class="sm:col-span-2">
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Stil des Gerichts</label>
@@ -120,15 +126,13 @@
                         </div>
                     </div>
 
+                    <!-- Manuelle Personenanzahl über Input Field -->
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Portionen</label>
-                        <div class="relative">
-                            <select id="param-persons" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:ring-2 focus:ring-amber-500">
-                                <option value="1">1 Person</option>
-                                <option value="2" selected>2 Personen</option>
-                                <option value="4">4 Personen</option>
-                            </select>
-                            <span class="absolute right-3 top-3.5 text-xs pointer-events-none text-slate-500">▼</span>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Portionen (Manuelle Anzahl)</label>
+                        <div class="flex rounded-xl bg-slate-900 border border-slate-700 overflow-hidden">
+                            <button type="button" onclick="document.getElementById('param-persons').stepDown()" class="px-4 py-3 bg-slate-800 text-slate-400 hover:text-white transition-colors font-bold text-lg select-none">-</button>
+                            <input type="number" id="param-persons" value="2" min="1" max="100" class="w-full bg-transparent text-center text-white outline-none font-bold text-base [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                            <button type="button" onclick="document.getElementById('param-persons').stepUp()" class="px-4 py-3 bg-slate-800 text-slate-400 hover:text-white transition-colors font-bold text-lg select-none">+</button>
                         </div>
                     </div>
                     <div>
@@ -144,6 +148,7 @@
                     </div>
                 </div>
 
+                <!-- NUR sichtbar im Modus "Zutat ersetzen" -->
                 <div class="mb-6 hidden" id="replacement-params">
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Priorität für den Ersatz</label>
                     <div class="relative">
@@ -172,6 +177,7 @@
 
         </div>
 
+        <!-- Ergebnis-Box -->
         <div id="result-container" class="mt-6 bg-slate-800 rounded-2xl p-5 shadow-xl border border-slate-700 hidden">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-3">
                 <h3 id="result-title" class="text-base font-bold text-amber-400 uppercase tracking-wide">Dein KI-Befehl steht bereit</h3>
@@ -179,15 +185,18 @@
                     <span>📋 Kopieren</span>
                 </button>
             </div>
-            <textarea id="output-prompt" readonly rows="8" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3.5 text-slate-300 text-xs md:text-sm focus:outline-none resize-none font-mono leading-relaxed"></textarea>
             
-            <div class="mt-5 border-t border-slate-700/60 pt-4">
+            <!-- Größere und lesbarere Schriftart für das Prompt-Fenster -->
+            <textarea id="output-prompt" readonly rows="9" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-4 text-slate-200 text-sm md:text-base focus:outline-none resize-none font-mono leading-relaxed tracking-wide"></textarea>
+            
+            <!-- KI-Schnittstellen Weitergabe-Bereich -->
+            <div class="mt-6 border-t border-slate-700/60 pt-4">
                 <p class="text-xs text-slate-400 mb-3 text-center font-medium">Direkt in deine bevorzugte KI einfügen:</p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 max-w-xl mx-auto">
-                    <a href="https://chat.openai.com" target="_blank" class="px-3 py-2.5 bg-slate-900 hover:bg-emerald-700 border border-slate-700 rounded-xl text-xs font-bold transition-colors text-center block">ChatGPT</a>
-                    <a href="https://claude.ai" target="_blank" class="px-3 py-2.5 bg-slate-900 hover:bg-orange-700 border border-slate-700 rounded-xl text-xs font-bold transition-colors text-center block">Claude</a>
-                    <a href="https://gemini.google.com" target="_blank" class="px-3 py-2.5 bg-slate-900 hover:bg-blue-700 border border-slate-700 rounded-xl text-xs font-bold transition-colors text-center block">Gemini</a>
-                    <a href="https://grok.com" target="_blank" class="px-3 py-2.5 bg-slate-900 hover:bg-zinc-700 border border-slate-700 rounded-xl text-xs font-bold transition-colors text-center block">Grok</a>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl mx-auto">
+                    <a href="https://chat.openai.com" target="_blank" class="px-3 py-3 bg-slate-900 hover:bg-emerald-700 border border-slate-700/80 rounded-xl text-xs font-bold transition-all text-center block shadow-md hover:scale-102 active:scale-98">ChatGPT</a>
+                    <a href="https://claude.ai" target="_blank" class="px-3 py-3 bg-slate-900 hover:bg-orange-700 border border-slate-700/80 rounded-xl text-xs font-bold transition-all text-center block shadow-md hover:scale-102 active:scale-98">Claude</a>
+                    <a href="https://gemini.google.com" target="_blank" class="px-3 py-3 bg-slate-900 hover:bg-blue-700 border border-slate-700/80 rounded-xl text-xs font-bold transition-all text-center block shadow-md hover:scale-102 active:scale-98">Gemini</a>
+                    <a href="https://grok.com" target="_blank" class="px-3 py-3 bg-slate-900 hover:bg-zinc-700 border border-slate-700/80 rounded-xl text-xs font-bold transition-all text-center block shadow-md hover:scale-102 active:scale-98">Grok</a>
                 </div>
             </div>
         </div>
@@ -386,7 +395,7 @@
             
             if (currentMode !== 'alternative') {
                 const vibe = document.getElementById('param-vibe').value;
-                const persons = document.getElementById('param-persons').value;
+                const persons = document.getElementById('param-persons').value || 2;
                 const method = document.getElementById('param-method').value;
                 
                 promptText += `RAHMENBEDINGUNGEN:\n- Kulinarische Ausrichtung: ${vibe.toUpperCase()}\n- Portionen: ${persons}\n- Garmethode: ${method}\n\n`;
